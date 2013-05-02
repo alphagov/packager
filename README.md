@@ -18,3 +18,12 @@ logged into the box, you should be able to make source packages by running `make
 
     $ cd ~/packager
     $ make collectd
+
+To test a binary package build, you first need to set up sbuild:
+
+    $ ./tools/sbuildinit  # follow the instructions about restarting your shell
+    $ ./tools/sbuildinit
+
+You can then build binary packages from .dsc files:
+
+    $ sbuild -A -d precise-amd64 build/collectd/collectd_5.3.0-ppa4.dsc
