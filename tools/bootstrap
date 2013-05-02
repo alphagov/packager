@@ -27,3 +27,10 @@ export DEBEMAIL="joe.bloggs@example.com"
 EOM
 EEOM
 fi
+
+if [ "$(sudo -u vagrant gpg --list-secret-keys 2>/dev/null | wc -l)" -eq "0" ]; then
+  echo "---> Make sure you import a GPG secret key that you have registered on Launchpad! For example:" >&2
+  cat 2>&1 <<EOM
+gpg --import <joe_bloggs.asc
+EOM
+fi

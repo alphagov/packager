@@ -3,20 +3,21 @@ set -e
 
 # ensure the VM has enough entropy to generate sbuild's archive keys
 if ! dpkg -s haveged >/dev/null 2>&1; then 
-  apt-get install haveged
+  sudo apt-get install haveged
 fi
 
 # Create a LXC container for building .debs from .dscs
 if mk-sbuild --arch=amd64 --name=precise precise; then
-  echo "If this is your first time running sbuildinit (you'll know, as  "
-  echo "you'll have been asked to supply your name and email, and you'll"
-  echo "have got the 'you MUST restart your session' warning, you must  "
-  echo "indeed now restart your session, and run sbuildinit again.      "
-else
-  sbuild-update --keygen
-  echo "You should now be able to build binary packages for             "
-  echo "amd64-precise environments with a command like the following:   "
-  echo
-  echo "    sbuild -A -d precise-amd64 path/to/sourcepackage.dsc"
-  echo
+  if sbuild-update --keygen >/dev/null 2>&1; then
+    echo "You should now be able to build binary packages for             "
+    echo "amd64-precise environments with a command like the following:   "
+    echo
+    echo "    sbuild -A -d precise-amd64 path/to/sourcepackage.dsc"
+    echo
+  else
+    echo "If this is your first time running sbuildinit (you'll know, as  "
+    echo "you'll have been asked to supply your name and email, and you'll"
+    echo "have got the 'you MUST restart your session' warning, you must  "
+    echo "indeed now restart your session, and run sbuildinit again.      "
+  fi
 fi
