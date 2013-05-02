@@ -1,0 +1,27 @@
+collectd (5.3.0-ppa4) precise; urgency=low
+
+  Ensure that plugin dependencies are not all automatically installed. Now,
+  instead of pulling in all plugin dependencies transitively, they are listed in
+  the "Suggests:" field of the debian package. If you need support for a
+  particular plugin, you will need to ensure that the appropriate libraries have
+  been installed.
+
+ -- Nick Stenning <nick@whiteink.com>  Thu, 02 May 2013 04:40:04 -0700
+
+collectd (5.3.0-ppa3) precise; urgency=low
+
+  * Update patches to allow building against varnish 2.X.
+
+ -- Nick Stenning <nick@whiteink.com>  Fri, 26 Apr 2013 13:37:46 +0000
+
+collectd (5.3.0-ppa2) precise; urgency=low
+
+  * Added build-depends to enable a wide variety of collectd plugins.
+
+ -- Nick Stenning <nick@whiteink.com>  Fri, 26 Apr 2013 13:14:15 +0000
+
+collectd (5.3.0-ppa1) precise; urgency=low
+
+  * Initial PPA build of collectd 5.3.0.
+
+ -- Nick Stenning <nick@whiteink.com>  Thu, 25 Apr 2013 16:34:21 +0000

@@ -1,0 +1,5 @@
+ruby (1.9.2p290-ppa1) precise; urgency=low
+
+  * Initial PPA build of ruby 1.9.2p290.
+
+ -- Nick Stenning <nick@whiteink.com>  Thu, 02 May 2013 05:25:55 -0700

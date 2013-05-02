@@ -1,0 +1,29 @@
+#!/bin/sh
+set -e
+
+export DEBIAN_FRONTEND=noninteractive
+export DEBIAN_PRIORITY=critical
+
+apt-get update -y -qq
+
+apt-get -y install curl devscripts quilt sbuild ubuntu-dev-tools debhelper rsync
+apt-get -y clean
+apt-get -y autoremove --purge
+
+if [ ! -f /etc/profile.d/quilt.sh ]; then
+  cat >/etc/profile.d/quilt.sh <<EOM
+export QUILT_PATCHES="debian/patches"
+export QUILT_PATCH_OPTS="--reject-format=unified"
+EOM
+  chmod +x /etc/profile.d/quilt.sh
+fi
+
+if ! grep -q DEBFULLNAME /home/vagrant/.bashrc; then
+  echo "---> Make sure you add your Launchpad name and email to your environment! For example:" >&2
+  cat 2>&1 <<EEOM
+tee -a ~/.bashrc >/dev/null <<EOM
+export DEBFULLNAME="Joe Bloggs"
+export DEBEMAIL="joe.bloggs@example.com"
+EOM
+EEOM
+fi

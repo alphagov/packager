@@ -1,0 +1,24 @@
+From 2006b75a20f2c0a89ce88a3fb2332367e4a208e3 Mon Sep 17 00:00:00 2001
+From: Nick Stenning <nick.stenning@digital.cabinet-office.gov.uk>
+Date: Thu, 25 Apr 2013 13:14:31 +0100
+Subject: [PATCH 1/2] varnish plugin: missing definition in default config
+
+---
+ src/varnish.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/varnish.c b/src/varnish.c
+index 602f47a..0ce2174 100644
+--- a/src/varnish.c
++++ b/src/varnish.c
+@@ -496,6 +496,7 @@ static int varnish_config_apply_default (user_config_t *conf) /* {{{ */
+ #endif
+ 	conf->collect_sms         = 0;
+ 	conf->collect_totals      = 0;
++	conf->collect_workers     = 0;
+ 
+ 	return (0);
+ } /* }}} int varnish_config_apply_default */
+-- 
+1.8.2
+

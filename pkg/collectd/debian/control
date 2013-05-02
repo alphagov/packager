@@ -1,0 +1,32 @@
+Source: collectd
+Maintainer: Nick Stenning <nick@whiteink.com>
+Section: universe/utils
+Priority: optional
+Homepage: http://collectd.org/
+Standards-Version: 3.9.3
+Build-Depends: debhelper (>= 8), bison, flex, autotools-dev,
+ libcurl4-gnutls-dev, libdbi-dev, libltdl-dev, pkg-config, iproute-dev,
+ iptables-dev, libganglia1-dev, libvarnishapi-dev, libgcrypt11-dev, libyajl-dev,
+ libmysqlclient-dev, libmemcache-dev, libxml2-dev, protobuf-c-compiler, 
+ librabbitmq-dev, libpq-dev, librrd-dev, libsensors4-dev, libtokyocabinet-dev,
+ libtokyotyrant-dev, python-dev, libperl-dev, libsnmp-dev, libpcap-dev,
+ liboping-dev, libopenipmi-dev, libesmtp-dev
+
+Package: collectd
+Architecture: any
+Depends: ${shlibs:Depends}, ${perl:Depends}, ${misc:Depends}
+Suggests: ${shlibs:Suggests}
+Description: statistics collection and monitoring daemon
+ collectd is a small daemon which collects system information periodically and
+ provides mechanisms to monitor and store the values in a variety of ways.
+ Since the daemon doesn't need to startup every time it wants to update the
+ values it's very fast and easy on the system. Also, the statistics are very
+ fine grained since the files are updated every 10 seconds by default.
+ .
+ The collected information can be used to find current performance bottlenecks
+ (performance analysis) and predict future system load (capacity planning).
+ .
+ This package provides a full installation of the daemon, including the
+ configuration. For the core system, see the "collectd-core" package, which
+ allows sites to, e.g., provide customizations (like a custom default
+ configuration) on top of it without having to modify the "collectd" package.

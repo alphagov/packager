@@ -1,0 +1,5 @@
+/.vagrant
+/Vagrantfile.local
+
+# Ignore quilt metadata dirs
+.pc
