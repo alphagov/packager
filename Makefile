@@ -29,3 +29,8 @@ build/ruby1.9.2/ruby_1.9.2p290.orig.tar.gz: pkg/ruby1.9.2/srcurl
 
 clean:
 	rm -rf build/*
+
+fullclean: clean
+	rm -f *.build *.changes *.deb *.ddeb
+
+.PHONY: collectd ruby1.9.2 clean fullclean
