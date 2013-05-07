@@ -1,13 +1,83 @@
 #!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
+
+CPPFLAGS = $(shell dpkg-buildflags --get CPPFLAGS)
+CPPFLAGS += -I$(CURDIR)/debian/include
+CFLAGS = $(shell dpkg-buildflags --get CFLAGS)
+CFLAGS += -Wall
+
+# There is no way to tell lt_dlopen() to use the RTLD_GLOBAL flag which is
+# however required by the perl plugin (which would otherwise be unable to find
+# symbols defined in libperl when loading perl modules that require such
+# symbols). This is a workaround for this issue.
+CPPFLAGS += -DLT_LAZY_OR_NOW='RTLD_LAZY|RTLD_GLOBAL'
+
+# Upstream defaults to ${sysconfdir}/collectd.conf. Setting ${sysconfdir} to
+# /etc/collectd would be wrong though.
+CPPFLAGS += -UCONFIGFILE
+CPPFLAGS += -DCONFIGFILE='"/etc/collectd/collectd.conf"'
+
 %:
 	dh $@
 
 override_dh_auto_configure:
-	dh_auto_configure -- --with-perl-bindings="INSTALLDIRS=vendor"
+	# This is a work-around for #474087 (broken openipmi .pc files).
+	mkdir debian/pkgconfig
+	sed -re 's/^(Requires:.*) pthread(.*)$$/\1\2/' \
+		/usr/lib/pkgconfig/OpenIPMIpthread.pc \
+		> debian/pkgconfig/OpenIPMIpthread.pc
+
+	PKG_CONFIG_PATH="$(CURDIR)/debian/pkgconfig:$$PKG_CONFIG_PATH" \
+	dh_auto_configure -- --with-perl-bindings="INSTALLDIRS=vendor" \
+	                     --without-libstatgrab \
+	                     --without-included-libltdl \
+	                     --disable-static
+
+override_dh_install:
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
+	
+	rm -f debian/tmp/usr/lib/collectd/*.la
+	rm -f debian/tmp/usr/lib/libcollectdclient.la
+	rm -f debian/tmp/etc/collectd.conf
+	rm -f debian/tmp/etc/collectd.conf.pkg-orig
+	
+	dh_install -a --sourcedir=$(CURDIR)/debian/tmp --fail-missing
+
+override_dh_installinit:
+	dh_installinit -pcollectd-core --name=collectd -- defaults 95
+
+override_dh_installexamples:
+	dh_installexamples -i contrib/examples/myplugin.c \
+		contrib/examples/MyPlugin.pm
+	dh_installexamples -a contrib/collectd2html.pl contrib/collection.cgi \
+		contrib/collection3/ contrib/php-collection/ \
+		contrib/exec-munin.conf contrib/exec-munin.px contrib/exec-smartctl \
+		contrib/exec-nagios.conf contrib/exec-nagios.px contrib/exec-ksm.sh \
+		contrib/SpamAssassin/ contrib/iptables/ contrib/cussh.pl \
+		contrib/snmp-data.conf contrib/add_rra.sh contrib/network-proxy.py \
+		contrib/collectd_network.py contrib/collectd_unixsock.py \
+		contrib/snmp-probe-host.px contrib/GenericJMX.conf \
+		contrib/postgresql \
+		debian/collectd.conf debian/filters.conf debian/thresholds.conf
+	# some upstream tarballs have been built inside a dirty working dir
+	( cd debian/collectd-core/ \
+		&& cd usr/share/doc/collectd-core/examples/collection3/ \
+		&& rm -f bin/foo bin/test_config.px etc/collection4.conf \
+		&& rm -f lib/Collectd/Graph.pm lib/Collectd/Graph/Data.pm \
+		&& rm -f lib/Collectd/Graph/File.pm lib/Collectd/Graph/Filter.pm \
+		&& rm -f lib/Collectd/Graph/MetaData.pm )
+
+override_dh_compress:
+	dh_compress -a -Xexamples/
 
 override_dh_shlibdeps:
-	# generate pkg deps without looking at plugins
-	dh_shlibdeps -X /usr/lib/collectd/
-	# and put plugin shlib deps in "shlibs:Suggests" so they can go in
-	# "Suggests" rather than "Depends" in the control file
-	dpkg-shlibdeps -dSuggests debian/collectd/usr/lib/collectd/*.so -O >> debian/collectd.substvars
+	dh_shlibdeps -a -Ncollectd-core -Ncollectd
+	dpkg-shlibdeps -Tdebian/collectd.substvars \
+		-dDepends debian/collectd-core/usr/lib/collectd/rrdtool.so
+	dpkg-shlibdeps -Tdebian/collectd-core.substvars \
+		-dDepends debian/collectd-core/usr/sbin/* \
+		-dSuggests debian/collectd-core/usr/lib/collectd/*.so
+	grep shlibs:Suggests debian/collectd-core.substvars \
+		| sed -e 's/shlibs:Suggests/shlibs:Recommends/' \
+		>> debian/collectd.substvars

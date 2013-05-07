@@ -1,3 +1,13 @@
+collectd (5.3.0-ppa5) precise; urgency=low
+
+  Import package splitting from Seb Harl's Debian packaging repository for
+  collectd at http://git.tokkee.org/pkg-collectd.git, thus splitting the package
+  into the collectd, collectd-core, collectd-utils, libcollectdclient1, and
+  libcollectdclient-dev packages, facilitating straightforward upgrades from the
+  Debian/Ubuntu packages.
+
+ -- Nick Stenning <nick@whiteink.com>  Fri, 03 May 2013 03:15:07 -0700
+
 collectd (5.3.0-ppa4) precise; urgency=low
 
   Ensure that plugin dependencies are not all automatically installed. Now,
