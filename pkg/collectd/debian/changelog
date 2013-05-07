@@ -1,3 +1,10 @@
+collectd (5.3.0-ppa6) precise; urgency=low
+
+  Update collectd varnish plugin patch to the latest version, correcting the
+  data types collected for many varnish stats.
+
+ -- Nick Stenning <nick@whiteink.com>  Tue, 07 May 2013 05:07:53 -0700
+
 collectd (5.3.0-ppa5) precise; urgency=low
 
   Import package splitting from Seb Harl's Debian packaging repository for
