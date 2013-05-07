@@ -3,3 +3,9 @@
 
 # Ignore quilt metadata dirs
 .pc
+
+# Ignore build products
+*.deb
+*.ddeb
+*.changes
+*.build
