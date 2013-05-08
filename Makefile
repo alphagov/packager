@@ -1,6 +1,8 @@
+DEBUILD_OPTS := 
+
 collectd: build/collectd build/collectd/collectd-5.3.0
 	rsync -a --delete pkg/collectd/debian/ build/collectd/collectd-5.3.0/debian/
-	(cd build/collectd/collectd-5.3.0 && debuild -S)
+	(cd build/collectd/collectd-5.3.0 && debuild -S $(DEBUILD_OPTS))
 
 build/collectd:
 	mkdir build/collectd
@@ -14,7 +16,7 @@ build/collectd/collectd_5.3.0.orig.tar.gz: pkg/collectd/srcurl
 
 ruby1.9.2: build/ruby1.9.2 build/ruby1.9.2/ruby-1.9.2p290
 	rsync -a --delete pkg/ruby1.9.2/debian/ build/ruby1.9.2/ruby-1.9.2p290/debian/
-	(cd build/ruby1.9.2/ruby-1.9.2p290 && debuild -S)
+	(cd build/ruby1.9.2/ruby-1.9.2p290 && debuild -S $(DEBUILD_OPTS))
 
 build/ruby1.9.2:
 	mkdir build/ruby1.9.2
