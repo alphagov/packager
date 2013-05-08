@@ -26,7 +26,7 @@ Building packages for multiple series
 -------------------------------------
 
 Building packages for multiple series ("Precise", "Lucid", etc.) is slightly
-more involved. See [`building_for_multiple_series.md`][building_for_multiple_series.md].
+more involved. See [`building_for_multiple_series.md`](building_for_multiple_series.md).
 
 Submitting to Launchpad
 -----------------------

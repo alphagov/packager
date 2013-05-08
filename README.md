@@ -9,4 +9,4 @@ Usage
 -----
 
 See the ["Getting Started" documentation at
-`doc/getting_started.md`][doc/getting_started.md].
+`doc/getting_started.md`](doc/getting_started.md).
