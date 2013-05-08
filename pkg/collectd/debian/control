@@ -4,14 +4,19 @@ Section: universe/utils
 Priority: optional
 Homepage: http://collectd.org/
 Standards-Version: 3.9.3
-Build-Depends: debhelper (>= 8),
+Build-Depends: debhelper (>= 7.0.50~),
  autotools-dev,
  bison,
  flex,
  iproute-dev,
  iptables-dev,
  libcurl4-gnutls-dev,
- libdbi-dev,
+# NB: sbuild doesn't seem to understand alternative dependency specs like this
+# one (A | B). This isn't actually causing any problems at the moment as both
+# libdbi0-dev and libvarnish-dev exist as virtual packages on precise. I'm
+# leaving the specifications as is, however, on the assumption that Launchpad's
+# buildd is smart enough to understand them.
+ libdbi0-dev | libdbi-dev,
  libesmtp-dev,
  libganglia1-dev,
  libgcrypt11-dev,
@@ -23,13 +28,13 @@ Build-Depends: debhelper (>= 8),
  libpcap-dev,
  libperl-dev,
  libpq-dev,
- librabbitmq-dev,
+# librabbitmq-dev, # unsupported on lucid
  librrd-dev,
  libsensors4-dev,
  libsnmp-dev,
  libtokyocabinet-dev,
- libtokyotyrant-dev,
- libvarnishapi-dev,
+# libtokyotyrant-dev, # unsupported on lucid
+ libvarnish-dev | libvarnishapi-dev,
  libxml2-dev,
  libyajl-dev,
  pkg-config,

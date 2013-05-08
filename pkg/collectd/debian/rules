@@ -18,6 +18,15 @@ CPPFLAGS += -DLT_LAZY_OR_NOW='RTLD_LAZY|RTLD_GLOBAL'
 CPPFLAGS += -UCONFIGFILE
 CPPFLAGS += -DCONFIGFILE='"/etc/collectd/collectd.conf"'
 
+CONFIGURE_FLAGS =
+
+# Something is wrong with the libvarnishapi.so shlib, and the collectd build
+# fails to find it. For now, just disable the varnish plugin when building for
+# lucid.
+ifeq ($(shell grep -c DISTRIB_CODENAME=lucid /etc/lsb-release),1)
+	CONFIGURE_FLAGS += --disable-varnish
+endif
+
 %:
 	dh $@
 
@@ -32,7 +41,8 @@ override_dh_auto_configure:
 	dh_auto_configure -- --with-perl-bindings="INSTALLDIRS=vendor" \
 	                     --without-libstatgrab \
 	                     --without-included-libltdl \
-	                     --disable-static
+	                     --disable-static \
+	                     $(CONFIGURE_FLAGS)
 
 override_dh_install:
 	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
