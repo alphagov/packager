@@ -22,8 +22,12 @@ Vagrant.configure("2") do |config|
     f.vmx["numvcpus"] = NCPU
   end
 
-  config.vm.provision :shell, :path => "tools/bootstrap"
   config.vm.synced_folder ".", "/home/vagrant/packager"
+
+  $stderr.puts "WARNING: The guest has access to your ~/.gnupg directory"
+  config.vm.synced_folder "~/.gnupg", "/home/vagrant/.gnupg"
+
+  config.vm.provision :shell, :path => "tools/bootstrap"
 
   if File.exist? 'Vagrantfile.local'
     instance_eval File.read('Vagrantfile.local'), 'Vagrantfile.local'
