@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision :shell, :path => "tools/bootstrap"
-  config.vm.synced_folder ".", "/home/vagrant/packager", :nfs => true
+  config.vm.synced_folder ".", "/home/vagrant/packager"
 
   if File.exist? 'Vagrantfile.local'
     instance_eval File.read('Vagrantfile.local'), 'Vagrantfile.local'
