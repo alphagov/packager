@@ -1,3 +1,17 @@
+collectd (5.3.0-ppa8~precise1) precise; urgency=low
+
+  No changes. This release simply adds "~precise1" to the version number for
+  consistency with the lucid build.
+
+ -- Nick Stenning <nick@whiteink.com>  Wed, 08 May 2013 14:29:29 +0000
+
+collectd (5.3.0-ppa8~lucid1) lucid; urgency=low
+
+  No changes. This release simply adds "~lucid1" to the version number in
+  an attempt to convince Launchpad to build for lucid.
+
+ -- Nick Stenning <nick@whiteink.com>  Wed, 08 May 2013 14:29:29 +0000
+
 collectd (5.3.0-ppa7) precise; urgency=low
 
   First build on lucid. Disable building tokyotyrant and rabbitmq plugins,
