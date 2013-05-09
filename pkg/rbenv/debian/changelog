@@ -1,0 +1,20 @@
+rbenv (0.3.0-1) unstable; urgency=low
+
+  [ Paul van Tilburg ]
+  * debian/watch: fixed the URL pattern.
+
+  [ Antonio Terceiro ]
+  * New upstream release.
+  * debian/patches/0001-Add-system-plugins-dir.patch: Read plugins from
+    /usr/lib/rbenv/plugins as well.
+  * The rbenv-alternatives plugin now also sets GEM_HOME so that gems are
+    installed inside ~/.rbenv/versions/$version/gems instead of system-wide.
+    Users are being warned of this fact through debian/NEWS. (Closes: #654550)
+
+ -- Antonio Terceiro <terceiro@debian.org>  Tue, 31 Jan 2012 21:24:04 -0200
+
+rbenv (0.1.2+git20100922-1) unstable; urgency=low
+
+  * Initial release (Closes: #642500)
+
+ -- Antonio Terceiro <terceiro@debian.org>  Sat, 24 Sep 2011 12:27:44 -0700

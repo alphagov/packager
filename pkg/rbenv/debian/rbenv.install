@@ -1,0 +1,4 @@
+libexec/*       /usr/lib/rbenv/libexec
+completions/*   /usr/lib/rbenv/completions
+rbenv-alternatives/bin/* /usr/lib/rbenv/libexec
+rbenv-alternatives/etc/rbenv.d/* /usr/lib/rbenv/hooks

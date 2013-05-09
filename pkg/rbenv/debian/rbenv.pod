@@ -1,0 +1,36 @@
+=head1 NAME
+
+rbenv - Simple Ruby Version Management
+
+=head1 USAGE
+
+Initialize rbenv for your acccount:
+
+  $ rbenv init
+  $ echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+  # restart your shell after this
+
+Make the Ruby interpreters installed through APT and configured with the
+alternatives system to rbenv:
+
+  $ rbenv alternatives
+  Added 1.8.7-debian
+  Added 1.9.2-debian
+
+Switch between different Ruby interpreters:
+
+  $ rbenv global 1.9.2-debian
+  $ ruby -v
+  ruby 1.9.2p290 (2011-07-09 revision 32553) [x86_64-linux]
+  $ rbenv global 1.8.7-debian
+  $ ruby -v
+  ruby 1.8.7 (2011-06-30 patchlevel 352) [x86_64-linux]
+
+The original rbenv README with a more comprehensive documentation,
+including all of the available commands, is available at
+/usr/share/doc/rbenv/README.md.gz
+
+=head1 ABOUT
+
+This manual page was written for the Debian system by Antonio Terceiro
+<terceiro@debian.org> and may be used by others.

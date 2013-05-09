@@ -1,0 +1,27 @@
+Source: rbenv
+Section: ruby
+Priority: optional
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Uploaders: Antonio Terceiro <terceiro@debian.org>
+DM-Upload-Allowed: yes
+Build-Depends: debhelper (>= 7.0.50)
+Standards-Version: 3.9.2
+Vcs-Git: git://git.debian.org/pkg-ruby-extras/rbenv.git
+Vcs-Browser: http://git.debian.org/?p=pkg-ruby-extras/rbenv.git;a=summary
+Homepage: https://github.com/sstephenson/rbenv
+XS-Ruby-Versions: all
+
+Package: rbenv
+Architecture: all
+XB-Ruby-Versions: ${ruby:Versions}
+Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter
+# TODO Also recommend jruby and rubinius eventually!
+Recommends: ruby1.8, ruby1.9.1
+Description: simple per-user Ruby version manager
+ rbenv lets you easily switch between multiple versions of Ruby. It's
+ simple, unobtrusive, and follows the UNIX tradition of single-purpose
+ tools that do one thing well.
+ .
+ This package also includes the rbenv-alternatives plugin, which hooks
+ into the Debian alternatives system and makes the Ruby interpreters
+ registered with update-alternatives available for use with rbenv.
