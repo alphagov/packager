@@ -1,0 +1,182 @@
+diff -Nru a/rbenv-alternatives/bin/rbenv-alternatives b/rbenv-alternatives/bin/rbenv-alternatives
+--- a/rbenv-alternatives/bin/rbenv-alternatives	1970-01-01 00:00:00.000000000 +0000
++++ b/rbenv-alternatives/bin/rbenv-alternatives	2012-01-10 18:08:46.000000000 +0000
+@@ -0,0 +1,48 @@
++#!/usr/bin/env bash
++set -e
++[ -n "$RBENV_DEBUG" ] && set -x
++
++if [ "$1" == '--version' ]; then
++  echo '0.3.0'
++  exit 0
++fi
++
++if ! which update-alternatives >/dev/null; then
++  echo "Sorry, it seems like you do not have update-alternatives available on your PATH."
++  echo "Are you sure this is a Debian (or derivative) system?"
++  exit 1
++fi
++
++update-alternatives --query ruby | sed -e '
++  1,/^$/ d
++  /^Priority:/ d
++  /^Slaves:/ d
++  s/^Alternative: \(.*\)/master \1/
++  /\/usr\/bin/ !d
++' |
++while read command; do
++  case "$command" in
++    master*)
++      master=$(echo "$command" | awk '{print $2}')
++      version=$($master -e 'puts(((defined?(RUBY_ENGINE) && RUBY_ENGINE != "ruby") && RUBY_ENGINE + "-" || "") + (defined?(Rubinius) && Rubinius::VERSION || (defined?(JRUBY_VERSION) && JRUBY_VERSION) || RUBY_VERSION))')-debian
++      if [ -d "${RBENV_ROOT}/versions/$version" ]; then
++        skip=true
++        echo "Skipping $version, it already exists"
++      else
++        skip=false
++        rm -rf "${RBENV_ROOT}/versions/$version"
++        mkdir -p "${RBENV_ROOT}/versions/$version/bin"
++        ln -s "$master" "${RBENV_ROOT}/versions/$version/bin/ruby"
++        ln -s "${master/ruby/gem}" "${RBENV_ROOT}/versions/$version/bin/gem"
++        echo "Added $version"
++      fi
++      ;;
++    *)
++      if [ "$skip" = 'false' ]; then
++        prog=$(echo "$command" | awk '{print $1}')
++        target=$(echo "$command" | awk '{print $2}')
++        ln -s "$target" "${RBENV_ROOT}/versions/$version/bin/$prog"
++      fi
++      ;;
++  esac
++done
+diff -Nru a/rbenv-alternatives/etc/rbenv.d/exec/alternatives-gems.bash b/rbenv-alternatives/etc/rbenv.d/exec/alternatives-gems.bash
+--- a/rbenv-alternatives/etc/rbenv.d/exec/alternatives-gems.bash	1970-01-01 00:00:00.000000000 +0000
++++ b/rbenv-alternatives/etc/rbenv.d/exec/alternatives-gems.bash	2012-01-10 18:08:46.000000000 +0000
+@@ -0,0 +1,9 @@
++__current_version=$(rbenv-version-name)
++case "$__current_version" in
++  *-debian)
++    export GEM_HOME="${RBENV_ROOT}/versions/${__current_version}/gems"
++    ;;
++  *)
++    true
++    ;;
++esac
+diff -Nru a/rbenv-alternatives/etc/rbenv.d/rehash/alternatives-gems.bash b/rbenv-alternatives/etc/rbenv.d/rehash/alternatives-gems.bash
+--- a/rbenv-alternatives/etc/rbenv.d/rehash/alternatives-gems.bash	1970-01-01 00:00:00.000000000 +0000
++++ b/rbenv-alternatives/etc/rbenv.d/rehash/alternatives-gems.bash	2012-01-10 18:08:46.000000000 +0000
+@@ -0,0 +1,11 @@
++for version in "${RBENV_ROOT}/versions/"*-debian; do
++  version_name=$(basename "$version")
++  gem_bindir="${RBENV_ROOT}/versions/${version_name}/gems/bin"
++  version_bindir="${RBENV_ROOT}/versions/${version_name}/bin"
++  if [[ -d "$gem_bindir" ]]; then
++    for program in "$gem_bindir"/*; do
++      program_name="$(basename $program)"
++      register_shim "$program_name"
++    done
++  fi
++done
+diff -Nru a/rbenv-alternatives/etc/rbenv.d/which/alternatives-gems.bash b/rbenv-alternatives/etc/rbenv.d/which/alternatives-gems.bash
+--- a/rbenv-alternatives/etc/rbenv.d/which/alternatives-gems.bash	1970-01-01 00:00:00.000000000 +0000
++++ b/rbenv-alternatives/etc/rbenv.d/which/alternatives-gems.bash	2012-01-10 18:08:46.000000000 +0000
+@@ -0,0 +1,8 @@
++case "$RBENV_VERSION" in
++  *-debian)
++    command_path="${RBENV_ROOT}/versions/${RBENV_VERSION}/gems/bin/${RBENV_COMMAND}"
++    if ! [ -x "$RBENV_COMMAND_PATH" ] && [ -x "$command_path" ]; then
++      RBENV_COMMAND_PATH="$command_path"
++    fi
++    ;;
++esac
+diff -Nru a/rbenv-alternatives/Makefile b/rbenv-alternatives/Makefile
+--- a/rbenv-alternatives/Makefile	1970-01-01 00:00:00.000000000 +0000
++++ b/rbenv-alternatives/Makefile	2012-01-10 18:08:46.000000000 +0000
+@@ -0,0 +1,17 @@
++PACKAGE = rbenv-alternatives
++VERSION = $(shell ./bin/rbenv-alternatives --version)
++TARBALL = $(PACKAGE)-$(VERSION).tar.gz
++DEBIAN_TARBALL = rbenv_$(VERSION).orig-$(PACKAGE).tar.gz
++
++dist: $(TARBALL)
++
++debian-dist: $(DEBIAN_TARBALL)
++
++$(TARBALL):
++	git archive --prefix=$(PACKAGE)-$(VERSION)/ HEAD | gzip - > $(TARBALL)
++
++$(DEBIAN_TARBALL): $(TARBALL)
++	ln $(TARBALL) $(DEBIAN_TARBALL)
++
++clean:
++	$(RM) $(TARBALL) $(DEBIAN_TARBALL)
+diff -Nru a/rbenv-alternatives/README.md b/rbenv-alternatives/README.md
+--- a/rbenv-alternatives/README.md	1970-01-01 00:00:00.000000000 +0000
++++ b/rbenv-alternatives/README.md	2012-01-10 18:08:46.000000000 +0000
+@@ -0,0 +1,65 @@
++# rbenv-alternatives
++
++This plugin allow you to add Ruby interpreters available through the Debian
++alternatives system into rbenv. This means you can install the different Ruby
++interpreters through APT on Debian and derivative distributions, and switch
++between them using rbenv.
++
++The Ruby interpreters installed via APT will become available to use with rbenv
++in addition to any other Ruby interpreter you may have installed into
++`~/.rbenv/versions` in any other way.
++
++This plugin also install hooks that configure Rubygems to install gems inside
++~/.rbenv/${version}/gems. This way you get completely separated Ruby
++environments.
++
++## Installation
++
++If you have installed rbenv from source into ~/.rbenv, just create a symcolic
++link to where you download this plugin inside ~/.rbenv/plugins:
++
++    $ mkdir ~/.rbenv/plugins
++    $ ln -s /path/to/rbenv-alternatives ~/.rbenv/plugins
++
++If you install rbenv through APT, then it will already bring this plugin with
++it:
++
++    # apt-get install rbenv
++
++## Usage
++
++    $ rbenv alternatives
++    $ rbenv versions
++      1.8.7-debian
++      1.9.2-debian
++    $ rbenv global 1.9.2-debian
++    $ rbenv version
++    1.9.2-debian (set by /home/terceiro/.rbenv/global)
++    $ ruby -v
++    ruby 1.9.2p290 (2011-07-09 revision 32553) [x86_64-linux]
++
++Whenever you install a new Ruby interpreter, or uninstall a previously
++installed one, just run `rbenv alternatives` again and it will update your
++list of Debian-provided Ruby interpreters with rbenv.
++
++## Copyright
++
++Copyright © 2011-2012, Antonio Terceiro <terceiro@debian.org>
++
++Permission is hereby granted, free of charge, to any person obtaining a copy of
++this software and associated documentation files (the "Software"), to deal in
++the Software without restriction, including without limitation the rights to
++use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
++of the Software, and to permit persons to whom the Software is furnished to do
++so, subject to the following conditions:
++
++The above copyright notice and this permission notice shall be included in all
++copies or substantial portions of the Software.
++
++THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++SOFTWARE.
