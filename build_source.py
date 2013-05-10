@@ -32,8 +32,10 @@ class Changelog(object):
 
 class Package(object):
 
-  def __init__(self, pkg_name):
+  def __init__(self, pkg_name, debuild_args=None):
     self.name = pkg_name
+    self.debuild_args = debuild_args
+
     self.pkg_path = os.path.join("pkg", pkg_name)
     self.build_path = os.path.join("build", pkg_name)
 
@@ -91,13 +93,18 @@ class Package(object):
   def __debuild(self):
     print "=> debuild..."
     command = ["debuild", "-S"]
+
+    if self.debuild_args:
+      command.extend(self.debuild_args.split())
+
     p = Popen(command, cwd=self.expanded_dir)
     p.wait()
 
 
 def main():
   pkg_name = sys.argv[1]
-  pkg = Package(pkg_name)
+  debuild_args = os.environ.get("DEBUILD_ARGS")
+  pkg = Package(pkg_name, debuild_args)
   pkg.make()
 
 if __name__ == "__main__":
