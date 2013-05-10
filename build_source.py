@@ -67,14 +67,22 @@ class Package(object):
     return self.__debuild()
     
   def __create_build_dir(self):
-    print "=> creating build directory"
-    if not os.path.isdir(self.build_path):
-      os.mkdir(self.build_path)
+    msg = "=> creating build directory"
+    if os.path.isdir(self.build_path):
+      print "%s [noop]" % msg
+      return
+
+    print msg
+    os.mkdir(self.build_path)
 
   def __fetch_tarball(self):
-    print "=> fetching tarball"
-    if not os.path.isfile(self.tarfile):
-      urllib.urlretrieve(self.url, self.tarfile)
+    msg = "=> fetching tarball"
+    if os.path.isfile(self.tarfile):
+      print "%s [noop]" % msg
+      return
+
+    print msg
+    urllib.urlretrieve(self.url, self.tarfile)
 
   def __expand_tarball(self):
     print "=> expanding tarball"
