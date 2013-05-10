@@ -58,28 +58,28 @@ class Package(object):
       self.url = f.read()
 
   def make(self):
-    self.create_build_dir()
-    self.fetch_tarball()
-    self.expand_tarball()
-    self.copy_debian()
-    self.debuild()
+    self.__create_build_dir()
+    self.__fetch_tarball()
+    self.__expand_tarball()
+    self.__copy_debian()
+    self.__debuild()
     
-  def create_build_dir(self):
+  def __create_build_dir(self):
     print "=> creating build directory"
     if not os.path.isdir(self.build_path):
       os.mkdir(self.build_path)
 
-  def fetch_tarball(self):
+  def __fetch_tarball(self):
     print "=> fetching tarball"
     if not os.path.isfile(self.tarfile):
       urllib.urlretrieve(self.url, self.tarfile)
 
-  def expand_tarball(self):
+  def __expand_tarball(self):
     print "=> expanding tarball"
     with tarfile.open(self.tarfile) as tar:
       tar.extractall(path=self.build_path)
 
-  def copy_debian(self):
+  def __copy_debian(self):
     print "=> copy new debian directory"
     src_dir = os.path.join(self.pkg_path, "debian")
     dst_dir = os.path.join(self.expanded_dir, "debian")
@@ -88,7 +88,7 @@ class Package(object):
       shutil.rmtree(dst_dir)
     shutil.copytree(src_dir, dst_dir)
 
-  def debuild(self):
+  def __debuild(self):
     print "=> debuild..."
     command = ["debuild", "-S"]
     p = Popen(command, cwd=self.expanded_dir)
