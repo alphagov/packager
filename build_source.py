@@ -19,7 +19,7 @@ class Changelog(object):
   def populate(self):
     p = Popen(['dpkg-parsechangelog', '-l' + self.path], stdout=PIPE)
     out = p.communicate()[0]
-    matches = re.search(r"^Source: (.+)\nVersion: (.+)-", out)
+    matches = re.search(r"^Source: (.+)\nVersion: ([^-]+)", out)
 
     self.source = matches.group(1)
     self.version = matches.group(2)
