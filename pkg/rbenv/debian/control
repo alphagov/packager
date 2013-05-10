@@ -21,7 +21,3 @@ Description: simple per-user Ruby version manager
  rbenv lets you easily switch between multiple versions of Ruby. It's
  simple, unobtrusive, and follows the UNIX tradition of single-purpose
  tools that do one thing well.
- .
- This package also includes the rbenv-alternatives plugin, which hooks
- into the Debian alternatives system and makes the Ruby interpreters
- registered with update-alternatives available for use with rbenv.

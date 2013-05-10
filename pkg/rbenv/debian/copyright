@@ -6,10 +6,6 @@ Files: *
 Copyright: Copyright (c) 2011 Sam Stephenson
 License: MIT
 
-Files: rbenv-alternatives/*
-Copyright: Copyright © 2011 Antonio Terceiro <terceiro@debian.org>
-License: MIT
-
 Files: debian/*
 Copyright: Copyright © 2011 Antonio Terceiro <terceiro@debian.org>
 License: MIT
