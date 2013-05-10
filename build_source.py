@@ -6,10 +6,10 @@ import sys
 import tarfile
 import urllib
 import shutil
+
 from subprocess import Popen, PIPE
 
 class Changelog(object):
-
   def __init__(self, path):
     self.path = path
     self.source = None
@@ -30,8 +30,8 @@ class Changelog(object):
   def debuild_dir_name(self):
     return "%s-%s" % (self.source, self.version)
 
-class Package(object):
 
+class Package(object):
   def __init__(self, pkg_name, debuild_args=None):
     self.name = pkg_name
     self.debuild_args = debuild_args
@@ -64,7 +64,7 @@ class Package(object):
     self.__fetch_tarball()
     self.__expand_tarball()
     self.__copy_debian()
-    self.__debuild()
+    return self.__debuild()
     
   def __create_build_dir(self):
     print "=> creating build directory"
@@ -98,14 +98,17 @@ class Package(object):
       command.extend(self.debuild_args.split())
 
     p = Popen(command, cwd=self.expanded_dir)
-    p.wait()
+    retcode = p.wait()
+    return retcode
 
 
 def main():
   pkg_name = sys.argv[1]
   debuild_args = os.environ.get("DEBUILD_ARGS")
   pkg = Package(pkg_name, debuild_args)
-  pkg.make()
+
+  retcode = pkg.make()
+  sys.exit(retcode)
 
 if __name__ == "__main__":
   main()
