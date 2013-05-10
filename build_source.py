@@ -87,7 +87,8 @@ class Package(object):
   def debuild(self):
     print "=> debuild..."
     command = ["debuild", "-S"]
-    Popen(command, cwd=self.expanded_dir)
+    p = Popen(command, cwd=self.expanded_dir)
+    p.wait()
 
 
 def main():
