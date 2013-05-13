@@ -1,4 +1,4 @@
-rbenv (0.4.0-ppa1~precise1ubuntu1) precise; urgency=low
+rbenv (0.4.0-ppa1~precise1) precise; urgency=low
 
   * Bump to version 0.4.0 which supports .ruby-version
   * Omit hooks patch which is now included upstream.
