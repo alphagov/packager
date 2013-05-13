@@ -32,12 +32,11 @@ class Changelog(object):
 
 
 class Package(object):
-  def __init__(self, pkg_name, debuild_args=None):
-    self.name = pkg_name
+  def __init__(self, pkg_dir, debuild_args=None):
     self.debuild_args = debuild_args
 
-    self.pkg_path = os.path.join("pkg", pkg_name)
-    self.build_path = os.path.join("build", pkg_name)
+    self.pkg_path = pkg_dir
+    self.build_path = None
 
     self.url = None
     self.tarfile = None
@@ -48,8 +47,9 @@ class Package(object):
 
   def read_changelog(self):
     changelog_path = os.path.join(self.pkg_path, "debian", "changelog")
-
     cl = Changelog(changelog_path)
+
+    self.build_path = os.path.join("build", cl.debuild_dir_name())
     self.expanded_dir = os.path.join(self.build_path, cl.debuild_dir_name())
     self.tarfile = os.path.join(self.build_path, cl.debuild_tar_name())
 
@@ -120,9 +120,9 @@ class Package(object):
 
 
 def main():
-  pkg_name = sys.argv[1]
+  pkg_dir = sys.argv[1]
   debuild_args = os.environ.get("DEBUILD_ARGS")
-  pkg = Package(pkg_name, debuild_args)
+  pkg = Package(pkg_dir, debuild_args)
 
   retcode = pkg.make()
   sys.exit(retcode)
