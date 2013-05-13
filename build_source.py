@@ -87,7 +87,16 @@ class Package(object):
   def __expand_tarball(self):
     print "=> expanding tarball"
     with tarfile.open(self.tarfile) as tar:
+      top_dir = os.path.join(
+        self.build_path,
+        os.path.commonprefix(tar.getnames())
+      )
+      shutil.rmtree(top_dir, ignore_errors=True)
       tar.extractall(path=self.build_path)
+
+    if self.expanded_dir != top_dir:
+      shutil.rmtree(self.expanded_dir, ignore_errors=True)
+      shutil.move(top_dir, self.expanded_dir)
 
   def __copy_debian(self):
     print "=> copy new debian directory"
