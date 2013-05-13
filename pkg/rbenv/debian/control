@@ -1,8 +1,7 @@
 Source: rbenv
 Section: ruby
 Priority: optional
-Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
-Uploaders: Antonio Terceiro <terceiro@debian.org>
+Maintainer: Dan Carley <dan.carley@gmail.com>
 DM-Upload-Allowed: yes
 Build-Depends: debhelper (>= 7.0.50)
 Standards-Version: 3.9.3
