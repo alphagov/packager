@@ -1,5 +1,5 @@
-ruby (1.9.2p290-ppa1) precise; urgency=low
+rbenv-ruby-1.9.3-p392 (1-ppa1~precise1) precise; urgency=low
 
-  * Initial PPA build of ruby 1.9.2p290.
+  * Initial build for Precise.
 
- -- Nick Stenning <nick@whiteink.com>  Thu, 02 May 2013 05:25:55 -0700
+ -- Dan Carley <dan.carley@gmail.com>  Mon, 13 May 2013 17:14:23 +0000
