@@ -1,0 +1,18 @@
+Source: rbenv
+Section: ruby
+Priority: optional
+Maintainer: Dan Carley <dan.carley@gmail.com>
+DM-Upload-Allowed: yes
+Build-Depends: debhelper (>= 7.0.50)
+Standards-Version: 3.9.3
+Homepage: https://github.com/sstephenson/rbenv
+XS-Ruby-Versions: all
+
+Package: rbenv
+Architecture: all
+XB-Ruby-Versions: ${ruby:Versions}
+Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter
+Description: simple per-user Ruby version manager
+ rbenv lets you easily switch between multiple versions of Ruby. It's
+ simple, unobtrusive, and follows the UNIX tradition of single-purpose
+ tools that do one thing well.

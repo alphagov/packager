@@ -1,0 +1,9 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_install:
+	mkdir -p debian/rbenv/usr/share/man/man1
+	pod2man -c "" -r "" debian/rbenv.pod > debian/rbenv/usr/share/man/man1/rbenv.1
+	dh_auto_install
