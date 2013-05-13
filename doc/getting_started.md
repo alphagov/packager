@@ -7,11 +7,11 @@ First, start the ubuntu package builder VM:
 
 Follow the instructions it gives you for setting up your environment. Then,
 logged into the box, you should be able to make source packages by running
-`make <target>` in the `packager` directory. You will be prompted to sign the
-source packages with your GPG key.
+`build_source.py <target>` in the `packager` directory. You will be prompted
+to sign the source packages with your GPG key.
 
     $ cd ~/packager
-    $ make collectd
+    $ ./build_source.py pkg/collectd
 
 To test a binary package build, you first need to set up sbuild:
 

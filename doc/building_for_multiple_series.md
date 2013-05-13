@@ -29,7 +29,7 @@ Let's say you're have `collectd` at version `5.3.0-ppa8` and you wish to release
 
 Make sure your package builds on all series you wish to build for:
 
-    $ make collectd
+    $ ./build_source.py pkg/collectd
     $ sbuild -A -d precise-amd64 build/collectd/collectd_5.3.0-ppa8.dsc
     $ sbuild -A -d lucid-amd64 build/collectd/collectd_5.3.0-ppa8.dsc
 
@@ -40,12 +40,12 @@ file to Launchpad:
     $ cd build/collectd/collect-5.3.0/
     $ dch -v '5.3.0-ppa9~lucid1' -D lucid
     $ cd ../../../
-    $ make collectd
+    $ ./build_source.py pkg/collectd
     $ dput ppa:gds/govuk build/collectd/collectd_5.3.0-ppa9~lucid1_source.changes
     $ cd build/collectd/collect-5.3.0/
     $ dch -v '5.3.0-ppa9~precise1' -D precise
     $ cd ../../../
-    $ make collectd
+    $ ./build_source.py pkg/collectd
     $ dput ppa:gds/govuk build/collectd/collectd_5.3.0-ppa9~precise1_source.changes
 
 Use the same changelog message for both versions. Usually the message should
