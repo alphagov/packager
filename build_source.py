@@ -1,4 +1,17 @@
 #!/usr/bin/env python
+"""
+Utility to create a Debian source package.
+
+This takes our internally version controlled `debian/` directory and a
+`srcurl` file containing a URL to the original source tarball, and turns
+them into a source package consisting of `.dsc` and `.tar.gz` files.
+
+This *appears* to be the sanest way to maintain our own packaging
+metadata against upstream releases. It doesn't currently support cleaning
+the `build/` directory.
+
+The resulting source package can be built with `sbuild`.
+"""
 
 import re
 import os
@@ -10,6 +23,12 @@ import shutil
 from subprocess import Popen, PIPE
 
 class Changelog(object):
+  """
+  Parse a `debian/changelog` file.
+
+  Has methods to return strings representing the directory and tarball names
+  that debuild expects.
+  """
   def __init__(self, path):
     self.path = path
     self.source = None
@@ -65,7 +84,7 @@ class Package(object):
     self.__expand_tarball()
     self.__copy_debian()
     return self.__debuild()
-    
+
   def __create_build_dir(self):
     msg = "=> creating build directory"
     if os.path.isdir(self.build_path):
@@ -118,9 +137,16 @@ class Package(object):
     retcode = p.wait()
     return retcode
 
-
 def main():
+  if len(sys.argv) != 2:
+    sys.stderr.write("Usage: %s <path_containing_debian_directory>\n" % sys.argv[0])
+    sys.exit(2)
+
   pkg_dir = sys.argv[1]
+  if not os.path.isdir(os.path.join(pkg_dir, "debian")):
+    sys.stderr.write("ERROR: %r does not contain a debian/ directory\n" % pkg_dir)
+    sys.exit(2)
+
   debuild_args = os.environ.get("DEBUILD_ARGS")
   pkg = Package(pkg_dir, debuild_args)
 
