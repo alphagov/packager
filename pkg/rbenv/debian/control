@@ -6,8 +6,6 @@ Uploaders: Antonio Terceiro <terceiro@debian.org>
 DM-Upload-Allowed: yes
 Build-Depends: debhelper (>= 7.0.50)
 Standards-Version: 3.9.3
-Vcs-Git: git://git.debian.org/pkg-ruby-extras/rbenv.git
-Vcs-Browser: http://git.debian.org/?p=pkg-ruby-extras/rbenv.git;a=summary
 Homepage: https://github.com/sstephenson/rbenv
 XS-Ruby-Versions: all
 
