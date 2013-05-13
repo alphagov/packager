@@ -2,8 +2,10 @@ rbenv (0.3.0-ppa1~precise1) precise; urgency=low
 
   * Rebuild for Precise.
   * Omit rbenv-alternatives.
+  * Include versions and shims directories so that RBENV_ROOT can be set
+    globally to /usr/lib/rbenv.
 
- -- Dan Carley <dan.carley@gmail.com>  Fri, 10 May 2013 07:16:44 +0000
+ -- Dan Carley <dan.carley@gmail.com>  Mon, 13 May 2013 10:50:15 +0000
 
 rbenv (0.3.0-1) unstable; urgency=low
 
