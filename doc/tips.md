@@ -28,13 +28,23 @@ Instruct `sbuild` to not purge the build directory or chroot session:
 sbuild --purge never --purge-session never [...]
 ```
 
+List the available sessions:
+```
+vagrant@packager:~/packager$ schroot -l --all-sessions
+session:precise-amd64-7c376c42-0b8d-49ac-abb2-0dd659a11551
+```
+
 Attach to the session and look in the `/build` directory:
 ```
-vagrant@packager:~/packager$ schroot -r -c
-precise-amd64-7c376c42-0b8d-49ac-abb2-0dd659a11551
+vagrant@packager:~/packager$ schroot -rc precise-amd64-7c376c42-0b8d-49ac-abb2-0dd659a11551
 (precise-amd64)vagrant@packager:~/packager$ ls -al /build
 total 12
 drwxrws--- 1 sbuild  sbuild 4096 May 14 16:09 .
 drwxr-xr-x 1 root    root   4096 May 14 16:09 ..
 drwxr-x--- 4 vagrant sbuild 4096 May 14 16:14 foo-E8JFbs
+```
+
+Delete it afterwards:
+```
+vagrant@packager:~/packager$ schroot -ec precise-amd64-7c376c42-0b8d-49ac-abb2-0dd659a11551
 ```
