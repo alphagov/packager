@@ -1,3 +1,10 @@
+rbenv (0.4.0-ppa1~lucid1) lucid; urgency=low
+
+  * Bump to version 0.4.0 which supports .ruby-version
+  * Omit hooks patch which is now included upstream.
+
+ -- Garima Singh <igarimasingh@gmail.com>  Mon, 16 May 2013 11:59:27 +0000
+
 rbenv (0.4.0-ppa1~precise1) precise; urgency=low
 
   * Bump to version 0.4.0 which supports .ruby-version

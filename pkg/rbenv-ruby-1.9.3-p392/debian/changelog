@@ -1,3 +1,9 @@
+rbenv-ruby-1.9.3-p392 (1-ppa1~lucid1) lucid; urgency=low
+
+  * Initial build for Lucid.
+
+ -- Garima Singh <igarimasingh@gmail.com>  Mon, 16 May 2013 10:29:06 +0000
+
 rbenv-ruby-1.9.3-p392 (1-ppa1~precise1) precise; urgency=low
 
   * Initial build for Precise.
