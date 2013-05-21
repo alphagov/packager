@@ -1,3 +1,9 @@
+rbenv-ruby-1.9.3-p392 (1-ppa1~lucid2) lucid; urgency=low
+
+  * Rebuild against Lucid for our PPA.
+
+ -- Dan Carley <dan.carley@gmail.com>  Tue, 21 May 2013 13:51:37 +0000
+
 rbenv-ruby-1.9.3-p392 (1-ppa1~precise2) precise; urgency=low
 
   * Rebuild against Precise for our PPA.
