@@ -1,3 +1,9 @@
+rbenv (0.4.0-ppa1~precise2) precise; urgency=low
+
+  * Rebuild against Precise for our PPA.
+
+ -- Dan Carley <dan.carley@gmail.com>  Tue, 21 May 2013 13:41:44 +0000
+
 rbenv (0.4.0-ppa1~lucid1) lucid; urgency=low
 
   * Bump to version 0.4.0 which supports .ruby-version
