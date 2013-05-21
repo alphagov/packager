@@ -11,6 +11,7 @@ Useful for testing packages locally before rebuilding for submission:
 ```
 DEBUILD_ARGS="-uc -us" ./build_source.py pkg/foo
 ```
+Options "-uc -us": Build only the binary package(s) without signing the .changes file
 
 ### Sign against a different GPG key
 
@@ -48,3 +49,26 @@ Delete it afterwards:
 ```
 vagrant@packager:~/packager$ schroot -ec precise-amd64-7c376c42-0b8d-49ac-abb2-0dd659a11551
 ```
+
+## Testing
+
+For testing on lucid/precise boxes you can add a temporary json to your vcloud-template.
+example: machines/tester/lucid.json
+
+        {
+            "role":             "lucid",
+            "class":            "tester",
+            "zone":             "tester",
+            "vm_name":          "lucid",
+            "ip":               "10.11.12.14",
+            "box_dist":         "lucid"
+        }
+
+You can add a temporary class in puppet to get this up and running: modules/govuk/manifests/node/s_tester.pp
+
+        class govuk::tester {
+          include apt
+        }
+
+To test and install packages, drop the packages in vagrant-govuk folder, example: debs/abc.deb. This would
+make your packages available at /vagrant/<path> example: /vagrant/debs/abc.deb.
