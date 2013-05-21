@@ -20,6 +20,22 @@ Useful if your GPG key email address differs from the changelog entry:
 DEBUILD_ARGS="-k12345678" ./build_source.py pkg/foo
 ```
 
+### Uploading tar files
+
+A successful upload can be rejected if tar.gz can't be found in the
+upload or distribution. A particular email you would get for the same
+would be like
+
+    Rejected:
+    Unable to find foo.orig.tar.gz in upload or distribution.
+    Files specified in DSC are broken or missing, skipping package unpack verification.
+
+To fix this you can use -sa which uploads .tar.gz along the .changes
+```
+DEBUILD_ARGS="-sa" ./build_source.py pkg/foo
+```
+
+
 ## sbuild
 
 ### Inspect a failed build

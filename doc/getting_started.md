@@ -35,3 +35,11 @@ Once you've verified that you're able to build a .deb from your .dsc, you can
 submit the original .changes file to Launchpad for building:
 
     $ dput ppa:gds/govuk build/collectd/collectd_5.3.0-ppa4_source.changes
+
+Common error encountered during upload: [here](https://help.launchpad.net/Packaging/UploadErrors)
+
+Once you are able to upload the changes file, you would get an email for either your
+upload has been accepted or rejected on the basis of launchpad criteria
+(also stated in the common errors links)
+
+**NOTE: read the tips document [here](tips.md)**
