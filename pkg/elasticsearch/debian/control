@@ -1,0 +1,14 @@
+Source: elasticsearch
+Maintainer: Garima Singh <igarimasingh@gmail.com>
+Section: net
+Priority: optional
+Homepage: http://www.elasticsearch.org/
+Standards-Version: 3.9.3
+Build-Depends: debhelper (>=7)
+
+Package: elasticsearch
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: ${shlibs:Suggests}
+Description: A Distributed RESTful Search Engine
+ ElasticSearch is a distributed RESTful search engine built for the cloud.
