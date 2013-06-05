@@ -22,6 +22,8 @@ You can then build binary packages from .dsc files:
 
     $ sbuild -A -d precise-amd64 build/collectd/collectd_5.3.0-ppa4.dsc
 
+For understanding the folder structure for packager packages: [here](folder_structure.md)
+
 Building packages for multiple series
 -------------------------------------
 
