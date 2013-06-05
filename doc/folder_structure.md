@@ -1,6 +1,6 @@
 Folder Structure for Package under Packager
 -------------------------------------------
-``
+```
 .
 ├── build
 ├── pkg
@@ -16,7 +16,7 @@ Folder Structure for Package under Packager
 │   │   │   ├── source
 │   │   │   │   └── format
 │   │   └── srcurl
-``
+```
 
 * Packages reside under _pkg_ folder (e.g. pkg_name above).
 * _srcurl_ file contains the path to tar.gz for the package
