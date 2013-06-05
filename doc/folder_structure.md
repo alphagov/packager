@@ -36,3 +36,9 @@ Folder Structure for Package under Packager
 
 The build folder's contains intermediary files, generated while building
 (using build_source script).
+=======
+      [here](http://www.debian.org/doc/manuals/maint-guide/dother.en.html#compat)
+
+The build folder's contains intermediary files, generated while building
+(using build_source script).
+>>>>>>> Adding documentation around folder structure for packages
