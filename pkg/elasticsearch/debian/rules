@@ -1,3 +1,19 @@
 #!/usr/bin/make -f
+
 %:
 	dh $@
+
+DEST = "debian/elasticsearch"
+
+override_dh_install:
+	mkdir -p $(DEST)/etc/elasticsearch
+	mkdir -p $(DEST)/usr/share/elasticsearch
+	mkdir $(DEST)/usr/share/elasticsearch/bin
+	mkdir -p $(DEST)/usr/share/elasticsearch/lib/sigar
+
+	cp -r bin $(DEST)/usr/share/elasticsearch/bin
+	cp config/* $(DEST)/etc/elasticsearch/
+	cp lib/*.jar $(DEST)/usr/share/elasticsearch/lib/
+	cp lib/sigar/*.jar $(DEST)/usr/share/elasticsearch/lib/sigar/
+
+	dh_install --list-missing
