@@ -1,5 +1,6 @@
 Folder Structure for Package under Packager
 -------------------------------------------
+
 ```
 .
 ├── build
@@ -29,10 +30,17 @@ Folder Structure for Package under Packager
       [here](http://manpages.ubuntu.com/manpages/raring/en/man7/debhelper.7.html#contenttoc8)
     * _control_ contains package management information. Some
       helpful links are:
-        * http://www.debian.org/doc/manuals/maint-guide/dreq.en.html#control
-        * http://www.debian.org/doc/debian-policy/ch-archive.html#s-subsections
+        * [http://www.debian.org/doc/manuals/maint-guide/dreq.en.html#control](http://www.debian.org/doc/manuals/maint-guide/dreq.en.html#control)
+        * [http://www.debian.org/doc/debian-policy/ch-archive.html#s-subsections](http://www.debian.org/doc/debian-policy/ch-archive.html#s-subsections)
+    * _rules_ contains rules used by dpkg-buildpackage for creating
+      actual package. Here you can override
+      [debhelper command](http://www.tin.org/bin/man.cgi?section=7&topic=debhelper).
+      You can use among the [variables avialable](http://cdbs-doc.duckcorp.org/en/cdbs-doc.xhtml)
+      from under the heading ``Basic settings and available variables``.
     * You can get more information about other files and folders
-      [here](http://www.debian.org/doc/manuals/maint-guide/dother.en.html#compat). Another useful link [here](http://www.debian.org/doc/manuals/maint-guide/dreq.en.html)
+      [here](http://www.debian.org/doc/manuals/maint-guide/dother.en.html#compat).
+      Another useful link [here](http://www.debian.org/doc/manuals/maint-guide/dreq.en.html)
 
 The build folder's contains intermediary files, generated while building
 (using build_source script).
+
