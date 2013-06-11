@@ -8,7 +8,7 @@ Build-Depends: debhelper (>=7)
 
 Package: elasticsearch
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, java7-runtime-headless | java6-runtime-headless | java7-runtime | java6-runtime
 Suggests: ${shlibs:Suggests}
 Description: A Distributed RESTful Search Engine
  ElasticSearch is a distributed RESTful search engine built for the cloud.
