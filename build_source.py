@@ -113,7 +113,7 @@ class Package(object):
       shutil.rmtree(top_dir, ignore_errors=True)
       tar.extractall(path=self.build_path)
 
-    if self.expanded_dir != top_dir:
+    if  os.path.normpath(self.expanded_dir) != os.path.normpath(top_dir):
       shutil.rmtree(self.expanded_dir, ignore_errors=True)
       shutil.move(top_dir, self.expanded_dir)
 

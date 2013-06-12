@@ -1,0 +1,11 @@
+elasticsearch (0.20.6-ppa1~lucid1) lucid; urgency=low
+
+  Initial PPA build of elasticsearch 0.20.6
+
+ -- Garima Singh <igarimasingh@gmail.com>  Tue, 11 Jun 2013 12:45:13 +0000
+
+elasticsearch (0.20.6-ppa1~precise1) precise; urgency=low
+
+  Initial PPA build of elasticsearch 0.20.6
+
+ -- Garima Singh <igarimasingh@gmail.com>  Wed, 05 Jun 2013 16:15:14 +0000
