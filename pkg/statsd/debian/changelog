@@ -1,3 +1,9 @@
+statsd (0.6.0-ppa1~lucid) lucid; urgency=low
+
+  * Initial PPA build.
+
+ -- Nick Stenning <nick@whiteink.com>  Fri, 12 Jul 2013 15:41:13 +0000
+
 statsd (0.6.0-ppa1~precise) precise; urgency=low
 
   * Initial PPA build.
