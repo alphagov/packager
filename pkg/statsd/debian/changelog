@@ -1,3 +1,15 @@
+statsd (0.6.0-ppa2~precise) precise; urgency=low
+
+  * Install docs and examples in correct locations.
+
+ -- Nick Stenning <nick@whiteink.com>  Fri, 12 Jul 2013 15:56:20 +0000
+
+statsd (0.6.0-ppa2~lucid) lucid; urgency=low
+
+  * Install docs and examples in correct locations.
+
+ -- Nick Stenning <nick@whiteink.com>  Fri, 12 Jul 2013 15:53:08 +0000
+
 statsd (0.6.0-ppa1~lucid) lucid; urgency=low
 
   * Initial PPA build.
