@@ -1,0 +1,22 @@
+description "StatsD: a simple daemon for easy stats aggregation"
+author "Etsy"
+
+start on (net-device-up
+          and local-filesystems
+          and runlevel [2345])
+stop on runlevel [016]
+
+respawn
+
+pre-start script
+   touch /var/run/statsd.pid
+   chown statsd /var/run/statsd.pid
+end script
+
+script
+  exec start-stop-daemon --start --quiet \
+    --chuid statsd \
+    --pidfile /var/run/statsd.pid \
+    --make-pidfile \
+    --exec /usr/bin/statsd -- /etc/statsd.conf
+end script

@@ -1,0 +1,16 @@
+Source: statsd
+Maintainer: Nick Stenning <nick@whiteink.com>
+Section: universe/utils
+Priority: optional
+Homepage: https://github.com/etsy/statsd
+Standards-Version: 3.9.3
+Build-Depends: debhelper (>= 7.0.50~)
+
+Package: statsd
+Architecture: any
+Depends: nodejs, adduser, ${shlibs:Depends}, ${misc:Depends}
+Suggests: ${shlibs:Suggests}
+Description: Simple daemon for easy stats aggregation 
+ A network daemon that runs on the Node.js platform and listens for statistics, 
+ like counters and timers, sent over UDP and sends aggregates to one or more 
+ pluggable backend services (e.g., Graphite).
