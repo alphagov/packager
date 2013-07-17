@@ -1,0 +1,4 @@
+bin usr/share/elasticsearch
+lib/*.jar usr/share/elasticsearch/lib
+lib/sigar/*.jar usr/share/elasticsearch/lib/sigar
+config/* etc/elasticsearch

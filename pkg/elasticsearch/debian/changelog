@@ -1,3 +1,17 @@
+elasticsearch (0.90.2-ppa1~precise) precise; urgency=low
+
+  * Update to upstream 0.90.2
+  * Manage elasticsearch process with upstart
+
+ -- Nick Stenning <nick@whiteink.com>  Wed, 17 Jul 2013 13:06:34 +0000
+
+elasticsearch (0.90.2-ppa1~lucid) lucid; urgency=low
+
+  * Update to upstream 0.90.2
+  * Manage elasticsearch process with upstart
+
+ -- Nick Stenning <nick@whiteink.com>  Wed, 17 Jul 2013 11:50:18 +0000
+
 elasticsearch (0.20.6-ppa1~lucid1) lucid; urgency=low
 
   Initial PPA build of elasticsearch 0.20.6
