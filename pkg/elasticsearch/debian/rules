@@ -3,8 +3,14 @@
 %:
 	dh $@
 
+ifeq (${DEB_BUILD_ARCH}, i386)
+LIBSIGAR_ARCH=x86
+else
+LIBSIGAR_ARCH=${DEB_BUILD_ARCH}
+endif
+
 override_dh_auto_build:
 
 override_dh_install:
 	dh_install
-	dh_install lib/sigar/libsigar-${DEB_BUILD_ARCH}-linux.so usr/share/elasticsearch/lib/sigar
+	dh_install lib/sigar/libsigar-${LIBSIGAR_ARCH}-linux.so usr/share/elasticsearch/lib/sigar

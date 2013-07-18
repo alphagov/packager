@@ -1,3 +1,15 @@
+elasticsearch (0.90.2-ppa2~precise) precise; urgency=low
+
+  * Fix i386 build by specifying correct arch for libsigar
+
+ -- Nick Stenning <nick@whiteink.com>  Thu, 18 Jul 2013 08:48:44 +0000
+
+elasticsearch (0.90.2-ppa2~lucid) lucid; urgency=low
+
+  * Fix i386 build by specifying correct arch for libsigar
+
+ -- Nick Stenning <nick@whiteink.com>  Thu, 18 Jul 2013 08:40:15 +0000
+
 elasticsearch (0.90.2-ppa1~precise) precise; urgency=low
 
   * Update to upstream 0.90.2
