@@ -1,0 +1,14 @@
+Source: rbenv-ruby-2.0.0-p247
+Maintainer: Dan Carley <dan.carley@gmail.com>
+Section: interpreters
+Priority: optional
+Homepage: http://ruby-lang.org/
+Standards-Version: 3.9.3
+Build-Depends: debhelper (>=7), autotools-dev, libssl-dev, libreadline6-dev, libyaml-dev, zlib1g-dev
+
+Package: rbenv-ruby-2.0.0-p247
+Architecture: any
+Depends: rbenv, ${shlibs:Depends}, ${perl:Depends}, ${misc:Depends}
+Suggests: ${shlibs:Suggests}
+Description: Ruby version for use with rbenv
+ Specific version of Ruby for use with a system install of rbenv.
