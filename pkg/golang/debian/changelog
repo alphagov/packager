@@ -1,3 +1,9 @@
+golang (2:1.1.2-2ubuntu1~precise1) precise; urgency=low
+
+  * Backport to precise.
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Thu, 03 Oct 2013 09:18:08 +0000
+
 golang (2:1.1.2-2ubuntu1) saucy; urgency=low
 
   * Merge from Debian unstable (LP: #1211749, #1202027). Remaining changes:
