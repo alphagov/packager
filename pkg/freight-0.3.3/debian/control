@@ -1,0 +1,13 @@
+Source: freight
+Maintainer: Dan Carley <dan.carley@gmail.com>
+Section: utils
+Priority: optional
+Homepage: https://github.com/rcrowley/freight
+Standards-Version: 3.9.3
+Build-Depends: debhelper (>=8)
+
+Package: freight
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: ${shlibs:Suggests}
+Description: A modern take on the Debian archive.
