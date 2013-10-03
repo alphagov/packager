@@ -1,4 +1,4 @@
-golang (2:1.1.2-2ubuntu1~precise1) precise; urgency=low
+golang (2:1.1.2-2ubuntu1~ppa1~precise1) precise; urgency=low
 
   * Backport to precise.
 
