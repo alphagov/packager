@@ -1,0 +1,5 @@
+rbenv-ruby-2.0.0-p247 (1-ppa1~precise1) precise; urgency=low
+
+  * Initial build for Precise.
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Mon, 14 Oct 2013 10:16:17 +0100
