@@ -1,0 +1,11 @@
+rbenv-ruby-2.0.0-p247 (1-ppa1~lucid1) lucid; urgency=low
+
+  * Initial build for Lucid.
+
+ -- Matthew Ford <matt@bitzesty.com>  Mon, 12 Aug 2013 16:28:24 +0000
+
+rbenv-ruby-2.0.0-p247 (1-ppa1~precise1) precise; urgency=low
+
+  * Initial build for Precise.
+
+ -- Matthew Ford <matt@bitzesty.com>  Mon, 12 Aug 2013 16:28:23 +0000
