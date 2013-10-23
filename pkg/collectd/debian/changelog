@@ -1,3 +1,9 @@
+collectd (5.4.0-ppa1~lucid1) precise; urgency=low
+
+  * Rebuild for Lucid.
+
+ -- Dan Carley <dan.carley@gmail.com>  Wed, 23 Oct 2013 11:27:55 +0000
+
 collectd (5.4.0-ppa1~precise1) precise; urgency=low
 
   * New upstream release.
