@@ -1,0 +1,15 @@
+#!/usr/bin/make -f
+
+export GOPATH=$(CURDIR)
+export GOBIN=$(CURDIR)/debian/vegeta/usr/bin
+
+%:
+	dh $@
+
+# Precise is too young for dh-golang.
+override_dh_auto_install-arch:
+	mkdir -p src/github.com/tsenart/
+	ln -s ../../../ src/github.com/tsenart/vegeta
+	go get -v -d
+	go install -v
+	mv $(GOBIN)/vegeta-* $(GOBIN)/vegeta
