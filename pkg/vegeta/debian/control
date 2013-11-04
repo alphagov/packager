@@ -1,0 +1,12 @@
+Source: vegeta
+Section: web
+Priority: extra
+Maintainer: Dan Carley <dan.carley@gmail.com>
+Build-Depends: debhelper (>= 8.0.0), golang-go (>= 2:1.1), git
+Standards-Version: 3.9.2
+Homepage: https://github.com/tsenart/vegeta
+
+Package: vegeta
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: HTTP load testing tool and library
