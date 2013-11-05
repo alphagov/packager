@@ -1,0 +1,3904 @@
+diff -ruN a/src/github.com/bmizerany/perks/.git/HEAD b/src/github.com/bmizerany/perks/.git/HEAD
+--- a/src/github.com/bmizerany/perks/.git/HEAD	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/HEAD	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1 @@
++ref: refs/heads/master
+diff -ruN a/src/github.com/bmizerany/perks/.git/config b/src/github.com/bmizerany/perks/.git/config
+--- a/src/github.com/bmizerany/perks/.git/config	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/config	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1,13 @@
++[core]
++	repositoryformatversion = 0
++	filemode = true
++	bare = false
++	logallrefupdates = true
++	ignorecase = true
++	precomposeunicode = false
++[remote "origin"]
++	url = git@github.com:bmizerany/perks.git
++	fetch = +refs/heads/*:refs/remotes/origin/*
++[branch "master"]
++	remote = origin
++	merge = refs/heads/master
+diff -ruN a/src/github.com/bmizerany/perks/.git/description b/src/github.com/bmizerany/perks/.git/description
+--- a/src/github.com/bmizerany/perks/.git/description	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/description	2013-11-05 12:37:22.000000000 +0000
+@@ -0,0 +1 @@
++Unnamed repository; edit this file 'description' to name the repository.
+diff -ruN a/src/github.com/bmizerany/perks/.git/hooks/applypatch-msg.sample b/src/github.com/bmizerany/perks/.git/hooks/applypatch-msg.sample
+--- a/src/github.com/bmizerany/perks/.git/hooks/applypatch-msg.sample	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/hooks/applypatch-msg.sample	2013-11-05 12:37:22.000000000 +0000
+@@ -0,0 +1,15 @@
++#!/bin/sh
++#
++# An example hook script to check the commit log message taken by
++# applypatch from an e-mail message.
++#
++# The hook should exit with non-zero status after issuing an
++# appropriate message if it wants to stop the commit.  The hook is
++# allowed to edit the commit message file.
++#
++# To enable this hook, rename this file to "applypatch-msg".
++
++. git-sh-setup
++test -x "$GIT_DIR/hooks/commit-msg" &&
++	exec "$GIT_DIR/hooks/commit-msg" ${1+"$@"}
++:
+diff -ruN a/src/github.com/bmizerany/perks/.git/hooks/commit-msg.sample b/src/github.com/bmizerany/perks/.git/hooks/commit-msg.sample
+--- a/src/github.com/bmizerany/perks/.git/hooks/commit-msg.sample	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/hooks/commit-msg.sample	2013-11-05 12:37:22.000000000 +0000
+@@ -0,0 +1,24 @@
++#!/bin/sh
++#
++# An example hook script to check the commit log message.
++# Called by "git commit" with one argument, the name of the file
++# that has the commit message.  The hook should exit with non-zero
++# status after issuing an appropriate message if it wants to stop the
++# commit.  The hook is allowed to edit the commit message file.
++#
++# To enable this hook, rename this file to "commit-msg".
++
++# Uncomment the below to add a Signed-off-by line to the message.
++# Doing this in a hook is a bad idea in general, but the prepare-commit-msg
++# hook is more suited to it.
++#
++# SOB=$(git var GIT_AUTHOR_IDENT | sed -n 's/^\(.*>\).*$/Signed-off-by: \1/p')
++# grep -qs "^$SOB" "$1" || echo "$SOB" >> "$1"
++
++# This example catches duplicate Signed-off-by lines.
++
++test "" = "$(grep '^Signed-off-by: ' "$1" |
++	 sort | uniq -c | sed -e '/^[ 	]*1[ 	]/d')" || {
++	echo >&2 Duplicate Signed-off-by lines.
++	exit 1
++}
+diff -ruN a/src/github.com/bmizerany/perks/.git/hooks/post-update.sample b/src/github.com/bmizerany/perks/.git/hooks/post-update.sample
+--- a/src/github.com/bmizerany/perks/.git/hooks/post-update.sample	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/hooks/post-update.sample	2013-11-05 12:37:22.000000000 +0000
+@@ -0,0 +1,8 @@
++#!/bin/sh
++#
++# An example hook script to prepare a packed repository for use over
++# dumb transports.
++#
++# To enable this hook, rename this file to "post-update".
++
++exec git update-server-info
+diff -ruN a/src/github.com/bmizerany/perks/.git/hooks/pre-applypatch.sample b/src/github.com/bmizerany/perks/.git/hooks/pre-applypatch.sample
+--- a/src/github.com/bmizerany/perks/.git/hooks/pre-applypatch.sample	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/hooks/pre-applypatch.sample	2013-11-05 12:37:22.000000000 +0000
+@@ -0,0 +1,14 @@
++#!/bin/sh
++#
++# An example hook script to verify what is about to be committed
++# by applypatch from an e-mail message.
++#
++# The hook should exit with non-zero status after issuing an
++# appropriate message if it wants to stop the commit.
++#
++# To enable this hook, rename this file to "pre-applypatch".
++
++. git-sh-setup
++test -x "$GIT_DIR/hooks/pre-commit" &&
++	exec "$GIT_DIR/hooks/pre-commit" ${1+"$@"}
++:
+diff -ruN a/src/github.com/bmizerany/perks/.git/hooks/pre-commit.sample b/src/github.com/bmizerany/perks/.git/hooks/pre-commit.sample
+--- a/src/github.com/bmizerany/perks/.git/hooks/pre-commit.sample	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/hooks/pre-commit.sample	2013-11-05 12:37:22.000000000 +0000
+@@ -0,0 +1,50 @@
++#!/bin/sh
++#
++# An example hook script to verify what is about to be committed.
++# Called by "git commit" with no arguments.  The hook should
++# exit with non-zero status after issuing an appropriate message if
++# it wants to stop the commit.
++#
++# To enable this hook, rename this file to "pre-commit".
++
++if git rev-parse --verify HEAD >/dev/null 2>&1
++then
++	against=HEAD
++else
++	# Initial commit: diff against an empty tree object
++	against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
++fi
++
++# If you want to allow non-ascii filenames set this variable to true.
++allownonascii=$(git config hooks.allownonascii)
++
++# Redirect output to stderr.
++exec 1>&2
++
++# Cross platform projects tend to avoid non-ascii filenames; prevent
++# them from being added to the repository. We exploit the fact that the
++# printable range starts at the space character and ends with tilde.
++if [ "$allownonascii" != "true" ] &&
++	# Note that the use of brackets around a tr range is ok here, (it's
++	# even required, for portability to Solaris 10's /usr/bin/tr), since
++	# the square bracket bytes happen to fall in the designated range.
++	test $(git diff --cached --name-only --diff-filter=A -z $against |
++	  LC_ALL=C tr -d '[ -~]\0' | wc -c) != 0
++then
++	echo "Error: Attempt to add a non-ascii file name."
++	echo
++	echo "This can cause problems if you want to work"
++	echo "with people on other platforms."
++	echo
++	echo "To be portable it is advisable to rename the file ..."
++	echo
++	echo "If you know what you are doing you can disable this"
++	echo "check using:"
++	echo
++	echo "  git config hooks.allownonascii true"
++	echo
++	exit 1
++fi
++
++# If there are whitespace errors, print the offending file names and fail.
++exec git diff-index --check --cached $against --
+diff -ruN a/src/github.com/bmizerany/perks/.git/hooks/pre-push.sample b/src/github.com/bmizerany/perks/.git/hooks/pre-push.sample
+--- a/src/github.com/bmizerany/perks/.git/hooks/pre-push.sample	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/hooks/pre-push.sample	2013-11-05 12:37:22.000000000 +0000
+@@ -0,0 +1,53 @@
++#!/bin/sh
++
++# An example hook script to verify what is about to be pushed.  Called by "git
++# push" after it has checked the remote status, but before anything has been
++# pushed.  If this script exits with a non-zero status nothing will be pushed.
++#
++# This hook is called with the following parameters:
++#
++# $1 -- Name of the remote to which the push is being done
++# $2 -- URL to which the push is being done
++#
++# If pushing without using a named remote those arguments will be equal.
++#
++# Information about the commits which are being pushed is supplied as lines to
++# the standard input in the form:
++#
++#   <local ref> <local sha1> <remote ref> <remote sha1>
++#
++# This sample shows how to prevent push of commits where the log message starts
++# with "WIP" (work in progress).
++
++remote="$1"
++url="$2"
++
++z40=0000000000000000000000000000000000000000
++
++IFS=' '
++while read local_ref local_sha remote_ref remote_sha
++do
++	if [ "$local_sha" = $z40 ]
++	then
++		# Handle delete
++	else
++		if [ "$remote_sha" = $z40 ]
++		then
++			# New branch, examine all commits
++			range="$local_sha"
++		else
++			# Update to existing branch, examine new commits
++			range="$remote_sha..$local_sha"
++		fi
++
++		# Check for WIP commit
++		commit=`git rev-list -n 1 --grep '^WIP' "$range"`
++		if [ -n "$commit" ]
++		then
++			echo "Found WIP commit in $local_ref, not pushing"
++			exit 1
++		fi
++	fi
++done
++
++exit 0
+diff -ruN a/src/github.com/bmizerany/perks/.git/hooks/pre-rebase.sample b/src/github.com/bmizerany/perks/.git/hooks/pre-rebase.sample
+--- a/src/github.com/bmizerany/perks/.git/hooks/pre-rebase.sample	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/hooks/pre-rebase.sample	2013-11-05 12:37:22.000000000 +0000
+@@ -0,0 +1,169 @@
++#!/bin/sh
++#
++# Copyright (c) 2006, 2008 Junio C Hamano
++#
++# The "pre-rebase" hook is run just before "git rebase" starts doing
++# its job, and can prevent the command from running by exiting with
++# non-zero status.
++#
++# The hook is called with the following parameters:
++#
++# $1 -- the upstream the series was forked from.
++# $2 -- the branch being rebased (or empty when rebasing the current branch).
++#
++# This sample shows how to prevent topic branches that are already
++# merged to 'next' branch from getting rebased, because allowing it
++# would result in rebasing already published history.
++
++publish=next
++basebranch="$1"
++if test "$#" = 2
++then
++	topic="refs/heads/$2"
++else
++	topic=`git symbolic-ref HEAD` ||
++	exit 0 ;# we do not interrupt rebasing detached HEAD
++fi
++
++case "$topic" in
++refs/heads/??/*)
++	;;
++*)
++	exit 0 ;# we do not interrupt others.
++	;;
++esac
++
++# Now we are dealing with a topic branch being rebased
++# on top of master.  Is it OK to rebase it?
++
++# Does the topic really exist?
++git show-ref -q "$topic" || {
++	echo >&2 "No such branch $topic"
++	exit 1
++}
++
++# Is topic fully merged to master?
++not_in_master=`git rev-list --pretty=oneline ^master "$topic"`
++if test -z "$not_in_master"
++then
++	echo >&2 "$topic is fully merged to master; better remove it."
++	exit 1 ;# we could allow it, but there is no point.
++fi
++
++# Is topic ever merged to next?  If so you should not be rebasing it.
++only_next_1=`git rev-list ^master "^$topic" ${publish} | sort`
++only_next_2=`git rev-list ^master           ${publish} | sort`
++if test "$only_next_1" = "$only_next_2"
++then
++	not_in_topic=`git rev-list "^$topic" master`
++	if test -z "$not_in_topic"
++	then
++		echo >&2 "$topic is already up-to-date with master"
++		exit 1 ;# we could allow it, but there is no point.
++	else
++		exit 0
++	fi
++else
++	not_in_next=`git rev-list --pretty=oneline ^${publish} "$topic"`
++	/usr/bin/perl -e '
++		my $topic = $ARGV[0];
++		my $msg = "* $topic has commits already merged to public branch:\n";
++		my (%not_in_next) = map {
++			/^([0-9a-f]+) /;
++			($1 => 1);
++		} split(/\n/, $ARGV[1]);
++		for my $elem (map {
++				/^([0-9a-f]+) (.*)$/;
++				[$1 => $2];
++			} split(/\n/, $ARGV[2])) {
++			if (!exists $not_in_next{$elem->[0]}) {
++				if ($msg) {
++					print STDERR $msg;
++					undef $msg;
++				}
++				print STDERR " $elem->[1]\n";
++			}
++		}
++	' "$topic" "$not_in_next" "$not_in_master"
++	exit 1
++fi
++
++exit 0
++
++################################################################
++
++This sample hook safeguards topic branches that have been
++published from being rewound.
++
++The workflow assumed here is:
++
++ * Once a topic branch forks from "master", "master" is never
++   merged into it again (either directly or indirectly).
++
++ * Once a topic branch is fully cooked and merged into "master",
++   it is deleted.  If you need to build on top of it to correct
++   earlier mistakes, a new topic branch is created by forking at
++   the tip of the "master".  This is not strictly necessary, but
++   it makes it easier to keep your history simple.
++
++ * Whenever you need to test or publish your changes to topic
++   branches, merge them into "next" branch.
++
++The script, being an example, hardcodes the publish branch name
++to be "next", but it is trivial to make it configurable via
++$GIT_DIR/config mechanism.
++
++With this workflow, you would want to know:
++
++(1) ... if a topic branch has ever been merged to "next".  Young
++    topic branches can have stupid mistakes you would rather
++    clean up before publishing, and things that have not been
++    merged into other branches can be easily rebased without
++    affecting other people.  But once it is published, you would
++    not want to rewind it.
++
++(2) ... if a topic branch has been fully merged to "master".
++    Then you can delete it.  More importantly, you should not
++    build on top of it -- other people may already want to
++    change things related to the topic as patches against your
++    "master", so if you need further changes, it is better to
++    fork the topic (perhaps with the same name) afresh from the
++    tip of "master".
++
++Let's look at this example:
++
++		   o---o---o---o---o---o---o---o---o---o "next"
++		  /       /           /           /
++		 /   a---a---b A     /           /
++		/   /               /           /
++	       /   /   c---c---c---c B         /
++	      /   /   /             \         /
++	     /   /   /   b---b C     \       /
++	    /   /   /   /             \     /
++    ---o---o---o---o---o---o---o---o---o---o---o "master"
++
++
++A, B and C are topic branches.
++
++ * A has one fix since it was merged up to "next".
++
++ * B has finished.  It has been fully merged up to "master" and "next",
++   and is ready to be deleted.
++
++ * C has not merged to "next" at all.
++
++We would want to allow C to be rebased, refuse A, and encourage
++B to be deleted.
++
++To compute (1):
++
++	git rev-list ^master ^topic next
++	git rev-list ^master        next
++
++	if these match, topic has not merged in next at all.
++
++To compute (2):
++
++	git rev-list master..topic
++
++	if this is empty, it is fully merged to "master".
+diff -ruN a/src/github.com/bmizerany/perks/.git/hooks/prepare-commit-msg.sample b/src/github.com/bmizerany/perks/.git/hooks/prepare-commit-msg.sample
+--- a/src/github.com/bmizerany/perks/.git/hooks/prepare-commit-msg.sample	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/hooks/prepare-commit-msg.sample	2013-11-05 12:37:22.000000000 +0000
+@@ -0,0 +1,36 @@
++#!/bin/sh
++#
++# An example hook script to prepare the commit log message.
++# Called by "git commit" with the name of the file that has the
++# commit message, followed by the description of the commit
++# message's source.  The hook's purpose is to edit the commit
++# message file.  If the hook fails with a non-zero status,
++# the commit is aborted.
++#
++# To enable this hook, rename this file to "prepare-commit-msg".
++
++# This hook includes three examples.  The first comments out the
++# "Conflicts:" part of a merge commit.
++#
++# The second includes the output of "git diff --name-status -r"
++# into the message, just before the "git status" output.  It is
++# commented because it doesn't cope with --amend or with squashed
++# commits.
++#
++# The third example adds a Signed-off-by line to the message, that can
++# still be edited.  This is rarely a good idea.
++
++case "$2,$3" in
++  merge,)
++    /usr/bin/perl -i.bak -ne 's/^/# /, s/^# #/#/ if /^Conflicts/ .. /#/; print' "$1" ;;
++
++# ,|template,)
++#   /usr/bin/perl -i.bak -pe '
++#      print "\n" . `git diff --cached --name-status -r`
++#	 if /^#/ && $first++ == 0' "$1" ;;
++
++  *) ;;
++esac
++
++# SOB=$(git var GIT_AUTHOR_IDENT | sed -n 's/^\(.*>\).*$/Signed-off-by: \1/p')
++# grep -qs "^$SOB" "$1" || echo "$SOB" >> "$1"
+diff -ruN a/src/github.com/bmizerany/perks/.git/hooks/update.sample b/src/github.com/bmizerany/perks/.git/hooks/update.sample
+--- a/src/github.com/bmizerany/perks/.git/hooks/update.sample	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/hooks/update.sample	2013-11-05 12:37:22.000000000 +0000
+@@ -0,0 +1,128 @@
++#!/bin/sh
++#
++# An example hook script to blocks unannotated tags from entering.
++# Called by "git receive-pack" with arguments: refname sha1-old sha1-new
++#
++# To enable this hook, rename this file to "update".
++#
++# Config
++# ------
++# hooks.allowunannotated
++#   This boolean sets whether unannotated tags will be allowed into the
++#   repository.  By default they won't be.
++# hooks.allowdeletetag
++#   This boolean sets whether deleting tags will be allowed in the
++#   repository.  By default they won't be.
++# hooks.allowmodifytag
++#   This boolean sets whether a tag may be modified after creation. By default
++#   it won't be.
++# hooks.allowdeletebranch
++#   This boolean sets whether deleting branches will be allowed in the
++#   repository.  By default they won't be.
++# hooks.denycreatebranch
++#   This boolean sets whether remotely creating branches will be denied
++#   in the repository.  By default this is allowed.
++#
++
++# --- Command line
++refname="$1"
++oldrev="$2"
++newrev="$3"
++
++# --- Safety check
++if [ -z "$GIT_DIR" ]; then
++	echo "Don't run this script from the command line." >&2
++	echo " (if you want, you could supply GIT_DIR then run" >&2
++	echo "  $0 <ref> <oldrev> <newrev>)" >&2
++	exit 1
++fi
++
++if [ -z "$refname" -o -z "$oldrev" -o -z "$newrev" ]; then
++	echo "usage: $0 <ref> <oldrev> <newrev>" >&2
++	exit 1
++fi
++
++# --- Config
++allowunannotated=$(git config --bool hooks.allowunannotated)
++allowdeletebranch=$(git config --bool hooks.allowdeletebranch)
++denycreatebranch=$(git config --bool hooks.denycreatebranch)
++allowdeletetag=$(git config --bool hooks.allowdeletetag)
++allowmodifytag=$(git config --bool hooks.allowmodifytag)
++
++# check for no description
++projectdesc=$(sed -e '1q' "$GIT_DIR/description")
++case "$projectdesc" in
++"Unnamed repository"* | "")
++	echo "*** Project description file hasn't been set" >&2
++	exit 1
++	;;
++esac
++
++# --- Check types
++# if $newrev is 0000...0000, it's a commit to delete a ref.
++zero="0000000000000000000000000000000000000000"
++if [ "$newrev" = "$zero" ]; then
++	newrev_type=delete
++else
++	newrev_type=$(git cat-file -t $newrev)
++fi
++
++case "$refname","$newrev_type" in
++	refs/tags/*,commit)
++		# un-annotated tag
++		short_refname=${refname##refs/tags/}
++		if [ "$allowunannotated" != "true" ]; then
++			echo "*** The un-annotated tag, $short_refname, is not allowed in this repository" >&2
++			echo "*** Use 'git tag [ -a | -s ]' for tags you want to propagate." >&2
++			exit 1
++		fi
++		;;
++	refs/tags/*,delete)
++		# delete tag
++		if [ "$allowdeletetag" != "true" ]; then
++			echo "*** Deleting a tag is not allowed in this repository" >&2
++			exit 1
++		fi
++		;;
++	refs/tags/*,tag)
++		# annotated tag
++		if [ "$allowmodifytag" != "true" ] && git rev-parse $refname > /dev/null 2>&1
++		then
++			echo "*** Tag '$refname' already exists." >&2
++			echo "*** Modifying a tag is not allowed in this repository." >&2
++			exit 1
++		fi
++		;;
++	refs/heads/*,commit)
++		# branch
++		if [ "$oldrev" = "$zero" -a "$denycreatebranch" = "true" ]; then
++			echo "*** Creating a branch is not allowed in this repository" >&2
++			exit 1
++		fi
++		;;
++	refs/heads/*,delete)
++		# delete branch
++		if [ "$allowdeletebranch" != "true" ]; then
++			echo "*** Deleting a branch is not allowed in this repository" >&2
++			exit 1
++		fi
++		;;
++	refs/remotes/*,commit)
++		# tracking branch
++		;;
++	refs/remotes/*,delete)
++		# delete tracking branch
++		if [ "$allowdeletebranch" != "true" ]; then
++			echo "*** Deleting a tracking branch is not allowed in this repository" >&2
++			exit 1
++		fi
++		;;
++	*)
++		# Anything else (is there anything else?)
++		echo "*** Update hook: unknown type of update to ref $refname of type $newrev_type" >&2
++		exit 1
++		;;
++esac
++
++# --- Finished
++exit 0
+Binary files a/src/github.com/bmizerany/perks/.git/index and b/src/github.com/bmizerany/perks/.git/index differ
+diff -ruN a/src/github.com/bmizerany/perks/.git/info/exclude b/src/github.com/bmizerany/perks/.git/info/exclude
+--- a/src/github.com/bmizerany/perks/.git/info/exclude	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/info/exclude	2013-11-05 12:37:22.000000000 +0000
+@@ -0,0 +1,6 @@
++# git ls-files --others --exclude-from=.git/info/exclude
++# Lines that start with '#' are comments.
++# For a project mostly in C, the following would be a good set of
++# exclude patterns (uncomment them if you want to use them):
++# *.[oa]
++# *~
+diff -ruN a/src/github.com/bmizerany/perks/.git/logs/HEAD b/src/github.com/bmizerany/perks/.git/logs/HEAD
+--- a/src/github.com/bmizerany/perks/.git/logs/HEAD	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/logs/HEAD	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1 @@
++0000000000000000000000000000000000000000 da72989a59aaaecda7110926d3a6198ee4421c1f Dan Carley <dan.carley@gmail.com> 1383655044 +0000	clone: from git@github.com:bmizerany/perks.git
+diff -ruN a/src/github.com/bmizerany/perks/.git/logs/refs/heads/master b/src/github.com/bmizerany/perks/.git/logs/refs/heads/master
+--- a/src/github.com/bmizerany/perks/.git/logs/refs/heads/master	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/logs/refs/heads/master	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1 @@
++0000000000000000000000000000000000000000 da72989a59aaaecda7110926d3a6198ee4421c1f Dan Carley <dan.carley@gmail.com> 1383655044 +0000	clone: from git@github.com:bmizerany/perks.git
+diff -ruN a/src/github.com/bmizerany/perks/.git/logs/refs/remotes/origin/HEAD b/src/github.com/bmizerany/perks/.git/logs/refs/remotes/origin/HEAD
+--- a/src/github.com/bmizerany/perks/.git/logs/refs/remotes/origin/HEAD	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/logs/refs/remotes/origin/HEAD	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1 @@
++0000000000000000000000000000000000000000 da72989a59aaaecda7110926d3a6198ee4421c1f Dan Carley <dan.carley@gmail.com> 1383655044 +0000	clone: from git@github.com:bmizerany/perks.git
+Binary files a/src/github.com/bmizerany/perks/.git/objects/pack/pack-0b0c34c00f3cd680ddd2ec4582077558b9fc94f6.idx and b/src/github.com/bmizerany/perks/.git/objects/pack/pack-0b0c34c00f3cd680ddd2ec4582077558b9fc94f6.idx differ
+Binary files a/src/github.com/bmizerany/perks/.git/objects/pack/pack-0b0c34c00f3cd680ddd2ec4582077558b9fc94f6.pack and b/src/github.com/bmizerany/perks/.git/objects/pack/pack-0b0c34c00f3cd680ddd2ec4582077558b9fc94f6.pack differ
+diff -ruN a/src/github.com/bmizerany/perks/.git/packed-refs b/src/github.com/bmizerany/perks/.git/packed-refs
+--- a/src/github.com/bmizerany/perks/.git/packed-refs	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/packed-refs	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1,3 @@
++# pack-refs with: peeled fully-peeled 
++408e7f0c0a99eb2c7fc205794594e7fe6c857598 refs/remotes/origin/histo
++da72989a59aaaecda7110926d3a6198ee4421c1f refs/remotes/origin/master
+diff -ruN a/src/github.com/bmizerany/perks/.git/refs/heads/master b/src/github.com/bmizerany/perks/.git/refs/heads/master
+--- a/src/github.com/bmizerany/perks/.git/refs/heads/master	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/refs/heads/master	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1 @@
++da72989a59aaaecda7110926d3a6198ee4421c1f
+diff -ruN a/src/github.com/bmizerany/perks/.git/refs/remotes/origin/HEAD b/src/github.com/bmizerany/perks/.git/refs/remotes/origin/HEAD
+--- a/src/github.com/bmizerany/perks/.git/refs/remotes/origin/HEAD	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.git/refs/remotes/origin/HEAD	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1 @@
++ref: refs/remotes/origin/master
+diff -ruN a/src/github.com/bmizerany/perks/.gitignore b/src/github.com/bmizerany/perks/.gitignore
+--- a/src/github.com/bmizerany/perks/.gitignore	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/.gitignore	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1,2 @@
++*.test
++*.prof
+diff -ruN a/src/github.com/bmizerany/perks/README.md b/src/github.com/bmizerany/perks/README.md
+--- a/src/github.com/bmizerany/perks/README.md	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/README.md	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1,31 @@
++# Perks for Go (golang.org)
++
++Perks contains the Go package quantile that computes approximate quantiles over
++an unbounded data stream within low memory and CPU bounds.
++
++For more information and examples, see:
++http://godoc.org/github.com/bmizerany/perks
++
++A very special thank you and shout out to Graham Cormode (Rutgers University),
++Flip Korn (AT&T Labs–Research), S. Muthukrishnan (Rutgers University), and
++Divesh Srivastava (AT&T Labs–Research) for their research and publication of
++[Effective Computation of Biased Quantiles over Data Streams](http://www.cs.rutgers.edu/~muthu/bquant.pdf)
++
++Thank you, also:
++* Armon Dadgar (@armon)
++* Andrew Gerrand (@nf)
++* Brad Fitzpatrick (@bradfitz)
++* Keith Rarick (@kr)
++
++FAQ:
++
++Q: Why not move the quantile package into the project root?
++A: I want to add more packages to perks later.
++
++Copyright (C) 2013 Blake Mizerany
++
++Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
++
++The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
++
++THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+diff -ruN a/src/github.com/bmizerany/perks/histogram/bench_test.go b/src/github.com/bmizerany/perks/histogram/bench_test.go
+--- a/src/github.com/bmizerany/perks/histogram/bench_test.go	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/histogram/bench_test.go	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1,26 @@
++package histogram
++
++import (
++	"math/rand"
++	"testing"
++)
++
++func BenchmarkInsert10Bins(b *testing.B) {
++	b.StopTimer()
++	h := New(10)
++	b.StartTimer()
++	for i := 0; i < b.N; i++ {
++		f := rand.ExpFloat64()
++		h.Insert(f)
++	}
++}
++
++func BenchmarkInsert100Bins(b *testing.B) {
++	b.StopTimer()
++	h := New(100)
++	b.StartTimer()
++	for i := 0; i < b.N; i++ {
++		f := rand.ExpFloat64()
++		h.Insert(f)
++	}
++}
+diff -ruN a/src/github.com/bmizerany/perks/histogram/histogram.go b/src/github.com/bmizerany/perks/histogram/histogram.go
+--- a/src/github.com/bmizerany/perks/histogram/histogram.go	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/histogram/histogram.go	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1,108 @@
++// Package histogram provides a Go implementation of BigML's histogram package
++// for Clojure/Java. It is currently experiemental.
++package histogram
++
++import (
++	"container/heap"
++	"math"
++	"sort"
++)
++
++type Bin struct {
++	Count int
++	Sum   float64
++}
++
++func (b *Bin) Update(x *Bin) {
++	b.Count += x.Count
++	b.Sum += x.Sum
++}
++
++func (b *Bin) Mean() float64 {
++	return b.Sum / float64(b.Count)
++}
++
++type Bins []*Bin
++
++func (bs Bins) Len() int           { return len(bs) }
++func (bs Bins) Less(i, j int) bool { return bs[i].Mean() < bs[j].Mean() }
++func (bs Bins) Swap(i, j int)      { bs[i], bs[j] = bs[j], bs[i] }
++
++func (bs *Bins) Push(x interface{}) {
++	*bs = append(*bs, x.(*Bin))
++}
++
++func (bs *Bins) Pop() interface{} {
++	return bs.remove(len(*bs) - 1)
++}
++
++func (bs *Bins) remove(n int) *Bin {
++	if n < 0 || len(*bs) < n {
++		return nil
++	}
++	x := (*bs)[n]
++	*bs = append((*bs)[:n], (*bs)[n+1:]...)
++	return x
++}
++
++type Histogram struct {
++	res *reservoir
++}
++
++func New(maxBins int) *Histogram {
++	return &Histogram{res: newReservoir(maxBins)}
++}
++
++func (h *Histogram) Insert(f float64) {
++	h.res.insert(&Bin{1, f})
++	h.res.compress()
++}
++
++func (h *Histogram) Bins() Bins {
++	return h.res.bins
++}
++
++type reservoir struct {
++	n       int
++	maxBins int
++	bins    Bins
++}
++
++func newReservoir(maxBins int) *reservoir {
++	return &reservoir{maxBins: maxBins}
++}
++
++func (r *reservoir) insert(bin *Bin) {
++	r.n += bin.Count
++	i := sort.Search(len(r.bins), func(i int) bool {
++		return r.bins[i].Mean() >= bin.Mean()
++	})
++	if i < 0 || i == r.bins.Len() {
++		// TODO(blake): Maybe use an .insert(i, bin) instead of
++		// performing the extra work of a heap.Push.
++		heap.Push(&r.bins, bin)
++		return
++	}
++	r.bins[i].Update(bin)
++}
++
++func (r *reservoir) compress() {
++	for r.bins.Len() > r.maxBins {
++		minGapIndex := -1
++		minGap := math.MaxFloat64
++		for i := 0; i < r.bins.Len()-1; i++ {
++			gap := gapWeight(r.bins[i], r.bins[i+1])
++			if minGap > gap {
++				minGap = gap
++				minGapIndex = i
++			}
++		}
++		prev := r.bins[minGapIndex]
++		next := r.bins.remove(minGapIndex + 1)
++		prev.Update(next)
++	}
++}
++
++func gapWeight(prev, next *Bin) float64 {
++	return next.Mean() - prev.Mean()
++}
+diff -ruN a/src/github.com/bmizerany/perks/histogram/histogram_test.go b/src/github.com/bmizerany/perks/histogram/histogram_test.go
+--- a/src/github.com/bmizerany/perks/histogram/histogram_test.go	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/histogram/histogram_test.go	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1,38 @@
++package histogram
++
++import (
++	"math/rand"
++	"testing"
++)
++
++func TestHistogram(t *testing.T) {
++	const numPoints = 1e6
++	const maxBins = 3
++
++	h := New(maxBins)
++	for i := 0; i < numPoints; i++ {
++		f := rand.ExpFloat64()
++		h.Insert(f)
++	}
++
++	bins := h.Bins()
++	if g := len(bins); g > maxBins {
++		t.Fatalf("got %d bins, wanted <= %d", g, maxBins)
++	}
++
++	for _, b := range bins {
++		t.Logf("%+v", b)
++	}
++
++	if g := count(h.Bins()); g != numPoints {
++		t.Fatalf("binned %d points, wanted %d", g, numPoints)
++	}
++}
++
++func count(bins Bins) int {
++	binCounts := 0
++	for _, b := range bins {
++		binCounts += b.Count
++	}
++	return binCounts
++}
+diff -ruN a/src/github.com/bmizerany/perks/quantile/bench_test.go b/src/github.com/bmizerany/perks/quantile/bench_test.go
+--- a/src/github.com/bmizerany/perks/quantile/bench_test.go	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/quantile/bench_test.go	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1,14 @@
++package quantile
++
++import (
++	"testing"
++)
++
++func BenchmarkInsert(b *testing.B) {
++	b.StopTimer()
++	s := NewTargeted(0.01, 0.5, 0.9, 0.99)
++	b.StartTimer()
++	for i := float64(0); i < float64(b.N); i++ {
++		s.Insert(i)
++	}
++}
+diff -ruN a/src/github.com/bmizerany/perks/quantile/example_test.go b/src/github.com/bmizerany/perks/quantile/example_test.go
+--- a/src/github.com/bmizerany/perks/quantile/example_test.go	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/quantile/example_test.go	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1,112 @@
++// +build go1.1
++
++package quantile_test
++
++import (
++	"bufio"
++	"fmt"
++	"github.com/bmizerany/perks/quantile"
++	"log"
++	"os"
++	"strconv"
++	"time"
++)
++
++func Example_simple() {
++	ch := make(chan float64)
++	go sendFloats(ch)
++
++	// Compute the 50th, 90th, and 99th percentile.
++	q := quantile.NewTargeted(0.50, 0.90, 0.99)
++	for v := range ch {
++		q.Insert(v)
++	}
++
++	fmt.Println("perc50:", q.Query(0.50))
++	fmt.Println("perc90:", q.Query(0.90))
++	fmt.Println("perc99:", q.Query(0.99))
++	fmt.Println("count:", q.Count())
++	// Output:
++	// perc50: 5
++	// perc90: 14
++	// perc99: 40
++	// count: 2388
++}
++
++func Example_mergeMultipleStreams() {
++	// Scenario:
++	// We have multiple database shards. On each shard, there is a process
++	// collecting query response times from the database logs and inserting
++	// them into a Stream (created via NewTargeted(0.90)), much like the
++	// Simple example. These processes expose a network interface for us to
++	// ask them to serialize and send us the results of their
++	// Stream.Samples so we may Merge and Query them.
++	//
++	// NOTES:
++	// * These sample sets are small, allowing us to get them
++	// across the network much faster than sending the entire list of data
++	// points.
++	//
++	// * For this to work correctly, we must supply the same quantiles
++	// a priori the process collecting the samples supplied to NewTargeted,
++	// even if we do not plan to query them all here.
++	ch := make(chan quantile.Samples)
++	getDBQuerySamples(ch)
++	q := quantile.NewTargeted(0.90)
++	for samples := range ch {
++		q.Merge(samples)
++	}
++	fmt.Println("perc90:", q.Query(0.90))
++}
++
++func Example_window() {
++	// Scenario: We want the 90th, 95th, and 99th percentiles for each
++	// minute.
++
++	ch := make(chan float64)
++	go sendStreamValues(ch)
++
++	tick := time.NewTicker(1 * time.Minute)
++	q := quantile.NewTargeted(0.90, 0.95, 0.99)
++	for {
++		select {
++		case t := <-tick.C:
++			flushToDB(t, q.Samples())
++			q.Reset()
++		case v := <-ch:
++			q.Insert(v)
++		}
++	}
++}
++
++func sendStreamValues(ch chan float64) {
++	// Use your imagination
++}
++
++func flushToDB(t time.Time, samples quantile.Samples) {
++	// Use your imagination
++}
++
++// This is a stub for the above example. In reality this would hit the remote
++// servers via http or something like it.
++func getDBQuerySamples(ch chan quantile.Samples) {}
++
++func sendFloats(ch chan<- float64) {
++	f, err := os.Open("exampledata.txt")
++	if err != nil {
++		log.Fatal(err)
++	}
++	sc := bufio.NewScanner(f)
++	for sc.Scan() {
++		b := sc.Bytes()
++		v, err := strconv.ParseFloat(string(b), 64)
++		if err != nil {
++			log.Fatal(err)
++		}
++		ch <- v
++	}
++	if sc.Err() != nil {
++		log.Fatal(sc.Err())
++	}
++	close(ch)
++}
+diff -ruN a/src/github.com/bmizerany/perks/quantile/exampledata.txt b/src/github.com/bmizerany/perks/quantile/exampledata.txt
+--- a/src/github.com/bmizerany/perks/quantile/exampledata.txt	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/quantile/exampledata.txt	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1,2388 @@
++8
++5
++26
++12
++5
++235
++13
++6
++28
++30
++3
++3
++3
++3
++5
++2
++33
++7
++2
++4
++7
++12
++14
++5
++8
++3
++10
++4
++5
++3
++6
++6
++209
++20
++3
++10
++14
++3
++4
++6
++8
++5
++11
++7
++3
++2
++3
++3
++212
++5
++222
++4
++10
++10
++5
++6
++3
++8
++3
++10
++254
++220
++2
++3
++5
++24
++5
++4
++222
++7
++3
++3
++223
++8
++15
++12
++14
++14
++3
++2
++2
++3
++13
++3
++11
++4
++4
++6
++5
++7
++13
++5
++3
++5
++2
++5
++3
++5
++2
++7
++15
++17
++14
++3
++6
++6
++3
++17
++5
++4
++7
++6
++4
++4
++8
++6
++8
++3
++9
++3
++6
++3
++4
++5
++3
++3
++660
++4
++6
++10
++3
++6
++3
++2
++5
++13
++2
++4
++4
++10
++4
++8
++4
++3
++7
++9
++9
++3
++10
++37
++3
++13
++4
++12
++3
++6
++10
++8
++5
++21
++2
++3
++8
++3
++2
++3
++3
++4
++12
++2
++4
++8
++8
++4
++3
++2
++20
++1
++6
++32
++2
++11
++6
++18
++3
++8
++11
++3
++212
++3
++4
++2
++6
++7
++12
++11
++3
++2
++16
++10
++6
++4
++6
++3
++2
++7
++3
++2
++2
++2
++2
++5
++6
++4
++3
++10
++3
++4
++6
++5
++3
++4
++4
++5
++6
++4
++3
++4
++4
++5
++7
++5
++5
++3
++2
++7
++2
++4
++12
++4
++5
++6
++2
++4
++4
++8
++4
++15
++13
++7
++16
++5
++3
++23
++5
++5
++7
++3
++2
++9
++8
++7
++5
++8
++11
++4
++10
++76
++4
++47
++4
++3
++2
++7
++4
++2
++3
++37
++10
++4
++2
++20
++5
++4
++4
++10
++10
++4
++3
++7
++23
++240
++7
++13
++5
++5
++3
++3
++2
++5
++4
++2
++8
++7
++19
++2
++23
++8
++7
++2
++5
++3
++8
++3
++8
++13
++5
++5
++5
++2
++3
++23
++4
++9
++8
++4
++3
++3
++5
++220
++2
++3
++4
++6
++14
++3
++53
++6
++2
++5
++18
++6
++3
++219
++6
++5
++2
++5
++3
++6
++5
++15
++4
++3
++17
++3
++2
++4
++7
++2
++3
++3
++4
++4
++3
++2
++664
++6
++3
++23
++5
++5
++16
++5
++8
++2
++4
++2
++24
++12
++3
++2
++3
++5
++8
++3
++5
++4
++3
++14
++3
++5
++8
++2
++3
++7
++9
++4
++2
++3
++6
++8
++4
++3
++4
++6
++5
++3
++3
++6
++3
++19
++4
++4
++6
++3
++6
++3
++5
++22
++5
++4
++4
++3
++8
++11
++4
++9
++7
++6
++13
++4
++4
++4
++6
++17
++9
++3
++3
++3
++4
++3
++221
++5
++11
++3
++4
++2
++12
++6
++3
++5
++7
++5
++7
++4
++9
++7
++14
++37
++19
++217
++16
++3
++5
++2
++2
++7
++19
++7
++6
++7
++4
++24
++5
++11
++4
++7
++7
++9
++13
++3
++4
++3
++6
++28
++4
++4
++5
++5
++2
++5
++6
++4
++4
++6
++10
++5
++4
++3
++2
++3
++3
++6
++5
++5
++4
++3
++2
++3
++7
++4
++6
++18
++16
++8
++16
++4
++5
++8
++6
++9
++13
++1545
++6
++215
++6
++5
++6
++3
++45
++31
++5
++2
++2
++4
++3
++3
++2
++5
++4
++3
++5
++7
++7
++4
++5
++8
++5
++4
++749
++2
++31
++9
++11
++2
++11
++5
++4
++4
++7
++9
++11
++4
++5
++4
++7
++3
++4
++6
++2
++15
++3
++4
++3
++4
++3
++5
++2
++13
++5
++5
++3
++3
++23
++4
++4
++5
++7
++4
++13
++2
++4
++3
++4
++2
++6
++2
++7
++3
++5
++5
++3
++29
++5
++4
++4
++3
++10
++2
++3
++79
++16
++6
++6
++7
++7
++3
++5
++5
++7
++4
++3
++7
++9
++5
++6
++5
++9
++6
++3
++6
++4
++17
++2
++10
++9
++3
++6
++2
++3
++21
++22
++5
++11
++4
++2
++17
++2
++224
++2
++14
++3
++4
++4
++2
++4
++4
++4
++4
++5
++3
++4
++4
++10
++2
++6
++3
++3
++5
++7
++2
++7
++5
++6
++3
++218
++2
++2
++5
++2
++6
++3
++5
++222
++14
++6
++33
++3
++2
++5
++3
++3
++3
++9
++5
++3
++3
++2
++7
++4
++3
++4
++3
++5
++6
++5
++26
++4
++13
++9
++7
++3
++221
++3
++3
++4
++4
++4
++4
++2
++18
++5
++3
++7
++9
++6
++8
++3
++10
++3
++11
++9
++5
++4
++17
++5
++5
++6
++6
++3
++2
++4
++12
++17
++6
++7
++218
++4
++2
++4
++10
++3
++5
++15
++3
++9
++4
++3
++3
++6
++29
++3
++3
++4
++5
++5
++3
++8
++5
++6
++6
++7
++5
++3
++5
++3
++29
++2
++31
++5
++15
++24
++16
++5
++207
++4
++3
++3
++2
++15
++4
++4
++13
++5
++5
++4
++6
++10
++2
++7
++8
++4
++6
++20
++5
++3
++4
++3
++12
++12
++5
++17
++7
++3
++3
++3
++6
++10
++3
++5
++25
++80
++4
++9
++3
++2
++11
++3
++3
++2
++3
++8
++7
++5
++5
++19
++5
++3
++3
++12
++11
++2
++6
++5
++5
++5
++3
++3
++3
++4
++209
++14
++3
++2
++5
++19
++4
++4
++3
++4
++14
++5
++6
++4
++13
++9
++7
++4
++7
++10
++2
++9
++5
++7
++2
++8
++4
++6
++5
++5
++222
++8
++7
++12
++5
++216
++3
++4
++4
++6
++3
++14
++8
++7
++13
++4
++3
++3
++3
++3
++17
++5
++4
++3
++33
++6
++6
++33
++7
++5
++3
++8
++7
++5
++2
++9
++4
++2
++233
++24
++7
++4
++8
++10
++3
++4
++15
++2
++16
++3
++3
++13
++12
++7
++5
++4
++207
++4
++2
++4
++27
++15
++2
++5
++2
++25
++6
++5
++5
++6
++13
++6
++18
++6
++4
++12
++225
++10
++7
++5
++2
++2
++11
++4
++14
++21
++8
++10
++3
++5
++4
++232
++2
++5
++5
++3
++7
++17
++11
++6
++6
++23
++4
++6
++3
++5
++4
++2
++17
++3
++6
++5
++8
++3
++2
++2
++14
++9
++4
++4
++2
++5
++5
++3
++7
++6
++12
++6
++10
++3
++6
++2
++2
++19
++5
++4
++4
++9
++2
++4
++13
++3
++5
++6
++3
++6
++5
++4
++9
++6
++3
++5
++7
++3
++6
++6
++4
++3
++10
++6
++3
++221
++3
++5
++3
++6
++4
++8
++5
++3
++6
++4
++4
++2
++54
++5
++6
++11
++3
++3
++4
++4
++4
++3
++7
++3
++11
++11
++7
++10
++6
++13
++223
++213
++15
++231
++7
++3
++7
++228
++2
++3
++4
++4
++5
++6
++7
++4
++13
++3
++4
++5
++3
++6
++4
++6
++7
++2
++4
++3
++4
++3
++3
++6
++3
++7
++3
++5
++18
++5
++6
++8
++10
++3
++3
++3
++2
++4
++2
++4
++4
++5
++6
++6
++4
++10
++13
++3
++12
++5
++12
++16
++8
++4
++19
++11
++2
++4
++5
++6
++8
++5
++6
++4
++18
++10
++4
++2
++216
++6
++6
++6
++2
++4
++12
++8
++3
++11
++5
++6
++14
++5
++3
++13
++4
++5
++4
++5
++3
++28
++6
++3
++7
++219
++3
++9
++7
++3
++10
++6
++3
++4
++19
++5
++7
++11
++6
++15
++19
++4
++13
++11
++3
++7
++5
++10
++2
++8
++11
++2
++6
++4
++6
++24
++6
++3
++3
++3
++3
++6
++18
++4
++11
++4
++2
++5
++10
++8
++3
++9
++5
++3
++4
++5
++6
++2
++5
++7
++4
++4
++14
++6
++4
++4
++5
++5
++7
++2
++4
++3
++7
++3
++3
++6
++4
++5
++4
++4
++4
++3
++3
++3
++3
++8
++14
++2
++3
++5
++3
++2
++4
++5
++3
++7
++3
++3
++18
++3
++4
++4
++5
++7
++3
++3
++3
++13
++5
++4
++8
++211
++5
++5
++3
++5
++2
++5
++4
++2
++655
++6
++3
++5
++11
++2
++5
++3
++12
++9
++15
++11
++5
++12
++217
++2
++6
++17
++3
++3
++207
++5
++5
++4
++5
++9
++3
++2
++8
++5
++4
++3
++2
++5
++12
++4
++14
++5
++4
++2
++13
++5
++8
++4
++225
++4
++3
++4
++5
++4
++3
++3
++6
++23
++9
++2
++6
++7
++233
++4
++4
++6
++18
++3
++4
++6
++3
++4
++4
++2
++3
++7
++4
++13
++227
++4
++3
++5
++4
++2
++12
++9
++17
++3
++7
++14
++6
++4
++5
++21
++4
++8
++9
++2
++9
++25
++16
++3
++6
++4
++7
++8
++5
++2
++3
++5
++4
++3
++3
++5
++3
++3
++3
++2
++3
++19
++2
++4
++3
++4
++2
++3
++4
++4
++2
++4
++3
++3
++3
++2
++6
++3
++17
++5
++6
++4
++3
++13
++5
++3
++3
++3
++4
++9
++4
++2
++14
++12
++4
++5
++24
++4
++3
++37
++12
++11
++21
++3
++4
++3
++13
++4
++2
++3
++15
++4
++11
++4
++4
++3
++8
++3
++4
++4
++12
++8
++5
++3
++3
++4
++2
++220
++3
++5
++223
++3
++3
++3
++10
++3
++15
++4
++241
++9
++7
++3
++6
++6
++23
++4
++13
++7
++3
++4
++7
++4
++9
++3
++3
++4
++10
++5
++5
++1
++5
++24
++2
++4
++5
++5
++6
++14
++3
++8
++2
++3
++5
++13
++13
++3
++5
++2
++3
++15
++3
++4
++2
++10
++4
++4
++4
++5
++5
++3
++5
++3
++4
++7
++4
++27
++3
++6
++4
++15
++3
++5
++6
++6
++5
++4
++8
++3
++9
++2
++6
++3
++4
++3
++7
++4
++18
++3
++11
++3
++3
++8
++9
++7
++24
++3
++219
++7
++10
++4
++5
++9
++12
++2
++5
++4
++4
++4
++3
++3
++19
++5
++8
++16
++8
++6
++22
++3
++23
++3
++242
++9
++4
++3
++3
++5
++7
++3
++3
++5
++8
++3
++7
++5
++14
++8
++10
++3
++4
++3
++7
++4
++6
++7
++4
++10
++4
++3
++11
++3
++7
++10
++3
++13
++6
++8
++12
++10
++5
++7
++9
++3
++4
++7
++7
++10
++8
++30
++9
++19
++4
++3
++19
++15
++4
++13
++3
++215
++223
++4
++7
++4
++8
++17
++16
++3
++7
++6
++5
++5
++4
++12
++3
++7
++4
++4
++13
++4
++5
++2
++5
++6
++5
++6
++6
++7
++10
++18
++23
++9
++3
++3
++6
++5
++2
++4
++2
++7
++3
++3
++2
++5
++5
++14
++10
++224
++6
++3
++4
++3
++7
++5
++9
++3
++6
++4
++2
++5
++11
++4
++3
++3
++2
++8
++4
++7
++4
++10
++7
++3
++3
++18
++18
++17
++3
++3
++3
++4
++5
++3
++3
++4
++12
++7
++3
++11
++13
++5
++4
++7
++13
++5
++4
++11
++3
++12
++3
++6
++4
++4
++21
++4
++6
++9
++5
++3
++10
++8
++4
++6
++4
++4
++6
++5
++4
++8
++6
++4
++6
++4
++4
++5
++9
++6
++3
++4
++2
++9
++3
++18
++2
++4
++3
++13
++3
++6
++6
++8
++7
++9
++3
++2
++16
++3
++4
++6
++3
++2
++33
++22
++14
++4
++9
++12
++4
++5
++6
++3
++23
++9
++4
++3
++5
++5
++3
++4
++5
++3
++5
++3
++10
++4
++5
++5
++8
++4
++4
++6
++8
++5
++4
++3
++4
++6
++3
++3
++3
++5
++9
++12
++6
++5
++9
++3
++5
++3
++2
++2
++2
++18
++3
++2
++21
++2
++5
++4
++6
++4
++5
++10
++3
++9
++3
++2
++10
++7
++3
++6
++6
++4
++4
++8
++12
++7
++3
++7
++3
++3
++9
++3
++4
++5
++4
++4
++5
++5
++10
++15
++4
++4
++14
++6
++227
++3
++14
++5
++216
++22
++5
++4
++2
++2
++6
++3
++4
++2
++9
++9
++4
++3
++28
++13
++11
++4
++5
++3
++3
++2
++3
++3
++5
++3
++4
++3
++5
++23
++26
++3
++4
++5
++6
++4
++6
++3
++5
++5
++3
++4
++3
++2
++2
++2
++7
++14
++3
++6
++7
++17
++2
++2
++15
++14
++16
++4
++6
++7
++13
++6
++4
++5
++6
++16
++3
++3
++28
++3
++6
++15
++3
++9
++2
++4
++6
++3
++3
++22
++4
++12
++6
++7
++2
++5
++4
++10
++3
++16
++6
++9
++2
++5
++12
++7
++5
++5
++5
++5
++2
++11
++9
++17
++4
++3
++11
++7
++3
++5
++15
++4
++3
++4
++211
++8
++7
++5
++4
++7
++6
++7
++6
++3
++6
++5
++6
++5
++3
++4
++4
++26
++4
++6
++10
++4
++4
++3
++2
++3
++3
++4
++5
++9
++3
++9
++4
++4
++5
++5
++8
++2
++4
++2
++3
++8
++4
++11
++19
++5
++8
++6
++3
++5
++6
++12
++3
++2
++4
++16
++12
++3
++4
++4
++8
++6
++5
++6
++6
++219
++8
++222
++6
++16
++3
++13
++19
++5
++4
++3
++11
++6
++10
++4
++7
++7
++12
++5
++3
++3
++5
++6
++10
++3
++8
++2
++5
++4
++7
++2
++4
++4
++2
++12
++9
++6
++4
++2
++40
++2
++4
++10
++4
++223
++4
++2
++20
++6
++7
++24
++5
++4
++5
++2
++20
++16
++6
++5
++13
++2
++3
++3
++19
++3
++2
++4
++5
++6
++7
++11
++12
++5
++6
++7
++7
++3
++5
++3
++5
++3
++14
++3
++4
++4
++2
++11
++1
++7
++3
++9
++6
++11
++12
++5
++8
++6
++221
++4
++2
++12
++4
++3
++15
++4
++5
++226
++7
++218
++7
++5
++4
++5
++18
++4
++5
++9
++4
++4
++2
++9
++18
++18
++9
++5
++6
++6
++3
++3
++7
++3
++5
++4
++4
++4
++12
++3
++6
++31
++5
++4
++7
++3
++6
++5
++6
++5
++11
++2
++2
++11
++11
++6
++7
++5
++8
++7
++10
++5
++23
++7
++4
++3
++5
++34
++2
++5
++23
++7
++3
++6
++8
++4
++4
++4
++2
++5
++3
++8
++5
++4
++8
++25
++2
++3
++17
++8
++3
++4
++8
++7
++3
++15
++6
++5
++7
++21
++9
++5
++6
++6
++5
++3
++2
++3
++10
++3
++6
++3
++14
++7
++4
++4
++8
++7
++8
++2
++6
++12
++4
++213
++6
++5
++21
++8
++2
++5
++23
++3
++11
++2
++3
++6
++25
++2
++3
++6
++7
++6
++6
++4
++4
++6
++3
++17
++9
++7
++6
++4
++3
++10
++7
++2
++3
++3
++3
++11
++8
++3
++7
++6
++4
++14
++36
++3
++4
++3
++3
++22
++13
++21
++4
++2
++7
++4
++4
++17
++15
++3
++7
++11
++2
++4
++7
++6
++209
++6
++3
++2
++2
++24
++4
++9
++4
++3
++3
++3
++29
++2
++2
++4
++3
++3
++5
++4
++6
++3
++3
++2
++4
+diff -ruN a/src/github.com/bmizerany/perks/quantile/stream.go b/src/github.com/bmizerany/perks/quantile/stream.go
+--- a/src/github.com/bmizerany/perks/quantile/stream.go	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/quantile/stream.go	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1,281 @@
++// Package quantile computes approximate quantiles over an unbounded data
++// stream within low memory and CPU bounds.
++//
++// A small amount of accuracy is traded to achieve the above properties.
++//
++// Multiple streams can be merged before calling Query to generate a single set
++// of results. This is meaningful when the streams represent the same type of
++// data. See Merge and Samples.
++//
++// For more detailed information about the algorithm used, see:
++//
++// Effective Computation of Biased Quantiles over Data Streams
++//
++// http://www.cs.rutgers.edu/~muthu/bquant.pdf
++package quantile
++
++import (
++	"container/list"
++	"math"
++	"sort"
++)
++
++// Sample holds an observed value and meta information for compression. JSON
++// tags have been added for convenience.
++type Sample struct {
++	Value float64 `json:",string"`
++	Width float64 `json:",string"`
++	Delta float64 `json:",string"`
++}
++
++// Samples represents a slice of samples. It implements sort.Interface.
++type Samples []Sample
++
++func (a Samples) Len() int {
++	return len(a)
++}
++
++func (a Samples) Less(i, j int) bool {
++	return a[i].Value < a[j].Value
++}
++
++func (a Samples) Swap(i, j int) {
++	a[i], a[j] = a[j], a[i]
++}
++
++type invariant func(s *stream, r float64) float64
++
++// NewBiased returns an initialized Stream for high-biased quantiles (e.g.
++// 50th, 90th, 99th) not known a priori with ﬁner error guarantees for the
++// higher ranks of the data distribution.
++// See http://www.cs.rutgers.edu/~muthu/bquant.pdf for time, space, and error properties.
++func NewBiased() *Stream {
++	ƒ := func(s *stream, r float64) float64 {
++		return 2 * s.epsilon * r
++	}
++	return newStream(ƒ)
++}
++
++// NewTargeted returns an initialized Stream concerned with a particular set of
++// quantile values that are supplied a priori. Knowing these a priori reduces
++// space and computation time.
++// See http://www.cs.rutgers.edu/~muthu/bquant.pdf for time, space, and error properties.
++func NewTargeted(quantiles ...float64) *Stream {
++	ƒ := func(s *stream, r float64) float64 {
++		var m float64 = math.MaxFloat64
++		var f float64
++		for _, q := range quantiles {
++			if q*s.n <= r {
++				f = (2 * s.epsilon * r) / q
++			} else {
++				f = (2 * s.epsilon * (s.n - r)) / (1 - q)
++			}
++			m = math.Min(m, f)
++		}
++		return m
++	}
++	return newStream(ƒ)
++}
++
++// Stream computes quantiles for a stream of float64s. It is not thread-safe by
++// design. Take care when using across multiple goroutines.
++type Stream struct {
++	*stream
++	b      Samples
++	sorted bool
++}
++
++func newStream(ƒ invariant) *Stream {
++	const defaultEpsilon = 0.01
++	x := &stream{epsilon: defaultEpsilon, ƒ: ƒ, l: list.New()}
++	return &Stream{x, make(Samples, 0, 500), true}
++}
++
++// Insert inserts v into the stream.
++func (s *Stream) Insert(v float64) {
++	s.insert(Sample{Value: v, Width: 1})
++}
++
++func (s *Stream) insert(sample Sample) {
++	s.b = append(s.b, sample)
++	s.sorted = false
++	if len(s.b) == cap(s.b) {
++		s.flush()
++		s.compress()
++	}
++}
++
++// Query returns the computed qth percentiles value. If s was created with
++// NewTargeted, and q is not in the set of quantiles provided a priori, Query
++// will return an unspecified result.
++func (s *Stream) Query(q float64) float64 {
++	if !s.flushed() {
++		// Fast path when there hasn't been enough data for a flush;
++		// this also yeilds better accuracy for small sets of data.
++		l := len(s.b)
++		if l == 0 {
++			return 0
++		}
++		i := int(float64(l) * q)
++		if i > 0 {
++			i -= 1
++		}
++		s.maybeSort()
++		return s.b[i].Value
++	}
++	s.flush()
++	return s.stream.query(q)
++}
++
++// Merge merges samples into the underlying streams samples. This is handy when
++// merging multiple streams from separate threads, database shards, etc.
++func (s *Stream) Merge(samples Samples) {
++	sort.Sort(samples)
++	s.stream.merge(samples)
++}
++
++// Reset reinitializes and clears the list reusing the samples buffer memory.
++func (s *Stream) Reset() {
++	s.stream.reset()
++	s.b = s.b[:0]
++}
++
++// Samples returns stream samples held by s.
++func (s *Stream) Samples() Samples {
++	if !s.flushed() {
++		return s.b
++	}
++	s.flush()
++	s.compress()
++	return s.stream.samples()
++}
++
++// Count returns the total number of samples observed in the stream
++// since initialization.
++func (s *Stream) Count() int {
++	return len(s.b) + s.stream.count()
++}
++
++func (s *Stream) flush() {
++	s.maybeSort()
++	s.stream.merge(s.b)
++	s.b = s.b[:0]
++}
++
++func (s *Stream) maybeSort() {
++	if !s.sorted {
++		s.sorted = true
++		sort.Sort(s.b)
++	}
++}
++
++func (s *Stream) flushed() bool {
++	return s.stream.l.Len() > 0
++}
++
++type stream struct {
++	epsilon float64
++	n       float64
++	l       *list.List
++	ƒ       invariant
++}
++
++// SetEpsilon sets the error epsilon for the Stream. The default epsilon is
++// 0.01 and is usually satisfactory. If needed, this must be called before all
++// Inserts.
++// To learn more, see: http://www.cs.rutgers.edu/~muthu/bquant.pdf
++func (s *stream) SetEpsilon(epsilon float64) {
++	s.epsilon = epsilon
++}
++
++func (s *stream) reset() {
++	s.l.Init()
++	s.n = 0
++}
++
++func (s *stream) insert(v float64) {
++	fn := s.mergeFunc()
++	fn(v, 1)
++}
++
++func (s *stream) merge(samples Samples) {
++	fn := s.mergeFunc()
++	for _, s := range samples {
++		fn(s.Value, s.Width)
++	}
++}
++
++func (s *stream) mergeFunc() func(v, w float64) {
++	// NOTE: I used a goto over defer because it bought me a few extra
++	// nanoseconds. I know. I know.
++	var r float64
++	e := s.l.Front()
++	return func(v, w float64) {
++		for ; e != nil; e = e.Next() {
++			c := e.Value.(*Sample)
++			if c.Value > v {
++				sm := &Sample{v, w, math.Floor(s.ƒ(s, r)) - 1}
++				s.l.InsertBefore(sm, e)
++				goto inserted
++			}
++			r += c.Width
++		}
++		s.l.PushBack(&Sample{v, w, 0})
++	inserted:
++		s.n += w
++	}
++}
++
++func (s *stream) count() int {
++	return int(s.n)
++}
++
++func (s *stream) query(q float64) float64 {
++	e := s.l.Front()
++	t := math.Ceil(q * s.n)
++	t += math.Ceil(s.ƒ(s, t) / 2)
++	p := e.Value.(*Sample)
++	e = e.Next()
++	r := float64(0)
++	for e != nil {
++		c := e.Value.(*Sample)
++		if r+c.Width+c.Delta > t {
++			return p.Value
++		}
++		r += p.Width
++		p = c
++		e = e.Next()
++	}
++	return p.Value
++}
++
++func (s *stream) compress() {
++	if s.l.Len() < 2 {
++		return
++	}
++	e := s.l.Back()
++	x := e.Value.(*Sample)
++	r := s.n - 1 - x.Width
++	e = e.Prev()
++	for e != nil {
++		c := e.Value.(*Sample)
++		if c.Width+x.Width+x.Delta <= s.ƒ(s, r) {
++			x.Width += c.Width
++			o := e
++			e = e.Prev()
++			s.l.Remove(o)
++		} else {
++			x = c
++			e = e.Prev()
++		}
++		r -= c.Width
++	}
++}
++
++func (s *stream) samples() Samples {
++	samples := make(Samples, 0, s.l.Len())
++	for e := s.l.Front(); e != nil; e = e.Next() {
++		samples = append(samples, *e.Value.(*Sample))
++	}
++	return samples
++}
+diff -ruN a/src/github.com/bmizerany/perks/quantile/stream_test.go b/src/github.com/bmizerany/perks/quantile/stream_test.go
+--- a/src/github.com/bmizerany/perks/quantile/stream_test.go	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/quantile/stream_test.go	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1,128 @@
++package quantile
++
++import (
++	"math"
++	"math/rand"
++	"sort"
++	"testing"
++)
++
++func TestQuantRandQuery(t *testing.T) {
++	s := NewTargeted(0.5, 0.90, 0.99)
++	a := make([]float64, 0, 1e5)
++	rand.Seed(42)
++	for i := 0; i < cap(a); i++ {
++		v := float64(rand.Int63())
++		s.Insert(v)
++		a = append(a, v)
++	}
++	t.Logf("len: %d", s.Count())
++	sort.Float64s(a)
++	w := getPerc(a, 0.50)
++	if g := s.Query(0.50); math.Abs(w-g)/w > 0.03 {
++		t.Errorf("perc50: want %v, got %v", w, g)
++		t.Logf("e: %f", math.Abs(w-g)/w)
++	}
++	w = getPerc(a, 0.90)
++	if g := s.Query(0.90); math.Abs(w-g)/w > 0.03 {
++		t.Errorf("perc90: want %v, got %v", w, g)
++		t.Logf("e: %f", math.Abs(w-g)/w)
++	}
++	w = getPerc(a, 0.99)
++	if g := s.Query(0.99); math.Abs(w-g)/w > 0.03 {
++		t.Errorf("perc99: want %v, got %v", w, g)
++		t.Logf("e: %f", math.Abs(w-g)/w)
++	}
++}
++
++func TestQuantRandMergeQuery(t *testing.T) {
++	ch := make(chan float64)
++	done := make(chan *Stream)
++	for i := 0; i < 2; i++ {
++		go func() {
++			s := NewTargeted(0.5, 0.90, 0.99)
++			for v := range ch {
++				s.Insert(v)
++			}
++			done <- s
++		}()
++	}
++
++	rand.Seed(42)
++	a := make([]float64, 0, 1e6)
++	for i := 0; i < cap(a); i++ {
++		v := float64(rand.Int63())
++		a = append(a, v)
++		ch <- v
++	}
++	close(ch)
++
++	s := <-done
++	o := <-done
++	s.Merge(o.Samples())
++
++	t.Logf("len: %d", s.Count())
++	sort.Float64s(a)
++	w := getPerc(a, 0.50)
++	if g := s.Query(0.50); math.Abs(w-g)/w > 0.03 {
++		t.Errorf("perc50: want %v, got %v", w, g)
++		t.Logf("e: %f", math.Abs(w-g)/w)
++	}
++	w = getPerc(a, 0.90)
++	if g := s.Query(0.90); math.Abs(w-g)/w > 0.03 {
++		t.Errorf("perc90: want %v, got %v", w, g)
++		t.Logf("e: %f", math.Abs(w-g)/w)
++	}
++	w = getPerc(a, 0.99)
++	if g := s.Query(0.99); math.Abs(w-g)/w > 0.03 {
++		t.Errorf("perc99: want %v, got %v", w, g)
++		t.Logf("e: %f", math.Abs(w-g)/w)
++	}
++}
++
++func TestUncompressed(t *testing.T) {
++	tests := []float64{0.50, 0.90, 0.95, 0.99}
++	q := NewTargeted(tests...)
++	for i := 100; i > 0; i-- {
++		q.Insert(float64(i))
++	}
++	if g := q.Count(); g != 100 {
++		t.Errorf("want count 100, got %d", g)
++	}
++	// Before compression, Query should have 100% accuracy.
++	for _, v := range tests {
++		w := v * 100
++		if g := q.Query(v); g != w {
++			t.Errorf("want %f, got %f", w, g)
++		}
++	}
++}
++
++func TestUncompressedSamples(t *testing.T) {
++	q := NewTargeted(0.99)
++	for i := 1; i <= 100; i++ {
++		q.Insert(float64(i))
++	}
++	if g := q.Samples().Len(); g != 100 {
++		t.Errorf("want count 100, got %d", g)
++	}
++}
++
++func TestUncompressedOne(t *testing.T) {
++	q := NewTargeted(0.90)
++	q.Insert(3.14)
++	if g := q.Query(0.90); g != 3.14 {
++		t.Error("want PI, got", g)
++	}
++}
++
++func TestDefaults(t *testing.T) {
++	if g := NewTargeted(0.99).Query(0.99); g != 0 {
++		t.Errorf("want 0, got %f", g)
++	}
++}
++
++func getPerc(x []float64, p float64) float64 {
++	k := int(float64(len(x)) * p)
++	return x[k]
++}
+diff -ruN a/src/github.com/bmizerany/perks/topk/topk.go b/src/github.com/bmizerany/perks/topk/topk.go
+--- a/src/github.com/bmizerany/perks/topk/topk.go	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/topk/topk.go	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1,85 @@
++package topk
++
++import (
++	"sort"
++)
++
++// http://www.cs.ucsb.edu/research/tech_reports/reports/2005-23.pdf
++
++type Element struct {
++	Value string
++	Count int
++}
++
++type Samples []*Element
++
++func (sm Samples) Len() int {
++	return len(sm)
++}
++
++func (sm Samples) Less(i, j int) bool {
++	return sm[i].Count < sm[j].Count
++}
++
++func (sm Samples) Swap(i, j int) {
++	sm[i], sm[j] = sm[j], sm[i]
++}
++
++type Stream struct {
++	k   int
++	mon map[string]*Element
++
++	// the minimum Element
++	min *Element
++}
++
++func New(k int) *Stream {
++	s := new(Stream)
++	s.k = k
++	s.mon = make(map[string]*Element)
++	s.min = &Element{}
++
++	// Track k+1 so that less frequenet items contended for that spot,
++	// resulting in k being more accurate.
++	return s
++}
++
++func (s *Stream) Insert(x string) {
++	s.insert(&Element{x, 1})
++}
++
++func (s *Stream) Merge(sm Samples) {
++	for _, e := range sm {
++		s.insert(e)
++	}
++}
++
++func (s *Stream) insert(in *Element) {
++	e := s.mon[in.Value]
++	if e != nil {
++		e.Count++
++	} else {
++		if len(s.mon) < s.k+1 {
++			e = &Element{in.Value, in.Count}
++			s.mon[in.Value] = e
++		} else {
++			e = s.min
++			delete(s.mon, e.Value)
++			e.Value = in.Value
++			e.Count += in.Count
++			s.min = e
++		}
++	}
++	if e.Count < s.min.Count {
++		s.min = e
++	}
++}
++
++func (s *Stream) Query() Samples {
++	var sm Samples
++	for _, e := range s.mon {
++		sm = append(sm, e)
++	}
++	sort.Sort(sort.Reverse(sm))
++	return sm[:s.k]
++}
+diff -ruN a/src/github.com/bmizerany/perks/topk/topk_test.go b/src/github.com/bmizerany/perks/topk/topk_test.go
+--- a/src/github.com/bmizerany/perks/topk/topk_test.go	1970-01-01 01:00:00.000000000 +0100
++++ b/src/github.com/bmizerany/perks/topk/topk_test.go	2013-11-05 12:37:24.000000000 +0000
+@@ -0,0 +1,38 @@
++package topk
++
++import (
++	"fmt"
++	"math/rand"
++	"sort"
++	"testing"
++)
++
++func TestTopK(t *testing.T) {
++	stream := New(10)
++	ss := []*Stream{New(10), New(10), New(10)}
++	m := make(map[string]int)
++	for _, s := range ss {
++		for i := 0; i < 1e6; i++ {
++			v := fmt.Sprintf("%x", int8(rand.ExpFloat64()))
++			s.Insert(v)
++			m[v]++
++		}
++		stream.Merge(s.Query())
++	}
++
++	var sm Samples
++	for x, s := range m {
++		sm = append(sm, &Element{x, s})
++	}
++	sort.Sort(sort.Reverse(sm))
++
++	g := stream.Query()
++	if len(g) != 10 {
++		t.Fatalf("got %d, want 10", len(g))
++	}
++	for i, e := range g {
++		if sm[i].Value != e.Value {
++			t.Errorf("at %d: want %q, got %q", i, sm[i].Value, e.Value)
++		}
++	}
++}
