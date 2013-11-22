@@ -11,7 +11,7 @@ XS-Ruby-Versions: all
 Package: rbenv
 Architecture: all
 XB-Ruby-Versions: ${ruby:Versions}
-Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: simple per-user Ruby version manager
  rbenv lets you easily switch between multiple versions of Ruby. It's
  simple, unobtrusive, and follows the UNIX tradition of single-purpose
