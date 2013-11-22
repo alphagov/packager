@@ -1,0 +1,11 @@
+rbenv-ruby-1.9.3-p484 (1-ppa1~lucid1) lucid; urgency=low
+
+  * Initial build for Lucid.
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Fri, 22 Nov 2013 10:43:49 +0000
+
+rbenv-ruby-1.9.3-p484 (1-ppa1~precise1) precise; urgency=low
+
+  * Initial build for Precise.
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Fri, 22 Nov 2013 10:43:49 +0000
