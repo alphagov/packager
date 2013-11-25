@@ -1,3 +1,15 @@
+rbenv-ruby-2.0.0-p353 (1-ppa2~lucid1) lucid; urgency=low
+
+  * Fix package install dir
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Mon, 25 Nov 2013 09:42:13 +0000
+
+rbenv-ruby-2.0.0-p353 (1-ppa2~precise1) precise; urgency=low
+
+  * Fix package install dir
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Mon, 25 Nov 2013 09:42:13 +0000
+
 rbenv-ruby-2.0.0-p353 (1-ppa1~lucid1) lucid; urgency=low
 
   * Initial build for Lucid.
