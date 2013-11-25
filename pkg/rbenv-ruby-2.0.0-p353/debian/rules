@@ -3,4 +3,4 @@
 	dh $@
 
 override_dh_auto_configure:
-	dh_auto_configure -- --prefix=/usr/lib/rbenv/versions/2.0.0-p247
+	dh_auto_configure -- --prefix=/usr/lib/rbenv/versions/2.0.0-p353
