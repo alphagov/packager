@@ -1,3 +1,17 @@
+collectd (5.4.0-ppa1~lucid1) precise; urgency=low
+
+  * Rebuild for Lucid.
+
+ -- Dan Carley <dan.carley@gmail.com>  Wed, 23 Oct 2013 11:27:55 +0000
+
+collectd (5.4.0-ppa1~precise1) precise; urgency=low
+
+  * New upstream release.
+  * New plugins, including statsd.
+  * Varnish patches are now included upstream.
+
+ -- Dan Carley <dan.carley@gmail.com>  Wed, 23 Oct 2013 11:18:26 +0000
+
 collectd (5.3.0-ppa8~precise1) precise; urgency=low
 
   No changes. This release simply adds "~precise1" to the version number for
