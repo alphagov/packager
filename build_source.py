@@ -43,12 +43,6 @@ class Changelog(object):
     self.source = matches.group(1)
     self.version = matches.group(2)
 
-  def debuild_tar_name(self):
-    return "%s_%s.orig.tar.gz" % (self.source, self.version)
-
-  def debuild_dir_name(self):
-    return "%s-%s" % (self.source, self.version)
-
 
 class Package(object):
   def __init__(self, pkg_dir, debuild_args=None):
@@ -68,15 +62,19 @@ class Package(object):
     changelog_path = os.path.join(self.pkg_path, "debian", "changelog")
     cl = Changelog(changelog_path)
 
-    self.build_path = os.path.join("build", cl.debuild_dir_name())
-    self.expanded_dir = os.path.join(self.build_path, cl.debuild_dir_name())
-    self.tarfile = os.path.join(self.build_path, cl.debuild_tar_name())
+    debuild_dir_name = "%s-%s" % (cl.source, cl.version)
+    self.build_path = os.path.join("build", debuild_dir_name)
+    self.expanded_dir = os.path.join(self.build_path, debuild_dir_name)
+
+    zip_suffix = "bz2" if self.url.endswith(".bz2") else "gz"
+    tar_filename = "%s_%s.orig.tar.%s" % (cl.source, cl.version, zip_suffix)
+    self.tarfile = os.path.join(self.build_path, tar_filename)
 
   def read_srcurl(self):
     src_url = os.path.join(self.pkg_path, "srcurl")
 
     with open(src_url, 'r') as f:
-      self.url = f.read()
+      self.url = f.read().rstrip()
 
   def make(self):
     self.__create_build_dir()
