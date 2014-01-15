@@ -1,0 +1,13 @@
+#!/usr/bin/make -f
+
+export GOPATH=$(CURDIR)
+export GOBIN=$(CURDIR)/debian/gor/usr/bin
+
+%:
+	dh $@
+
+# Precise is too young for dh-golang.
+override_dh_auto_install-arch:
+	mkdir -p src/github.com/buger/
+	ln -s ../../../ src/github.com/buger/gor
+	go install -v ./bin/gor.go

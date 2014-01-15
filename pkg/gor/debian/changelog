@@ -1,0 +1,6 @@
+gor (0.7.0-9026155~ppa1~precise) precise; urgency=low
+
+  * Initial package release.
+  * From branch: https://github.com/buger/gor/pull/70
+
+ -- Dan Carley <dan.carley@gmail.com>  Wed, 15 Jan 2014 14:49:14 +0000
