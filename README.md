@@ -2,7 +2,7 @@ packager
 ========
 
 This repository contains some scripts to aid the building of debian source
-packages (.dsc) files for submission to Launchpad or another buildd server for
+packages (.dsc) files for submission to Launchpad or another build server for
 building into binary debian packages (.deb)
 
 Usage
