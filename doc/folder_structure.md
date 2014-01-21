@@ -24,10 +24,8 @@ Folder Structure for Package under Packager
 * _debian_ folder contains meta data about package for making the
   debian from tar.gz
     * _changelog_ contains information about the author and changes
-      made. For more information on changelog look
-      [here](http://www.debian.org/doc/debian-policy/ch-source.html#s-dpkgchangelog)
-    * _compact_ file talks about the compatibility mode for debhelper
-      [here](http://manpages.ubuntu.com/manpages/raring/en/man7/debhelper.7.html#contenttoc8)
+      made. [More information on changelog](http://www.debian.org/doc/debian-policy/ch-source.html#s-dpkgchangelog)
+    * _compact_ file talks about the [compatibility mode for debhelper](http://manpages.ubuntu.com/manpages/raring/en/man7/debhelper.7.html#contenttoc8)
     * _control_ contains package management information. Some
       helpful links are:
         * [http://www.debian.org/doc/manuals/maint-guide/dreq.en.html#control](http://www.debian.org/doc/manuals/maint-guide/dreq.en.html#control)

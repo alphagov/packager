@@ -22,7 +22,7 @@ You can then build binary packages from .dsc files:
 
     $ sbuild -A -d precise-amd64 build/collectd/collectd_5.3.0-ppa4.dsc
 
-For understanding the folder structure for packager packages: [here](folder_structure.md)
+[Understanding the folder structure for packager packages](folder_structure.md)
 
 Building packages for multiple series
 -------------------------------------
@@ -38,10 +38,10 @@ submit the original .changes file to Launchpad for building:
 
     $ dput ppa:gds/govuk build/collectd/collectd_5.3.0-ppa4_source.changes
 
-Common error encountered during upload: [here](https://help.launchpad.net/Packaging/UploadErrors)
+A [common error encountered during upload](https://help.launchpad.net/Packaging/UploadErrors)
 
 Once you are able to upload the changes file, you would get an email for either your
 upload has been accepted or rejected on the basis of launchpad criteria
 (also stated in the common errors links)
 
-**NOTE: read the tips document [here](tips.md)**
+**NOTE: read the [tips document](tips.md)**
