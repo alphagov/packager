@@ -25,3 +25,6 @@ Description: a pattern scanning and text processing language
  .
  Mawk is smaller and much faster than gawk. It has some compile-time
  limits such as NF = 32767 and sprintf buffer = 1020.
+ .
+ This package installs to /opt/mawk so that it can co-exist with the
+ core mawk package
