@@ -3,9 +3,8 @@
 %:
 	dh $@ --with quilt
 
-override_dh_auto_install:
-	dh_auto_install -- BINDIR=$(CURDIR)/debian/mawk/usr/bin \
-	                   MANDIR=$(CURDIR)/debian/mawk/usr/share/man/man1
+override_dh_auto_configure:
+	dh_auto_configure -- --prefix=/opt/mawk
 
 override_dh_auto_build:
 	dh_auto_build -- mawk

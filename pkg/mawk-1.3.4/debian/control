@@ -1,16 +1,15 @@
-Source: mawk
+Source: mawk-1.3.4
 Section: interpreters
-Priority: required
+Priority: optional
 Maintainer: Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>
 XSBC-Original-Maintainer: Steve Langasek <vorlon@debian.org>
 Build-Depends: quilt (>= 0.46-7), bison, debhelper (>= 8.9.4)
 Build-Conflicts: byacc
 Standards-Version: 3.9.3
 
-Package: mawk
+Package: mawk-1.3.4
 Architecture: any
 Multi-Arch: foreign
-Provides: awk
 Pre-Depends: ${shlibs:Depends}
 Depends: ${misc:Depends}
 Description: a pattern scanning and text processing language
@@ -26,3 +25,6 @@ Description: a pattern scanning and text processing language
  .
  Mawk is smaller and much faster than gawk. It has some compile-time
  limits such as NF = 32767 and sprintf buffer = 1020.
+ .
+ This package installs to /opt/mawk so that it can co-exist with the
+ core mawk package
