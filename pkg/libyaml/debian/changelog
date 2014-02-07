@@ -1,3 +1,9 @@
+libyaml (0.1.4-2ubuntu0.10.04.1ppa1) lucid; urgency=medium
+
+  * Backport Precise version to lucid
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Fri, 07 Feb 2014 08:40:39 +0000
+
 libyaml (0.1.3-1) unstable; urgency=low
 
   * New upstream version 0.1.3.
