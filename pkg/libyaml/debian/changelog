@@ -1,0 +1,26 @@
+libyaml (0.1.3-1) unstable; urgency=low
+
+  * New upstream version 0.1.3.
+    + This release fixes non-standard structure initialization and a
+      streaming-related issue.
+  * Bump priority from extra to optional.
+
+ -- Anders Kaseorg <andersk@mit.edu>  Sun, 04 Oct 2009 14:07:18 -0400
+
+libyaml (0.1.2-1) unstable; urgency=low
+
+  * New upstream version 0.1.2.
+    + Fixed grammar in error messages (from YAML::XS::LibYAML).
+    + Rewritten whitespace detection in the scalar analyzer and block
+      scalar writers (ported from PyYAML).
+    + Fixed emitting folded scalars with trailing breaks; Forced emitting
+      of a document end indicator when there is a possibility of ambiguous
+      parsing.
+
+ -- Anders Kaseorg <andersk@mit.edu>  Mon, 29 Dec 2008 21:10:48 -0500
+
+libyaml (0.1.1-1) unstable; urgency=low
+
+  * Initial release (Closes: #484381).
+
+ -- Anders Kaseorg <andersk@mit.edu>  Tue, 10 Jun 2008 02:37:34 -0400
