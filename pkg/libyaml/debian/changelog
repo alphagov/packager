@@ -1,6 +1,21 @@
+libyaml (0.1.4-2ubuntu0.10.04.2ppa1) lucid; urgency=low
+
+  * Backport regression fix to lucid
+  * SECURITY REGRESSION: parsing regression in security update
+    (LP: #1279805)
+    - debian/patches/CVE-2013-6393.patch: updated to use upstream commits
+      from 0.1.5.
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Mon, 17 Feb 2014 09:33:42 +0000
+
 libyaml (0.1.4-2ubuntu0.10.04.1ppa1) lucid; urgency=medium
 
   * Backport Precise version to lucid
+  * SECURITY UPDATE: denial of service and possible code execution via
+    large yaml documents
+    - debian/patches/CVE-2013-6393.patch: fix integer overflows in
+      src/scanner.c, src/api.c.
+    - CVE-2013-6393
 
  -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Fri, 07 Feb 2014 08:40:39 +0000
 
