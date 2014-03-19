@@ -1,0 +1,8 @@
+debian/javaws-wrapper.sh /var/cache/oracle-jdk7-installer/
+debian/jar.binfmt /var/cache/oracle-jdk7-installer/
+debian/oracle_java7.xpm /usr/share/pixmaps/
+debian/oracle_java7.png /usr/share/pixmaps/
+debian/*.desktop /usr/share/applications/
+debian/*.applications /usr/share/application-registry/
+debian/*.mime /usr/sharme/mime-info/
+debian/*.keys /usr/sharme/mime-info/

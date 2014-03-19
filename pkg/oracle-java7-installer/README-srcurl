@@ -1,0 +1,3 @@
+This has no upstream source tarball, it's a debian native package.
+
+To build the dsc, just run 'debuild -S' in this directory.
