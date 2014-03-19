@@ -1,3 +1,15 @@
+oracle-java7-installer (7u9-1~gds1~lucid1) lucid; urgency=low
+
+  * Point download location at S3 for reliability
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Wed, 19 Mar 2014 14:34:23 +0000
+
+oracle-java7-installer (7u9-1~gds1~precise1) precise; urgency=low
+
+  * Point download location at S3 for reliability
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Wed, 19 Mar 2014 14:34:23 +0000
+
 oracle-java7-installer (7u9-0~webupd8~1) maverick; urgency=medium
 
   * new upstream release

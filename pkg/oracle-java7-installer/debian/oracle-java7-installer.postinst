@@ -38,7 +38,7 @@ case $(uname -m) in
     echo "Please report to author unsupported platform '`uname -m`'.";
     echo "Proceeding without web browser plugin support";
 esac
-PARTNER_URL=http://download.oracle.com/otn-pub/java/jdk/7u9-b05/$FILENAME #must be modified for each release!!!
+PARTNER_URL=http://gds-public-readable-tarballs.s3.amazonaws.com/$FILENAME #must be modified for each release!!!
 J_INSTALL_DIR=/usr/lib/jvm/java-7-oracle
 J_DIR=jdk1.7.0_09 #must be modified for each release
 
