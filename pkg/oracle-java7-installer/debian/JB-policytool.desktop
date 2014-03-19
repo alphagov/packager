@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Oracle Java 7 Policy Tool
+Comment=Oracle Java 7 Policy Tool
+Exec=/usr/lib/jvm/java-7-oracle/bin/policytool
+Terminal=false
+Type=Application
+Icon=oracle_java7
+Categories=Settings;
