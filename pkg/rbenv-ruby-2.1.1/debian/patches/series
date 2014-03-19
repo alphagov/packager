@@ -1,1 +1,2 @@
 01_downgrade_rubygems.diff
+02_hash_regression.diff
