@@ -66,20 +66,25 @@ class Package(object):
     self.build_path = os.path.join("build", debuild_dir_name)
     self.expanded_dir = os.path.join(self.build_path, debuild_dir_name)
 
-    zip_suffix = "bz2" if self.url.endswith(".bz2") else "gz"
-    tar_filename = "%s_%s.orig.tar.%s" % (cl.source, cl.version, zip_suffix)
-    self.tarfile = os.path.join(self.build_path, tar_filename)
+    if self.url:
+      zip_suffix = "bz2" if self.url.endswith(".bz2") else "gz"
+      tar_filename = "%s_%s.orig.tar.%s" % (cl.source, cl.version, zip_suffix)
+      self.tarfile = os.path.join(self.build_path, tar_filename)
 
   def read_srcurl(self):
     src_url = os.path.join(self.pkg_path, "srcurl")
 
-    with open(src_url, 'r') as f:
-      self.url = f.read().rstrip()
+    if os.path.isfile(src_url):
+      with open(src_url, 'r') as f:
+        self.url = f.read().rstrip()
+    else:
+      print "=> no srcurl file - assuming debian-native package"
 
   def make(self):
     self.__create_build_dir()
-    self.__fetch_tarball()
-    self.__expand_tarball()
+    if self.url:
+      self.__fetch_tarball()
+      self.__expand_tarball()
     self.__copy_debian()
     return self.__debuild()
 
