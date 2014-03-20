@@ -1,0 +1,115 @@
+oracle-java7-installer (7u9-1~gds2~lucid1) lucid; urgency=low
+
+  * Fix config script to look for correct filename
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Thu, 20 Mar 2014 09:20:48 +0000
+
+oracle-java7-installer (7u9-1~gds2~precise1) precise; urgency=low
+
+  * Fix config script to look for correct filename
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Thu, 20 Mar 2014 09:20:05 +0000
+
+oracle-java7-installer (7u9-0~webupd8~1) maverick; urgency=medium
+
+  * new upstream release
+  * make Oracle Java & show up on Open With > Properties (thanks bruce!) and other mime type fixes
+
+ -- Alin Andrei <webupd8@gmail.com>  Wed, 17 Oct 2012 14:18:29 +0200
+
+oracle-java7-installer (7u7-0~webupd8~4) maverick; urgency=medium
+
+  * removed cookie file use or else the PPA stays disabled
+  * request the user to accept the Oracle license before installation
+
+ -- Alin Andrei <webupd8@gmail.com>  Tue, 04 Sep 2012 14:18:29 +0200
+
+oracle-java7-installer (7u7-0~webupd8~3) maverick; urgency=medium
+
+  * revert default-java
+
+ -- Alin Andrei <webupd8@gmail.com>  Tue, 04 Sep 2012 14:18:29 +0200
+
+oracle-java7-installer (7u7-0~webupd8~2) maverick; urgency=medium
+
+  * fix a bug with switching between java versions which resulted in the browser plugin not being re-registered
+
+ -- Alin Andrei <webupd8@gmail.com>  Tue, 04 Sep 2012 14:18:29 +0200
+
+oracle-java7-installer (7u7-0~webupd8~1) maverick; urgency=medium
+
+  * set /usr/lib/jvm/default-java
+
+ -- Alin Andrei <webupd8@gmail.com>  Fri, 31 Aug 2012 14:18:29 +0200
+
+oracle-java7-installer (7u7-0~webupd8~0) maverick; urgency=medium
+
+  * New JDK release
+
+ -- Alin Andrei <webupd8@gmail.com>  Thu, 30 Aug 2012 14:18:29 +0200
+
+oracle-java7-installer (7u6-0~webupd8~0) maverick; urgency=medium
+
+  * New JDK release
+
+ -- Alin Andrei <webupd8@gmail.com>  Wed, 15 Aug 2012 14:18:29 +0200
+
+oracle-java7-installer (7u5-0~webupd8~5) precise; urgency=medium
+
+  * The installation script now generates a (hidden) .jinfo file automatically under /usr/lib/jvm
+  * use jre/bin/ for all JRE files available instead of jdk/bin/
+  * s/Sun/Oracle in package description
+
+ -- Alin Andrei <webupd8@gmail.com>  Thu, 14 Jun 2012 14:18:29 +0200
+
+oracle-java7-installer (7u5-0~webupd8~3) precise; urgency=medium
+
+  * new JDK release
+  * some small fixes
+
+ -- Alin Andrei <webupd8@gmail.com>  Fri, 01 Jun 2012 14:18:29 +0200
+
+oracle-java7-installer (7u4-0~webupd8~4) precise; urgency=medium
+
+  * fixed jedit and improved download procedure (thanks to Eugene San for the patch!)
+
+ -- Alin Andrei <webupd8@gmail.com>  Fri, 01 Jun 2012 14:18:29 +0200
+
+oracle-java7-installer (7u4-0~webupd8~2) precise; urgency=medium
+
+  * link to jre/bin/java instead of bin/java as requested by Marco Vermeulen
+
+ -- Alin Andrei <webupd8@gmail.com>  Mon, 14 May 2012 20:08:39 +0300
+
+oracle-java7-installer (7u4-0~webupd8~0) precise; urgency=medium
+
+  * new Java 7 version (u4)
+
+ -- Alin Andrei <webupd8@gmail.com>  Fri, 27 Apr 2012 20:08:39 +0300
+
+oracle-java7-installer (7u3-0~webupd8~10) precise; urgency=medium
+
+  * minor tweak to make it removable when the download fails
+
+ -- Alin Andrei <webupd8@gmail.com>  Wed, 25 Apr 2012 16:54:23 +0000
+
+oracle-java7-installer (7u3-0~webupd8~9) oneiric; urgency=medium
+
+  * updated control file: better desktop integration (thanks to Eugene San)
+  * renamed package from oracle-jdk7-installer to oracle-java7-installer (and created metapackage for old name)
+  * use a cookie for wget to download JDK7, it doesn't work anymore without this
+
+ -- Alin Andrei <webupd8@gmail.com>  Tue, 27 Mar 2012 16:54:23 +0000
+s
+oracle-jdk7-installer (7u3-0~webupd8~1) oneiric; urgency=medium
+
+  * new upstream release
+  * create the /usr/lib/mozilla/plugins/ if it doesn't exists - fixes installation on Ubuntu server
+
+ -- Alin Andrei <webupd8@gmail.com>  Tue, 14 Feb 2012 16:54:23 +0000
+
+oracle-jdk7-installer (7u2-0~webupd8~4) oneiric; urgency=medium
+
+  * initial release
+
+ -- Alin Andrei <webupd8@gmail.com>  Tue, 17 Jan 2012 16:54:23 +0000
