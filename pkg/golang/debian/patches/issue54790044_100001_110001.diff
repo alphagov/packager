@@ -1,0 +1,20 @@
+Description: cmd/go: do not require a valid archChar when using -compiler gccgo
+ Fixes issue 7152.
+Origin: https://codereview.appspot.com/54790044
+
+--- a/src/cmd/go/build.go
++++ b/src/cmd/go/build.go
+@@ -349,7 +349,12 @@ func init() {
+ 	var err error
+ 	archChar, err = build.ArchChar(goarch)
+ 	if err != nil {
+-		fatalf("%s", err)
++		if _, isgc := buildToolchain.(gcToolchain); isgc {
++			fatalf("%s", err)
++		}
++		// archChar is only required for gcToolchain, if we're using
++		// another toolchain leave it blank.
++		archChar = ""
+ 	}
+ }
+ 

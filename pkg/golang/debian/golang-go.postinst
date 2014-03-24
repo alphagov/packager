@@ -19,8 +19,9 @@ case "$1" in
 		rm -f $conffile
 		rmdir /etc/golang || true
 	fi
+	update-alternatives --force --install /usr/bin/go go /usr/bin/golang-go 10
 	# Very ugly hack to set timestamps same as /usr/bin/go
-	find /usr/lib/go/pkg -exec touch -r /usr/bin/go {} \;
+	find /usr/lib/go/pkg -exec touch -r /usr/bin/golang-go {} \;
 	;;
     *)
 	;;

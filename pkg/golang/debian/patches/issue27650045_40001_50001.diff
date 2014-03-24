@@ -1,0 +1,36 @@
+Description: cmd/go: test: do not put object files where later steps will find them
+
+When recompiling a package whose basename is the name of a standard
+package for testing with gccgo, a .o file with the basename of the
+package being tested was being placed in the _test/ directory where the
+compilation of the test binary then found it when looking for the
+standard library package.
+
+This change puts the object files in a separate directory.
+
+Fixes issue 6793
+
+Origin: https://codereview.appspot.com/27650045
+
+Index: src/cmd/go/test.go
+===================================================================
+--- a/src/cmd/go/test.go
++++ b/src/cmd/go/test.go
+@@ -711,7 +711,7 @@
+ 
+ 	if ptest != p {
+ 		a := b.action(modeBuild, modeBuild, ptest)
+-		a.objdir = testDir + string(filepath.Separator)
++		a.objdir = testDir + string(filepath.Separator) + "_obj_test" + string(filepath.Separator)
+ 		a.objpkg = ptestObj
+ 		a.target = ptestObj
+ 		a.link = false
+@@ -719,7 +719,7 @@
+ 
+ 	if pxtest != nil {
+ 		a := b.action(modeBuild, modeBuild, pxtest)
+-		a.objdir = testDir + string(filepath.Separator)
++		a.objdir = testDir + string(filepath.Separator) + "_obj_xtest" + string(filepath.Separator)
+ 		a.objpkg = buildToolchain.pkgpath(testDir, pxtest)
+ 		a.target = a.objpkg
+ 	}

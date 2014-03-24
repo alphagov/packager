@@ -1,8 +1,143 @@
-golang (2:1.1.2-2ubuntu1~ppa1~precise1) precise; urgency=low
+golang (2:1.2.1-2ubuntu1) trusty; urgency=low
 
-  * Backport to precise.
+  * Merge from Debian unstable.  Remaining changes:
+    - 016-armhf-elf-header.patch: Use correct ELF header for armhf binaries.
+    - Support co-installability with gccgo-go tool:
+      - d/rules,golang-go.install: Rename bin/go -> bin/golang-go
+      - d/golang-go.{postinst,prerm}: Install/remove /usr/bin/go using
+        alternatives.
+    - Fixes from golang trunk for better gccgo support (LP: #1271335):
+      - d/p/issue27650045_40001_50001.diff:
+        cmd/go: test: do not put object files where later steps will find them
+      - d/p/issue28050043_60001_70001.diff:
+        cmd/go: When linking with gccgo pass .a files in the order they are
+        discovered
+      - d/p/issue54790044_100001_110001.diff:
+        cmd/go: do not require a valid archChar when using -compiler gccgo
+    - d/copyright: Amendments for full compiliance with copyright format.
+    - d/control: Demote golang-go.tools to Suggests to support Ubuntu MIR.
 
- -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Thu, 03 Oct 2013 09:18:08 +0000
+ -- James Page <james.page@ubuntu.com>  Thu, 20 Mar 2014 10:19:36 +0000
+
+golang (2:1.2.1-2) unstable; urgency=low
+
+  * Re-apply debian/patches/add-tar-xattr-support.patch which got lost when
+    uploading 1.2.1-1; sorry about that.
+
+ -- Michael Stapelberg <stapelberg@debian.org>  Sat, 08 Mar 2014 20:01:12 +0100
+
+golang (2:1.2.1-1ubuntu2) trusty; urgency=medium
+
+  * d/control: Demote golang-go.tools to Suggests to support Ubuntu MIR. 
+
+ -- James Page <james.page@ubuntu.com>  Mon, 17 Mar 2014 11:26:56 +0000
+
+golang (2:1.2.1-1ubuntu1) trusty; urgency=medium
+
+  * Merge with Debian; remaining changes:
+    - 016-armhf-elf-header.patch: Use correct ELF header for armhf binaries.
+    - Support co-installability with gccgo-go tool:
+      - d/rules,golang-go.install: Rename bin/go -> bin/golang-go
+      - d/golang-go.{postinst,prerm}: Install/remove /usr/bin/go using
+        alternatives.
+    - Fixes from golang trunk for better gccgo support (LP: #1271335):
+      - d/p/issue27650045_40001_50001.diff:
+        cmd/go: test: do not put object files where later steps will find them
+      - d/p/issue28050043_60001_70001.diff:
+        cmd/go: When linking with gccgo pass .a files in the order they are
+        discovered
+      - d/p/issue54790044_100001_110001.diff:
+        cmd/go: do not require a valid archChar when using -compiler gccgo
+    - d/copyright: Amendments for full compiliance with copyright format.
+
+ -- Matthias Klose <doko@ubuntu.com>  Fri, 07 Mar 2014 06:03:18 +0000
+
+golang (2:1.2.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Michael Stapelberg <stapelberg@debian.org>  Mon, 03 Mar 2014 17:40:57 +0100
+
+golang (2:1.2-3) unstable; urgency=low
+
+  * add debian/patches/add-tar-xattr-support.patch to have xattr support in
+    tar (cherry-picked from upstream) (Thanks proppy) (Closes: #739586)
+
+ -- Michael Stapelberg <stapelberg@debian.org>  Mon, 24 Feb 2014 19:34:16 +0100
+
+golang (2:1.2-2ubuntu3) trusty; urgency=medium
+
+  * d/copyright: Drop incorrect Comment block in headers.
+
+ -- James Page <james.page@ubuntu.com>  Mon, 27 Jan 2014 10:18:33 +0000
+
+golang (2:1.2-2ubuntu2) trusty; urgency=medium
+
+  * Support co-installability with gccgo-go tool:
+    - d/rules,golang-go.install: Rename bin/go -> bin/golang-go
+    - d/golang-go.{postinst,prerm}: Install/remove /usr/bin/go using
+      alternatives.
+  * Fixes from golang trunk for better gccgo support (LP: #1271335):
+    - d/p/issue27650045_40001_50001.diff:
+      cmd/go: test: do not put object files where later steps will find them
+    - d/p/issue28050043_60001_70001.diff:
+      cmd/go: When linking with gccgo pass .a files in the order they are
+      discovered
+    - d/p/issue54790044_100001_110001.diff:
+      cmd/go: do not require a valid archChar when using -compiler gccgo
+  * d/copyright: Amendments for full compiliance with copyright format.
+
+ -- James Page <james.page@ubuntu.com>  Mon, 27 Jan 2014 09:55:27 +0000
+
+golang (2:1.2-2ubuntu1) trusty; urgency=low
+
+  * Merge from Debian unstable.  Remaining changes:
+    - 016-armhf-elf-header.patch: Use correct ELF header for armhf binaries.
+
+ -- James Page <james.page@ubuntu.com>  Mon, 06 Jan 2014 09:37:23 +0000
+
+golang (2:1.2-2) unstable; urgency=low
+
+  * add patches/add-src-pkg-debug-elf-testdata-hello.patch to provide source
+    for the testdata/ ELF binaries (Closes: #716853)
+
+ -- Michael Stapelberg <stapelberg@debian.org>  Tue, 31 Dec 2013 18:28:29 +0100
+
+golang (2:1.2-1ubuntu1) trusty; urgency=low
+
+  * Merge from Debian unstable.  Remaining changes:
+    - 016-armhf-elf-header.patch: Use correct ELF header for armhf binaries.
+  * Dropped changes, no longer required:
+    - d/control,control.cross: Update Breaks/Replaces for Ubuntu
+      versions to ensure smooth upgrades, regenerate control file.
+
+ -- James Page <james.page@ubuntu.com>  Wed, 04 Dec 2013 11:13:08 +0000
+
+golang (2:1.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * drop patches/archive-tar-fix-links-and-pax.patch, it is merged upstream
+  * godoc(1) is now in the Debian package golang-go.tools, it was moved into a
+    separate repository by upstream.
+  * move patches/godoc-symlinks.diff to golang-go.tools
+
+ -- Michael Stapelberg <stapelberg@debian.org>  Mon, 02 Dec 2013 23:57:24 +0100
+
+golang (2:1.1.2-3ubuntu1) trusty; urgency=low
+
+  * Merge from Debian unstable.  Remaining changes:
+    - 016-armhf-elf-header.patch: Use correct ELF header for armhf binaries.
+    - d/control,control.cross: Update Breaks/Replaces for Ubuntu
+      versions to ensure smooth upgrades, regenerate control file.
+
+ -- James Page <james.page@ubuntu.com>  Wed, 27 Nov 2013 12:12:43 +0000
+
+golang (2:1.1.2-3) unstable; urgency=low
+
+  * cherry-pick upstream commit: archive-tar-fix-links-and-pax.patch
+    (Closes: #730566)
+
+ -- Michael Stapelberg <stapelberg@debian.org>  Tue, 26 Nov 2013 18:59:27 +0100
 
 golang (2:1.1.2-2ubuntu1) saucy; urgency=low
 
