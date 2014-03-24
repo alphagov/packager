@@ -2,10 +2,8 @@
 Source: golang
 Section: devel
 Priority: optional
-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-XSBC-Original-Maintainer: Michael Stapelberg <stapelberg@debian.org>
-Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-golang/golang.git
-Vcs-Git: git://anonscm.debian.org/pkg-golang/golang.git
+Maintainer: Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>
+XSBC-Original-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Build-Depends: debhelper (>= 7.4.10), bison, ed, mawk | awk, perl, netbase
 Build-Depends-Indep: po-debconf
 Standards-Version: 3.9.3
