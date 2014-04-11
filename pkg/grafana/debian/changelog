@@ -1,0 +1,5 @@
+grafana (1.5.2~ppa1~precise) precise; urgency=low
+
+  * Initial build.
+
+ -- Dan Carley <dan.carley@gmail.com>  Thu, 10 Apr 2014 17:46:13 +0000
