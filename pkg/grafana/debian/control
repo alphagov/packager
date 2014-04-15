@@ -1,0 +1,12 @@
+Source: grafana
+Section: web
+Priority: extra
+Maintainer: Dan Carley <dan.carley@gmail.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.2
+Homepage: https://github.com/torkelo/grafana
+
+Package: grafana
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Graphite dashboard
