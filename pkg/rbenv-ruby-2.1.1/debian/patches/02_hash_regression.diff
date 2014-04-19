@@ -1,0 +1,30 @@
+Description: Fix Hash#reject regression described here: https://www.ruby-lang.org/en/news/2014/03/10/regression-of-hash-reject-in-ruby-2-1-1/
+Origin: upstream, https://github.com/ruby/ruby/commit/d5c45b5fb11748acbfc9ee6c7dbfeb04408de53d
+Author: Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>
+Last-Update: 2014-03-19
+Index: rbenv-ruby-2.1.1-1/hash.c
+===================================================================
+--- rbenv-ruby-2.1.1-1.orig/hash.c	2014-03-19 10:22:19.000000000 +0000
++++ rbenv-ruby-2.1.1-1/hash.c	2014-03-19 10:46:42.000000000 +0000
+@@ -1178,7 +1178,7 @@
+ #endif
+ 	}
+     }
+-#if HASH_REJECT_COPY_MISC_ATTRIBUTES
++#if HASH_REJECT_COPY_EXTRA_STATES
+     result = rb_hash_dup_empty(hash);
+ #else
+     result = rb_hash_new();
+Index: rbenv-ruby-2.1.1-1/version.h
+===================================================================
+--- rbenv-ruby-2.1.1-1.orig/version.h	2014-02-24 04:24:15.000000000 +0000
++++ rbenv-ruby-2.1.1-1/version.h	2014-03-19 10:55:30.000000000 +0000
+@@ -44,7 +44,7 @@
+     RUBY_PATCHLEVEL_STR		    \
+     " ("RUBY_RELEASE_DATE	    \
+     RUBY_REVISION_STR") "	    \
+-    "["RUBY_PLATFORM"]"
++    "["RUBY_PLATFORM"] GDS patched"
+ # define RUBY_COPYRIGHT		    \
+     "ruby - Copyright (C) "	    \
+     STRINGIZE(RUBY_BIRTH_YEAR)"-"   \
