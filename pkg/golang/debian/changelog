@@ -1,3 +1,9 @@
+golang (2:1.2.2-0~ppa1~precise1) precise; urgency=low
+
+  * Package new upstream version 1.2.2
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Fri, 16 May 2014 10:30:52 +0000
+
 golang (2:1.2.1-2ubuntu1~ppa1~precise1) precise; urgency=low
 
   * Backport to precise
