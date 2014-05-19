@@ -1,2 +1,6 @@
-godoc-symlinks.diff
+add-src-pkg-debug-elf-testdata-hello.patch
+add-tar-xattr-support.patch
 016-armhf-elf-header.patch
+issue28050043_60001_70001.diff
+issue27650045_40001_50001.diff
+issue54790044_100001_110001.diff
