@@ -1,0 +1,5 @@
+phantomjs (1.9.7-0~ppa1) precise; urgency=low
+
+  * Debian packaging of binary 1.9.7 release
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Tue, 27 May 2014 12:53:10 +0000
