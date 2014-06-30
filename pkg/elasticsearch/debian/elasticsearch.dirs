@@ -1,0 +1,3 @@
+var/lib/elasticsearch
+var/log/elasticsearch
+var/run/elasticsearch

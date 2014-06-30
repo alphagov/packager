@@ -1,0 +1,5 @@
+usr/share/elasticsearch/bin/elasticsearch usr/bin/elasticsearch
+usr/share/elasticsearch/bin/plugin usr/bin/elasticsearch-plugin
+etc/elasticsearch usr/share/elasticsearch/config
+var/lib/elasticsearch usr/share/elasticsearch/data
+var/log/elasticsearch usr/share/elasticsearch/logs

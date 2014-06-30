@@ -1,0 +1,41 @@
+description "ElasticSearch server"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+respawn
+respawn limit 5 120
+
+pre-start script
+  ES_USER=elasticsearch
+  ES_GROUP=elasticsearch
+
+  [ -f /etc/default/elasticsearch ] && . /etc/default/elasticsearch
+
+  chown "${ES_USER}:${ES_GROUP}" /var/lib/elasticsearch /var/log/elasticsearch /var/run/elasticsearch
+end script
+
+script
+  ES_HOME=/usr/share/elasticsearch
+  ES_USER=elasticsearch
+  ES_GROUP=elasticsearch
+  MAX_OPEN_FILES=65535
+  MAX_LOCKED_MEMORY=unlimited
+
+  [ -f /etc/default/elasticsearch ] && . /etc/default/elasticsearch
+
+  ulimit -n "$MAX_OPEN_FILES"
+  ulimit -Sn "$MAX_OPEN_FILES"
+  ulimit -l "$MAX_LOCKED_MEMORY"
+  ulimit -Sl "$MAX_LOCKED_MEMORY"
+
+  export ES_HOME
+  export ES_HEAP_SIZE
+  export ES_JAVA_OPTS
+
+  exec start-stop-daemon --start \
+                         --chuid "${ES_USER}:${ES_GROUP}" \
+                         --pidfile "/var/run/elasticsearch/elasticsearch.pid" \
+                         --make-pidfile \
+                         --startas "${ES_HOME}/bin/elasticsearch" -- -f
+end script

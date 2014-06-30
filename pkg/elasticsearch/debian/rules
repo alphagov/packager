@@ -3,25 +3,14 @@
 %:
 	dh $@
 
-DEST = "debian/elasticsearch"
-
-ifeq (${DEB_BUILD_ARCH}, amd64)
-LIB_SIGAR_ARCH=amd64
+ifeq (${DEB_BUILD_ARCH}, i386)
+LIBSIGAR_ARCH=x86
 else
-LIB_SIGAR_ARCH=x86
+LIBSIGAR_ARCH=${DEB_BUILD_ARCH}
 endif
 
+override_dh_auto_build:
+
 override_dh_install:
-	mkdir -p $(DEST)/etc/elasticsearch
-	mkdir -p $(DEST)/usr/share/elasticsearch
-	mkdir $(DEST)/usr/share/elasticsearch/bin
-	mkdir -p $(DEST)/usr/share/elasticsearch/lib/sigar
-
-	cp -r bin $(DEST)/usr/share/elasticsearch
-	cp lib/*.jar $(DEST)/usr/share/elasticsearch/lib/
-	cp lib/sigar/*.jar $(DEST)/usr/share/elasticsearch/lib/sigar/
-	cp lib/sigar/libsigar-${LIB_SIGAR_ARCH}-linux.so $(DEST)/usr/share/elasticsearch/lib/sigar/
-	cp *.txt *.textile $(DEST)/usr/share/elasticsearch/
-	cp config/* $(DEST)/etc/elasticsearch/
-
-	dh_install --list-missing
+	dh_install
+	dh_install lib/sigar/libsigar-${LIBSIGAR_ARCH}-linux.so usr/share/elasticsearch/lib/sigar
