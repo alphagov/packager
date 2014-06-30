@@ -1,9 +1,3 @@
-rbenv (0.4.0-ppa1~lucid3) lucid; urgency=low
-
-  * Remove dependency on ruby
-
- -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Fri, 22 Nov 2013 11:50:44 +0000
-
 rbenv (0.4.0-ppa1~precise3) precise; urgency=low
 
   * Remove dependency on ruby

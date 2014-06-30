@@ -2,7 +2,7 @@
 set -e
 
 ARCH="amd64"
-DISTS="lucid precise"
+DISTS="precise"
 
 # ensure the VM has enough entropy to generate sbuild's archive keys
 if ! dpkg -s haveged >/dev/null 2>&1; then 
