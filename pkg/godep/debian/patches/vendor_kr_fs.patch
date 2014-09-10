@@ -1,0 +1,429 @@
+Description: Add vendored github.com/kr/fs
+  Checkout of revision 2788f0dbd16903de03cb8186e5c7d97b69ad387b
+Origin: https://github.com/kr/fs/tree/2788f0d
+
+diff --git a/src/github.com/kr/fs/LICENSE b/src/github.com/kr/fs/LICENSE
+new file mode 100644
+index 0000000..7448756
+--- /dev/null
++++ b/src/github.com/kr/fs/LICENSE
+@@ -0,0 +1,27 @@
++Copyright (c) 2012 The Go Authors. All rights reserved.
++
++Redistribution and use in source and binary forms, with or without
++modification, are permitted provided that the following conditions are
++met:
++
++   * Redistributions of source code must retain the above copyright
++notice, this list of conditions and the following disclaimer.
++   * Redistributions in binary form must reproduce the above
++copyright notice, this list of conditions and the following disclaimer
++in the documentation and/or other materials provided with the
++distribution.
++   * Neither the name of Google Inc. nor the names of its
++contributors may be used to endorse or promote products derived from
++this software without specific prior written permission.
++
++THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
++"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
++LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
++A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
++OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
++SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
++LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
++DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
++THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
++OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+diff --git a/src/github.com/kr/fs/Readme b/src/github.com/kr/fs/Readme
+new file mode 100644
+index 0000000..c95e13f
+--- /dev/null
++++ b/src/github.com/kr/fs/Readme
+@@ -0,0 +1,3 @@
++Filesystem Package
++
++http://godoc.org/github.com/kr/fs
+diff --git a/src/github.com/kr/fs/example_test.go b/src/github.com/kr/fs/example_test.go
+new file mode 100644
+index 0000000..77e0db9
+--- /dev/null
++++ b/src/github.com/kr/fs/example_test.go
+@@ -0,0 +1,19 @@
++package fs_test
++
++import (
++	"fmt"
++	"os"
++
++	"github.com/kr/fs"
++)
++
++func ExampleWalker() {
++	walker := fs.Walk("/usr/lib")
++	for walker.Step() {
++		if err := walker.Err(); err != nil {
++			fmt.Fprintln(os.Stderr, err)
++			continue
++		}
++		fmt.Println(walker.Path())
++	}
++}
+diff --git a/src/github.com/kr/fs/filesystem.go b/src/github.com/kr/fs/filesystem.go
+new file mode 100644
+index 0000000..f1c4805
+--- /dev/null
++++ b/src/github.com/kr/fs/filesystem.go
+@@ -0,0 +1,36 @@
++package fs
++
++import (
++	"io/ioutil"
++	"os"
++	"path/filepath"
++)
++
++// FileSystem defines the methods of an abstract filesystem.
++type FileSystem interface {
++
++	// ReadDir reads the directory named by dirname and returns a
++	// list of directory entries.
++	ReadDir(dirname string) ([]os.FileInfo, error)
++
++	// Lstat returns a FileInfo describing the named file. If the file is a
++	// symbolic link, the returned FileInfo describes the symbolic link. Lstat
++	// makes no attempt to follow the link.
++	Lstat(name string) (os.FileInfo, error)
++
++	// Join joins any number of path elements into a single path, adding a
++	// separator if necessary. The result is Cleaned; in particular, all
++	// empty strings are ignored.
++	//
++	// The separator is FileSystem specific.
++	Join(elem ...string) string
++}
++
++// fs represents a FileSystem provided by the os package.
++type fs struct{}
++
++func (f *fs) ReadDir(dirname string) ([]os.FileInfo, error) { return ioutil.ReadDir(dirname) }
++
++func (f *fs) Lstat(name string) (os.FileInfo, error) { return os.Lstat(name) }
++
++func (f *fs) Join(elem ...string) string { return filepath.Join(elem...) }
+diff --git a/src/github.com/kr/fs/walk.go b/src/github.com/kr/fs/walk.go
+new file mode 100644
+index 0000000..6ffa1e0
+--- /dev/null
++++ b/src/github.com/kr/fs/walk.go
+@@ -0,0 +1,95 @@
++// Package fs provides filesystem-related functions.
++package fs
++
++import (
++	"os"
++)
++
++// Walker provides a convenient interface for iterating over the
++// descendants of a filesystem path.
++// Successive calls to the Step method will step through each
++// file or directory in the tree, including the root. The files
++// are walked in lexical order, which makes the output deterministic
++// but means that for very large directories Walker can be inefficient.
++// Walker does not follow symbolic links.
++type Walker struct {
++	fs      FileSystem
++	cur     item
++	stack   []item
++	descend bool
++}
++
++type item struct {
++	path string
++	info os.FileInfo
++	err  error
++}
++
++// Walk returns a new Walker rooted at root.
++func Walk(root string) *Walker {
++	return WalkFS(root, new(fs))
++}
++
++// WalkFS returns a new Walker rooted at root on the FileSystem fs.
++func WalkFS(root string, fs FileSystem) *Walker {
++	info, err := fs.Lstat(root)
++	return &Walker{
++		fs:    fs,
++		stack: []item{{root, info, err}},
++	}
++}
++
++// Step advances the Walker to the next file or directory,
++// which will then be available through the Path, Stat,
++// and Err methods.
++// It returns false when the walk stops at the end of the tree.
++func (w *Walker) Step() bool {
++	if w.descend && w.cur.err == nil && w.cur.info.IsDir() {
++		list, err := w.fs.ReadDir(w.cur.path)
++		if err != nil {
++			w.cur.err = err
++			w.stack = append(w.stack, w.cur)
++		} else {
++			for i := len(list) - 1; i >= 0; i-- {
++				path := w.fs.Join(w.cur.path, list[i].Name())
++				w.stack = append(w.stack, item{path, list[i], nil})
++			}
++		}
++	}
++
++	if len(w.stack) == 0 {
++		return false
++	}
++	i := len(w.stack) - 1
++	w.cur = w.stack[i]
++	w.stack = w.stack[:i]
++	w.descend = true
++	return true
++}
++
++// Path returns the path to the most recent file or directory
++// visited by a call to Step. It contains the argument to Walk
++// as a prefix; that is, if Walk is called with "dir", which is
++// a directory containing the file "a", Path will return "dir/a".
++func (w *Walker) Path() string {
++	return w.cur.path
++}
++
++// Stat returns info for the most recent file or directory
++// visited by a call to Step.
++func (w *Walker) Stat() os.FileInfo {
++	return w.cur.info
++}
++
++// Err returns the error, if any, for the most recent attempt
++// by Step to visit a file or directory. If a directory has
++// an error, w will not descend into that directory.
++func (w *Walker) Err() error {
++	return w.cur.err
++}
++
++// SkipDir causes the currently visited directory to be skipped.
++// If w is not on a directory, SkipDir has no effect.
++func (w *Walker) SkipDir() {
++	w.descend = false
++}
+diff --git a/src/github.com/kr/fs/walk_test.go b/src/github.com/kr/fs/walk_test.go
+new file mode 100644
+index 0000000..6f5ad2a
+--- /dev/null
++++ b/src/github.com/kr/fs/walk_test.go
+@@ -0,0 +1,209 @@
++// Copyright 2009 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++package fs_test
++
++import (
++	"os"
++	"path/filepath"
++	"runtime"
++	"testing"
++
++	"github.com/kr/fs"
++)
++
++type PathTest struct {
++	path, result string
++}
++
++type Node struct {
++	name    string
++	entries []*Node // nil if the entry is a file
++	mark    int
++}
++
++var tree = &Node{
++	"testdata",
++	[]*Node{
++		{"a", nil, 0},
++		{"b", []*Node{}, 0},
++		{"c", nil, 0},
++		{
++			"d",
++			[]*Node{
++				{"x", nil, 0},
++				{"y", []*Node{}, 0},
++				{
++					"z",
++					[]*Node{
++						{"u", nil, 0},
++						{"v", nil, 0},
++					},
++					0,
++				},
++			},
++			0,
++		},
++	},
++	0,
++}
++
++func walkTree(n *Node, path string, f func(path string, n *Node)) {
++	f(path, n)
++	for _, e := range n.entries {
++		walkTree(e, filepath.Join(path, e.name), f)
++	}
++}
++
++func makeTree(t *testing.T) {
++	walkTree(tree, tree.name, func(path string, n *Node) {
++		if n.entries == nil {
++			fd, err := os.Create(path)
++			if err != nil {
++				t.Errorf("makeTree: %v", err)
++				return
++			}
++			fd.Close()
++		} else {
++			os.Mkdir(path, 0770)
++		}
++	})
++}
++
++func markTree(n *Node) { walkTree(n, "", func(path string, n *Node) { n.mark++ }) }
++
++func checkMarks(t *testing.T, report bool) {
++	walkTree(tree, tree.name, func(path string, n *Node) {
++		if n.mark != 1 && report {
++			t.Errorf("node %s mark = %d; expected 1", path, n.mark)
++		}
++		n.mark = 0
++	})
++}
++
++// Assumes that each node name is unique. Good enough for a test.
++// If clear is true, any incoming error is cleared before return. The errors
++// are always accumulated, though.
++func mark(path string, info os.FileInfo, err error, errors *[]error, clear bool) error {
++	if err != nil {
++		*errors = append(*errors, err)
++		if clear {
++			return nil
++		}
++		return err
++	}
++	name := info.Name()
++	walkTree(tree, tree.name, func(path string, n *Node) {
++		if n.name == name {
++			n.mark++
++		}
++	})
++	return nil
++}
++
++func TestWalk(t *testing.T) {
++	makeTree(t)
++	errors := make([]error, 0, 10)
++	clear := true
++	markFn := func(walker *fs.Walker) (err error) {
++		for walker.Step() {
++			err = mark(walker.Path(), walker.Stat(), walker.Err(), &errors, clear)
++			if err != nil {
++				break
++			}
++		}
++		return err
++	}
++	// Expect no errors.
++	err := markFn(fs.Walk(tree.name))
++	if err != nil {
++		t.Fatalf("no error expected, found: %s", err)
++	}
++	if len(errors) != 0 {
++		t.Fatalf("unexpected errors: %s", errors)
++	}
++	checkMarks(t, true)
++	errors = errors[0:0]
++
++	// Test permission errors.  Only possible if we're not root
++	// and only on some file systems (AFS, FAT).  To avoid errors during
++	// all.bash on those file systems, skip during go test -short.
++	if os.Getuid() > 0 && !testing.Short() {
++		// introduce 2 errors: chmod top-level directories to 0
++		os.Chmod(filepath.Join(tree.name, tree.entries[1].name), 0)
++		os.Chmod(filepath.Join(tree.name, tree.entries[3].name), 0)
++
++		// 3) capture errors, expect two.
++		// mark respective subtrees manually
++		markTree(tree.entries[1])
++		markTree(tree.entries[3])
++		// correct double-marking of directory itself
++		tree.entries[1].mark--
++		tree.entries[3].mark--
++		err := markFn(fs.Walk(tree.name))
++		if err != nil {
++			t.Fatalf("expected no error return from Walk, got %s", err)
++		}
++		if len(errors) != 2 {
++			t.Errorf("expected 2 errors, got %d: %s", len(errors), errors)
++		}
++		// the inaccessible subtrees were marked manually
++		checkMarks(t, true)
++		errors = errors[0:0]
++
++		// 4) capture errors, stop after first error.
++		// mark respective subtrees manually
++		markTree(tree.entries[1])
++		markTree(tree.entries[3])
++		// correct double-marking of directory itself
++		tree.entries[1].mark--
++		tree.entries[3].mark--
++		clear = false // error will stop processing
++		err = markFn(fs.Walk(tree.name))
++		if err == nil {
++			t.Fatalf("expected error return from Walk")
++		}
++		if len(errors) != 1 {
++			t.Errorf("expected 1 error, got %d: %s", len(errors), errors)
++		}
++		// the inaccessible subtrees were marked manually
++		checkMarks(t, false)
++		errors = errors[0:0]
++
++		// restore permissions
++		os.Chmod(filepath.Join(tree.name, tree.entries[1].name), 0770)
++		os.Chmod(filepath.Join(tree.name, tree.entries[3].name), 0770)
++	}
++
++	// cleanup
++	if err := os.RemoveAll(tree.name); err != nil {
++		t.Errorf("removeTree: %v", err)
++	}
++}
++
++func TestBug3486(t *testing.T) { // http://code.google.com/p/go/issues/detail?id=3486
++	root, err := filepath.EvalSymlinks(runtime.GOROOT())
++	if err != nil {
++		t.Fatal(err)
++	}
++	lib := filepath.Join(root, "lib")
++	src := filepath.Join(root, "src")
++	seenSrc := false
++	walker := fs.Walk(root)
++	for walker.Step() {
++		if walker.Err() != nil {
++			t.Fatal(walker.Err())
++		}
++
++		switch walker.Path() {
++		case lib:
++			walker.SkipDir()
++		case src:
++			seenSrc = true
++		}
++	}
++	if !seenSrc {
++		t.Fatalf("%q not seen", src)
++	}
++}
