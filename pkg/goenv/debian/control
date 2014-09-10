@@ -1,0 +1,15 @@
+Source: goenv
+Section: devel
+Priority: optional
+Maintainer: Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>
+Build-Depends: debhelper (>= 7.0.50)
+Standards-Version: 3.9.3
+Homepage: https://github.com/wfarr/goenv
+
+Package: goenv
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: simple per-user Go version manager
+ goenv lets you easily switch between multiple versions of Go. It's
+ simple, unobtrusive, and follows the UNIX tradition of single-purpose
+ tools that do one thing well.
