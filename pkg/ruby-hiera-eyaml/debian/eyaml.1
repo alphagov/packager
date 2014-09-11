@@ -1,0 +1,92 @@
+.\" -*- nroff -*-
+.\" (C) Copyright 2014 Stig Sandbeck Mathisen <ssm@debian.org>,
+.Dd Mar 31, 2014
+.Dt EYAML 1
+.Os Debian
+.Sh NAME
+.Nm eyaml
+.Nd command line interface for the hiera eyaml backend
+.Sh SYNOPSIS
+.Nm
+.Op Fl -help
+.Op Ar subcommand Op Ar subcommand options
+.Ss all subcommands
+.Op Fl -help , Fl h
+.Dl Display help
+.Op Fl -version
+.Dl Display program version
+.Op Fl -verbose , Fl v
+.Dl Be more verbose
+.Op Fl -quiet , Fl q
+.Dl Be less verbose
+.Op Fl -encrypt-method , Fl n Ar METHOD
+.Dl Override default encryption and decryption method (default: pkcs7)
+.Op Fl -pkcs7-private-key FILE
+.Dl Path to private key (default: ./keys/private_key.pkcs7.pem)
+.Op Fl -pkcs7-public-key FILE
+.Dl Path to public key (default: ./keys/public_key.pkcs7.pem)
+.Op Fl -pkcs7-subject SUBJECT
+.Dl Subject to use for certificate when creating keys (default: /)
+.Ss eyaml createkeys Op options
+.Dl Create a new key pair
+.Ss eyaml decrypt Op options
+.Dl Decrypt data
+.Op Fl -string Ar STRING
+.Dl Source input STRING is provided as an argument
+.Op Fl -file , Fl f Ar FILE
+.Dl Source input FILE is a regular file
+.Op Fl -eyaml , Fl e Ar FILE
+.Dl Source input FILE is an eyaml file
+.Op Fl -stdin
+.Dl Source input is taken from STDIN
+.Ss eyaml edit Ar FILE
+.Dl Edit a file
+.Ss eyaml encrypt Op options
+.Op Fl -password , Fl p
+.Dl Source input is a password entered on the terminal
+.Op Fl -eyaml , Fl e Ar FILE
+.Dl Source input FILE is an eyaml file
+.Op Fl -file , Fl f Ar FILE
+.Dl Source input FILE is a regular file
+.Op Fl -stdin
+.Dl Source input is taken from STDIN
+.Op Fl -string Ar STRING
+.Dl Source input STRING is provided as an argument
+.Op Fl -output , Fl o
+.Dl Output format of final result (examples, block, string) (default: examples)
+.Op Fl -label , Fl l Ar LABEL
+.Dl Apply a label to the encrypted result
+.Ss eyaml recrypt Op options
+.Dl recrypt an eyaml file
+.Ss eyaml version
+.Dl show version information
+.Sh DESCRIPTION
+The
+.Nm
+command is a command line interface for hiera-eyaml. It is used to
+create keys, encrypt and decrypt data, and act as a wrapper around a
+text editor.
+.Sh EXAMPLES
+.Ss encrypting data
+.Dl $ eyaml encrypt --string 'foo bar'
+Encrypts the command line argument to "--string", and outputs the
+encrypted data on two formats, line and block. This can be included in
+an .eyaml file. The "eyaml" command expects keys to be present in the
+"./keys/" directory by default.
+.Ss using the editor wrapper
+.Dl $ eyaml edit hieradata/common.eyaml
+Decrypts the file into a temporary file, and opens the file in a text
+editor. Values to be encrypted are wrapped in markup. When the file is
+saved, any changed values are encrypted.
+.Sh AUTHORS
+.Nm
+was written by Geoff Meakin, Peter Dyson, Robert Fielding, Simon
+Hildrew and Tom Poulton.
+.Pp
+This man page was written by Stig Sandbeck Mathisen for the Debian
+distribution, but may be used by others.
+.Sh BUGS
+The file referenced in "eyaml edit" must exist.
+.Pp
+An error in the markup may result in "eyaml edit" not being able to
+open the file.
