@@ -1,3 +1,9 @@
+ruby-trollop (2.0-1) precise; urgency=low
+
+  * Backport to Ubuntu Precise
+
+ -- Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>  Thu, 11 Sep 2014 14:57:47 +0100
+
 ruby-trollop (2.0-1) unstable; urgency=low
 
   * Team upload.
