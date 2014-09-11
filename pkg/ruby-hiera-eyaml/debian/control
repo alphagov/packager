@@ -1,6 +1,6 @@
 Source: ruby-hiera-eyaml
-Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
-Uploaders: Stig Sandbeck Mathisen <ssm@debian.org>
+Maintainer: Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>
+XSBC-Original-Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
 Section: ruby
 Priority: optional
 Build-Depends: debhelper (>= 7.0.50~),
