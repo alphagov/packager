@@ -1,3 +1,9 @@
+ruby-hiera-eyaml (2.0.2-1) precise; urgency=low
+
+  * Backport to Ubuntu Precise
+
+ -- Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>  Thu, 11 Sep 2014 13:51:08 +0100
+
 ruby-hiera-eyaml (2.0.2-1) unstable; urgency=medium
 
   * Import upstream release 2.0.2
