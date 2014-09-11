@@ -4,7 +4,7 @@ Uploaders: Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>
 Section: ruby
 Priority: optional
 Build-Depends: debhelper (>= 7.0.50~),
-               gem2deb (>= 0.7.0~)
+               gem2deb (>= 0.2.13)
 Standards-Version: 3.9.5
 Vcs-Git: git://anonscm.debian.org/pkg-ruby-extras/ruby-hiera-eyaml.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-ruby-extras/ruby-hiera-eyaml.git;a=summary
