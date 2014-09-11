@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+export GOPATH=$(CURDIR)
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	rm -f godep
+
+override_dh_auto_build:
+	go build -o godep
