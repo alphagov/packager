@@ -20,7 +20,7 @@ import tarfile
 import urllib
 import shutil
 
-from subprocess import Popen, PIPE
+from subprocess import call, Popen, PIPE
 
 class Changelog(object):
   """
@@ -55,8 +55,16 @@ class Package(object):
     self.tarfile = None
     self.expanded_dir = None
 
+    self.check_build_dependencies()
     self.read_srcurl()
     self.read_changelog()
+
+  def check_build_dependencies(self):
+    control_path = os.path.join(self.pkg_path, "debian", "control")
+    exit_code = call(['dpkg-checkbuilddeps', control_path])
+
+    if exit_code > 0:
+      sys.exit(1)
 
   def read_changelog(self):
     changelog_path = os.path.join(self.pkg_path, "debian", "changelog")
