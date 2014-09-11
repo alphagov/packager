@@ -21,6 +21,8 @@ Follow the instructions it gives you for setting up your environment, then
 
     $ vagrant ssh
 
+All of the below commands should be run from inside the Vagrant box.
+
 ### Using `build_source.py`
 
 `build_source.py` collects source and metadata together into the _build_

@@ -19,7 +19,7 @@ EOM
 fi
 
 if ! grep -q DEBFULLNAME /home/vagrant/.bashrc; then
-  echo "---> Make sure you add your Launchpad name and email to your environment! For example:" >&2
+  echo "---> Make sure you add your Launchpad name and email to the Vagrant environment! For example:" >&2
   cat 2>&1 <<EEOM
 tee -a ~/.bashrc >/dev/null <<EOM
 export DEBFULLNAME="Joe Bloggs"
