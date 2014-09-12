@@ -1,3 +1,9 @@
+ruby-highline (1.6.20-1) precise; urgency=low
+
+  * Backport to Ubuntu Precise
+
+ -- Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>  Fri, 12 Sep 2014 15:20:29 +0100
+
 ruby-highline (1.6.20-1) unstable; urgency=medium
 
   * Imported Upstream version 1.6.20
