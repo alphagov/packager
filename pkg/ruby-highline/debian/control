@@ -3,7 +3,7 @@ Section: ruby
 Priority: optional
 Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
 Uploaders: Lucas Nussbaum <lucas@debian.org>, Cédric Boutillier <boutil@debian.org>, Per Andersson <avtobiff@gmail.com>
-Build-Depends: debhelper (>= 7.0.50~), gem2deb (>= 0.3.0~)
+Build-Depends: debhelper (>= 7.0.50~), gem2deb (>= 0.2.13~)
 Standards-Version: 3.9.5
 Vcs-Git: git://anonscm.debian.org/pkg-ruby-extras/ruby-highline.git
 Vcs-Browser: http://anonscm.debian.org/gitweb?p=pkg-ruby-extras/ruby-highline.git;a=summary
