@@ -17,7 +17,6 @@ Architecture: all
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          ruby | ruby-interpreter,
-         ruby-hiera (>= 1.2.1),
          ruby-trollop (>= 2.0),
          ruby-highline (>= 1.6.19)
 Description: OpenSSL Encryption backend for Hiera
