@@ -1,0 +1,53 @@
+From: Stig Sandbeck Mathisen <ssm@debian.org>
+Date: Mon, 31 Mar 2014 12:28:17 +0200
+Subject: Do not require rubygems
+
+---
+ bin/eyaml                           | 3 +--
+ lib/hiera/backend/eyaml/commands.rb | 3 +--
+ lib/hiera/backend/eyaml/plugins.rb  | 1 -
+ 3 files changed, 2 insertions(+), 5 deletions(-)
+
+diff --git a/bin/eyaml b/bin/eyaml
+index 6a053d6..3c40c35 100755
+--- a/bin/eyaml
++++ b/bin/eyaml
+@@ -1,6 +1,5 @@
+ #!/usr/bin/env ruby
+ 
+-require 'rubygems'
+ require 'hiera/backend/eyaml/CLI'
+ require 'hiera/backend/eyaml/plugins'
+ require 'hiera/backend/eyaml/encryptors/pkcs7'
+@@ -10,4 +9,4 @@ Hiera::Backend::Eyaml::Encryptors::Pkcs7.register
+ Hiera::Backend::Eyaml::Plugins.find
+ 
+ Hiera::Backend::Eyaml::CLI.parse
+-Hiera::Backend::Eyaml::CLI.execute
+\ No newline at end of file
++Hiera::Backend::Eyaml::CLI.execute
+diff --git a/lib/hiera/backend/eyaml/commands.rb b/lib/hiera/backend/eyaml/commands.rb
+index be693fe..6d05b0f 100644
+--- a/lib/hiera/backend/eyaml/commands.rb
++++ b/lib/hiera/backend/eyaml/commands.rb
+@@ -1,4 +1,3 @@
+-require 'rubygems'
+ 
+ class Hiera
+   module Backend
+@@ -18,4 +17,4 @@ class Hiera
+       end
+     end
+   end
+-end
+\ No newline at end of file
++end
+diff --git a/lib/hiera/backend/eyaml/plugins.rb b/lib/hiera/backend/eyaml/plugins.rb
+index ee10606..2dc7925 100644
+--- a/lib/hiera/backend/eyaml/plugins.rb
++++ b/lib/hiera/backend/eyaml/plugins.rb
+@@ -1,4 +1,3 @@
+-require 'rubygems'
+ 
+ class Hiera
+   module Backend

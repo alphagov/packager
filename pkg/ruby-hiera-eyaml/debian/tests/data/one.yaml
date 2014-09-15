@@ -1,0 +1,3 @@
+---
+plaintext: foo
+encrypted: DEC::PKCS7[bar]!
