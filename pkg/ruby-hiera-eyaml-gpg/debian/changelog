@@ -1,0 +1,5 @@
+ruby-hiera-eyaml-gpg (0.4-1) precise; urgency=low
+
+  * Initial release
+
+ -- Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>  Thu, 11 Sep 2014 13:52:28 +0100
