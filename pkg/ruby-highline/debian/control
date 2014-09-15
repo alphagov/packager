@@ -1,8 +1,9 @@
 Source: ruby-highline
 Section: ruby
 Priority: optional
-Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
-Uploaders: Lucas Nussbaum <lucas@debian.org>, Cédric Boutillier <boutil@debian.org>, Per Andersson <avtobiff@gmail.com>
+Maintainer: Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>
+XSBC-Original-Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Uploaders: Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>
 Build-Depends: debhelper (>= 7.0.50~), gem2deb (>= 0.2.13~)
 Standards-Version: 3.9.5
 Vcs-Git: git://anonscm.debian.org/pkg-ruby-extras/ruby-highline.git
