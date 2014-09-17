@@ -1,0 +1,33 @@
+Source: ruby-hiera-eyaml-gpg
+Maintainer: Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>
+Uploaders: Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>
+Section: ruby
+Priority: optional
+Build-Depends: debhelper (>= 7.0.50~),
+               gem2deb (>= 0.2.13)
+Standards-Version: 3.9.5
+Homepage: https://github.com/sihil/hiera-eyaml-gpg
+XS-Ruby-Versions: all
+
+Package: ruby-hiera-eyaml-gpg
+Architecture: all
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         ruby | ruby-interpreter,
+         ruby-hiera-eyaml (>= 1.3.8),
+         ruby-gpgme (>= 2.0.0)
+Description: GPG encryption backend for the Hiera eYAML backend
+ A backend for Hiera that provides per-value GPG encryption of sensitive
+ data within YAML files to be used by Puppet.
+ .
+ Only the values are encrypted, allowing files to be swiftly reviewed
+ without decryption.
+ .
+ The value of each key is encrypted individually, which means that
+ "git diff" is meaningful.
+ .
+ Includes a command line tool for encrypting, decrypting, editing and
+ rotating keys. This makes it almost as easy as using clear text
+ files.
+ .
+XB-Ruby-Versions: ${ruby:Versions}
