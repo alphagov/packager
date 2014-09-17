@@ -1,0 +1,89 @@
+ruby-trollop (2.0-1) precise; urgency=low
+
+  * Backport to Ubuntu Precise
+
+ -- Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>  Thu, 11 Sep 2014 14:57:47 +0100
+
+ruby-trollop (2.0-1) unstable; urgency=low
+
+  * Team upload.
+
+  [ Cédric Boutillier ]
+  * debian/control
+    - remove obsolete DM-Upload-Allowed flag
+    - use canonical URI in Vcs-* fields
+
+  [ Jonas Genannt ]
+  * Imported Upstream version 2.0
+  * d/control:
+    - removed transitional packages (Closes: #735715)
+    - bumped standards version to 3.9.5 (no changes needed)
+  * d/docs renamed to ruby-trollop.docs
+  * removed rubygems patch, no longer needed
+
+ -- Jonas Genannt <jonas.genannt@capi2name.de>  Sat, 25 Jan 2014 23:50:22 +0100
+
+ruby-trollop (1.16.2-3) unstable; urgency=low
+
+  * Correct maintainer address. (Closes: #678284)
+
+ -- Per Andersson <avtobiff@gmail.com>  Wed, 20 Jun 2012 18:57:33 +0200
+
+ruby-trollop (1.16.2-2) unstable; urgency=low
+
+  * Correct binary ruby versions tag.
+  * Fix path setup in debian/ruby-tests.rb.
+  * Relax conflicts with transitional package to breaks.
+  * Change section to ruby.
+  * Added watch file.
+
+ -- Per Andersson <avtobiff@gmail.com>  Wed, 20 Jun 2012 15:53:34 +0200
+
+ruby-trollop (1.16.2-1) unstable; urgency=low
+
+  * New maintainer. (Closes: #660503)
+  * New upstream release. (Closes: #646868)
+  * Bumped standards version to 3.9.3 (no changes needed).
+  * Changed to gem2deb packaging.
+    - Rename source and binary packages to ruby-trollop.
+    - Add libtrollop-ruby transitional package.
+    - Run tests during build.
+    - Build for all ruby versions. (Closes: #611822)
+  * Use source format 3.0 (quilt).
+  * Remove unnecessary dirs file.
+  * Remove Manifest.txt from docs, no longer shipped.
+  * Remove History.txt from docs, shipped automatically.
+
+ -- Per Andersson <avtobiff@gmail.com>  Sun, 15 Apr 2012 12:38:39 +0200
+
+libtrollop-ruby (1.15-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Decklin Foster <decklin@red-bean.com>  Fri, 13 Aug 2010 23:48:50 -0400
+
+libtrollop-ruby (1.10.2-1) unstable; urgency=low
+
+  * New Upstream Version
+
+ -- Decklin Foster <decklin@red-bean.com>  Sat, 01 Nov 2008 18:38:24 -0400
+
+libtrollop-ruby (1.9-1) unstable; urgency=low
+
+  * New Upstream Version
+  * Fixed copyright file
+
+ -- Decklin Foster <decklin@red-bean.com>  Sat, 11 Oct 2008 16:54:34 -0400
+
+libtrollop-ruby (1.8.2-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Decklin Foster <decklin@red-bean.com>  Mon, 30 Jun 2008 17:56:32 -0400
+
+libtrollop-ruby (1.8-1) unstable; urgency=low
+
+  * Initial release (Closes: #488877)
+
+ -- Decklin Foster <decklin@red-bean.com>  Thu, 26 Jun 2008 16:39:17 -0400
+

@@ -1,0 +1,23 @@
+Source: ruby-trollop
+Section: ruby
+Priority: extra
+Maintainer: Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>
+XSBC-Original-Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Uploaders: Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>
+Build-Depends: debhelper (>= 7.0.50~), gem2deb (>= 0.2.13~)
+Standards-Version: 3.9.5
+Vcs-Git: git://anonscm.debian.org/pkg-ruby-extras/ruby-trollop.git
+Vcs-Browser: http://anonscm.debian.org/gitweb?p=pkg-ruby-extras/ruby-trollop.git;a=summary
+Homepage: http://trollop.rubyforge.org
+XS-Ruby-Versions: all
+
+Package: ruby-trollop
+Architecture: all
+XB-Ruby-Versions: ${ruby:Versions}
+Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter
+Provides: libtrollop-ruby
+Description: command-line argument processing library
+ Trollop is YAFCLAP --- yet another fine commandline argument processor
+ for Ruby. Trollop is designed to provide the maximal amount of GNU-style
+ argument processing in the minimum number of lines of code (for you, the
+ programmer).
