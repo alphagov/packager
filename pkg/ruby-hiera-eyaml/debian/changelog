@@ -1,0 +1,19 @@
+ruby-hiera-eyaml (2.0.2-1~ppa1) precise; urgency=low
+
+  * Backport to Ubuntu Precise; removes dependency on `ruby-hiera` which is
+    included in the Puppet Labs `puppet` package.
+
+ -- Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>  Thu, 11 Sep 2014 13:51:08 +0100
+
+ruby-hiera-eyaml (2.0.2-1) unstable; urgency=medium
+
+  * Import upstream release 2.0.2
+  * Add DEP-8 tests with sharness
+
+ -- Stig Sandbeck Mathisen <ssm@debian.org>  Sat, 10 May 2014 23:59:42 +0200
+
+ruby-hiera-eyaml (2.0.1-1) unstable; urgency=medium
+
+  * Initial release (Closes: #743194)
+
+ -- Stig Sandbeck Mathisen <ssm@debian.org>  Mon, 31 Mar 2014 17:02:09 +0200

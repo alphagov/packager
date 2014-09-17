@@ -1,0 +1,43 @@
+Source: ruby-hiera-eyaml
+Maintainer: Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>
+XSBC-Original-Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Section: ruby
+Priority: optional
+Build-Depends: debhelper (>= 7.0.50~),
+               gem2deb (>= 0.2.13)
+Standards-Version: 3.9.5
+Vcs-Git: git://anonscm.debian.org/pkg-ruby-extras/ruby-hiera-eyaml.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-ruby-extras/ruby-hiera-eyaml.git;a=summary
+Homepage: http://github.com/TomPoulton/hiera-eyaml
+XS-Ruby-Versions: all
+
+Package: ruby-hiera-eyaml
+Architecture: all
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         ruby | ruby-interpreter,
+         ruby-trollop (>= 2.0),
+         ruby-highline (>= 1.6.19)
+Description: OpenSSL Encryption backend for Hiera
+ A backend for Hiera that provides per-value encryption of sensitive
+ data within yaml files to be used by Puppet.
+ .
+ Only the values are encrypted, allowing files to be swiftly reviewed
+ without decryption.
+ .
+ The value of each key is encrypted individually, which means that
+ "git diff" is meaningful.
+ .
+ Includes a command line tool for encrypting, decrypting, editing and
+ rotating keys. This makes it almost as easy as using clear text
+ files.
+ .
+ Basic asymmetric encryption (PKCS#7) is used by default. This does
+ not require any native libraries to be compiled, and it allows users
+ without the private key to encrypt values that the puppet master can
+ decrypt
+ .
+ hiera-eyaml includes a pluggable encryption framework (e.g. GPG
+ encryption (hiera-eyaml-gpg) can be used if you have the need for
+ multiple keys and easier key rotation)
+XB-Ruby-Versions: ${ruby:Versions}
