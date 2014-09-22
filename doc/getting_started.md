@@ -54,7 +54,7 @@ produced by `./build_source.py`:
 Building packages for multiple series
 -------------------------------------
 
-Building packages for multiple series ("Precise", "Lucid", etc.) is slightly
+Building packages for multiple series ("Precise", "Trusty", etc.) is slightly
 more involved. See [`building_for_multiple_series.md`](building_for_multiple_series.md).
 
 Submitting to Launchpad
