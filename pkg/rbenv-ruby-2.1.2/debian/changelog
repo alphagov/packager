@@ -1,3 +1,9 @@
+rbenv-ruby-2.1.2 (1-ppa1~trusty1) trusty; urgency=medium
+
+  * Build for trusty
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Mon, 22 Sep 2014 15:53:28 +0000
+
 rbenv-ruby-2.1.2 (1-ppa1~lucid1) lucid; urgency=low
 
   * Initial build for lucid
