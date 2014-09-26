@@ -1,2 +1,3 @@
 01_upgrade_rubygems.diff
 02_fix_rbinstall.diff
+fix_readline_compile.diff
