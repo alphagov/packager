@@ -7,7 +7,7 @@ NCPU = "2"
 # NB: please don't use ruby 1.9 syntax in this file until the default system
 #     ruby shipping with Mac OS X becomes ruby 1.9
 #
-DIST_PREFERRED = 'precise'
+DIST_PREFERRED = 'trusty'
 LATEST_BOX_VERSIONS = {
   'precise' => '20140829',
   'trusty'  => '20140829',
