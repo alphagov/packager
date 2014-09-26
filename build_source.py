@@ -38,7 +38,9 @@ class Changelog(object):
   def populate(self):
     p = Popen(['dpkg-parsechangelog', '-l' + self.path], stdout=PIPE)
     out = p.communicate()[0]
-    matches = re.search(r"^Source: (.+)\nVersion: (?:\d+:)?([^-\n]+)", out)
+    # See https://www.debian.org/doc/debian-policy/ch-controlfields.html#s-f-Version for details
+    # of the version field
+    matches = re.search(r"^Source: (.+)\nVersion: (?:\d+:)?([A-Za-s0-9.+:~-]*?)(?:-[^-\n]+)?\n", out)
 
     self.source = matches.group(1)
     self.version = matches.group(2)
