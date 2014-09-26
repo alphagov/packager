@@ -1,3 +1,16 @@
+rbenv-ruby-2.0.0-p353 (1-ppa3~trusty1) trusty; urgency=medium
+
+  * Build for trusty
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Fri, 26 Sep 2014 12:36:33 +0000
+
+rbenv-ruby-2.0.0-p353 (1-ppa3~precise1) precise; urgency=medium
+
+  * Fix compile issue with newer readline versions
+    https://bugs.ruby-lang.org/issues/9578
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Fri, 26 Sep 2014 12:33:05 +0000
+
 rbenv-ruby-2.0.0-p353 (1-ppa2~lucid1) lucid; urgency=low
 
   * Fix package install dir

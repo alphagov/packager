@@ -1,3 +1,9 @@
+rbenv-ruby-1.9.3-p392 (1-ppa1~trusty1) trusty; urgency=medium
+
+  * Build for trusty
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Fri, 26 Sep 2014 10:52:33 +0000
+
 rbenv-ruby-1.9.3-p392 (1-ppa1~lucid2) lucid; urgency=low
 
   * Rebuild against Lucid for our PPA.

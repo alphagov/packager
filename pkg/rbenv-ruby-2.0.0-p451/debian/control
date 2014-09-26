@@ -3,7 +3,7 @@ Maintainer: Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>
 Section: interpreters
 Priority: optional
 Homepage: http://www.ruby-lang.org/
-Standards-Version: 3.9.3
+Standards-Version: 3.9.5
 Build-Depends: debhelper (>=7), autotools-dev, libssl-dev, libreadline6-dev, libyaml-dev, zlib1g-dev
 
 Package: rbenv-ruby-2.0.0-p451
