@@ -3,7 +3,7 @@ Section: devel
 Priority: optional
 Maintainer: Alex Tomlins <alex.tomlins@digital.cabient-office.gov.uk>
 Build-Depends: debhelper (>= 8.0.0), golang-go (>= 2:1.1)
-Standards-Version: 3.9.2
+Standards-Version: 3.9.5
 Homepage: https://github.com/tools/godep
 
 Package: godep
