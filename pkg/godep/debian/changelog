@@ -1,5 +1,5 @@
-godep (0.0.1-edcaa96~ppa1) precise; urgency=low
+godep (0.0.1-104-gedcaa96-1~ppa1) trusty; urgency=medium
 
-  * Initial package release of master at revision edcaa96.
+  * Initial package release of git master at revision edcaa96.
 
- -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Wed, 10 Sep 2014 10:55:55 +0000
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Fri, 26 Sep 2014 13:44:48 +0000
