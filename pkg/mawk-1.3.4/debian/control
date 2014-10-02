@@ -5,7 +5,7 @@ Maintainer: Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>
 XSBC-Original-Maintainer: Steve Langasek <vorlon@debian.org>
 Build-Depends: quilt (>= 0.46-7), bison, debhelper (>= 8.9.4)
 Build-Conflicts: byacc
-Standards-Version: 3.9.3
+Standards-Version: 3.9.5
 
 Package: mawk-1.3.4
 Architecture: any
