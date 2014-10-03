@@ -1,3 +1,9 @@
+vegeta (0.0.1-1517f2d~ppa3) trusty; urgency=medium
+
+  * Build on trusty
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Fri, 03 Oct 2014 11:10:06 +0000
+
 vegeta (0.0.1-1517f2d~ppa2~precise) precise; urgency=low
 
   * Include bmizerany/perks dependency as a patch. Because the Launchpad
