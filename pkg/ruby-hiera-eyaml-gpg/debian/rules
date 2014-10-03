@@ -1,4 +1,7 @@
 #!/usr/bin/make -f
 
+clean:
+	dh $@
+
 %:
 	dh $@ --buildsystem=ruby --with ruby
