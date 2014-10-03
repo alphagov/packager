@@ -1,6 +1,5 @@
 Source: ruby-hiera-eyaml-gpg
 Maintainer: Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>
-Uploaders: Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>
 Section: ruby
 Priority: optional
 Build-Depends: debhelper (>= 7.0.50~),
