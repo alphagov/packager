@@ -1,3 +1,9 @@
+ruby-trollop (2.0-1~trusty1) trusty; urgency=low
+
+  * Backport to Ubuntu Trusty
+
+ -- Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>  Fri, 03 Oct 2014 14:55:18 +0100
+
 ruby-trollop (2.0-1) precise; urgency=low
 
   * Backport to Ubuntu Precise
