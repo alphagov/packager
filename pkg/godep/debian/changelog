@@ -1,5 +1,5 @@
-godep (0.0.1-104-gedcaa96-1~ppa1) trusty; urgency=medium
+godep (0-105-g754ee6f-1~ppa1) trusty; urgency=medium
 
-  * Initial package release of git master at revision edcaa96.
+  * Initial package release of git master at revision 754ee6f.
 
  -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Fri, 26 Sep 2014 13:44:48 +0000
