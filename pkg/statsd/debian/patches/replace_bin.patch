@@ -1,0 +1,17 @@
+Description: Replace statsd binary with shell script that locates nodejs binary.
+  The location of the binary is different between Trusty and Precise, so this is
+  necessary to allow the package to handle both.
+Author: Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>
+Index: statsd-0.6.0/bin/statsd
+===================================================================
+--- statsd-0.6.0.orig/bin/statsd	2014-10-07 09:30:10.000000000 +0000
++++ statsd-0.6.0/bin/statsd	2014-10-07 12:46:05.000000000 +0000
+@@ -1,2 +1,5 @@
+-#!/usr/bin/env node
+-require('./../stats.js');
+\ No newline at end of file
++#!/bin/sh
++
++NODE_BIN=$(which nodejs||which node)
++chdir /usr/share/statsd
++exec $NODE_BIN stats.js "$@"

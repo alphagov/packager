@@ -1,1 +1,2 @@
-0001-ubuntuize-bin-statsd-and-rename-config.patch
+replace_bin.patch
+create_default_config.patch
