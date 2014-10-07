@@ -1,3 +1,11 @@
+statsd (0.6.0-ppa3) precise; urgency=medium
+
+  * Update statsd binary to handle different nodejs binaries
+  * Simplify upstart config, and use statsd binary
+  * Make this `Architecture: any` as there are no compiled binaries.
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Tue, 07 Oct 2014 11:36:58 +0000
+
 statsd (0.6.0-ppa2~precise) precise; urgency=low
 
   * Install docs and examples in correct locations.
