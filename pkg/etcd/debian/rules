@@ -1,0 +1,20 @@
+#!/usr/bin/make -f
+
+export GOPATH=$(CURDIR)
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	rm -rf src
+	rm -rf build
+
+override_dh_auto_build:
+	# Create a symlink to resolve Go imports
+	mkdir -p src/github.com/coreos
+	ln -s `pwd` src/github.com/coreos/etcd
+	# Create directory for the newly-build binary
+	# as the source tarball already contains an
+	# 'etcd' directory
+	mkdir build
+	go build -o build/etcd
