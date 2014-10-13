@@ -1,0 +1,6 @@
+locksmithctl (0.1.8-ppa2) trusty; urgency=low
+
+  * Initial package release.
+  * From tag: https://github.com/coreos/locksmith/releases/tag/v0.1.8
+
+ -- Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>  Mon, 13 Oct 2014 11:44:14 +0000

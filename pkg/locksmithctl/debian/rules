@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+export GOPATH=$(CURDIR)
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	rm -f locksmithctl/locksmithctl
+	rm -rf src
+
+override_dh_auto_build:
+	# Create a symlink to resolve Go imports
+	mkdir -p src/github.com/coreos
+	ln -s `pwd` src/github.com/coreos/locksmith
+	cd locksmithctl && go build -o locksmithctl
