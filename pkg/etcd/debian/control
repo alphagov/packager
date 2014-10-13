@@ -1,0 +1,12 @@
+Source: etcd
+Section: admin
+Priority: extra
+Maintainer: Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>
+Build-Depends: debhelper (>= 8.0.0), golang-go (>= 2:1.2)
+Standards-Version: 3.9.2
+Homepage: https://github.com/coreos/etcd
+
+Package: etcd
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Highly-available key value store for shared configuration and service discovery

@@ -1,0 +1,6 @@
+etcd (0.4.6-ppa2) trusty; urgency=low
+
+  * Initial package release.
+  * From tag: https://github.com/coreos/etcd/releases/tag/v0.4.6
+
+ -- Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>  Mon, 13 Oct 2014 10:05:14 +0000
