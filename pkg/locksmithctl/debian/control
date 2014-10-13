@@ -1,0 +1,12 @@
+Source: locksmithctl
+Section: admin
+Priority: extra
+Maintainer: Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>
+Build-Depends: debhelper (>= 8.0.0), golang-go (>= 2:1.2)
+Standards-Version: 3.9.2
+Homepage: https://github.com/coreos/locksmith
+
+Package: locksmithctl
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Simple client to control a distributed mutex to control reboots
