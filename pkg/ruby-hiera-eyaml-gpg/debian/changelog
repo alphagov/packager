@@ -1,3 +1,25 @@
+ruby-hiera-eyaml-gpg (0.4-5-gb10d8a8-1~trusty2) trusty; urgency=low
+
+  * Package from fork at
+    https://github.com/alphagov/hiera-eyaml-gpg/tree/avoid_gpghome_env_var
+
+  * Set GPG home directory without using the GPGHOME environment
+    variable. See:
+    https://github.com/alphagov/hiera-eyaml-gpg/commit/00e95645e050928bbd137aceb35e7196bc72341e
+
+ -- Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>  Fri, 16 Oct 2014 16:39:42 +0100
+
+ruby-hiera-eyaml-gpg (0.4-5-gb10d8a8-1~precise2) precise; urgency=low
+
+  * Package from fork at
+    https://github.com/alphagov/hiera-eyaml-gpg/tree/avoid_gpghome_env_var
+
+  * Set GPG home directory without using the GPGHOME environment
+    variable. See:
+    https://github.com/alphagov/hiera-eyaml-gpg/commit/00e95645e050928bbd137aceb35e7196bc72341e
+
+ -- Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>  Fri, 16 Oct 2014 16:39:42 +0100
+
 ruby-hiera-eyaml-gpg (0.4-1~trusty1) trusty; urgency=low
 
   * Initial release
