@@ -1,0 +1,5 @@
+golang-gom (0-122-gd8c87b3-1~ppa1) trusty; urgency=medium
+
+  * Initial package release of git master at revision d8c87b3.
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Tue, 21 Oct 2014 08:13:46 +0000
