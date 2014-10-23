@@ -1,0 +1,316 @@
+Description: Add vendored github.com/daviddengcn/go-colortext
+  Checkout of revision b5c0891944c2f150ccc9d02aecf51b76c14c2948
+Origin: https://github.com/daviddengcn/go-colortext/tree/b5c0891
+
+diff --git a/vendor/src/github.com/daviddengcn/go-colortext/.gitignore b/vendor/src/github.com/daviddengcn/go-colortext/.gitignore
+new file mode 100644
+index 0000000..0026861
+--- /dev/null
++++ b/vendor/src/github.com/daviddengcn/go-colortext/.gitignore
+@@ -0,0 +1,22 @@
++# Compiled Object files, Static and Dynamic libs (Shared Objects)
++*.o
++*.a
++*.so
++
++# Folders
++_obj
++_test
++
++# Architecture specific extensions/prefixes
++*.[568vq]
++[568vq].out
++
++*.cgo1.go
++*.cgo2.c
++_cgo_defun.c
++_cgo_gotypes.go
++_cgo_export.*
++
++_testmain.go
++
++*.exe
+diff --git a/vendor/src/github.com/daviddengcn/go-colortext/README.md b/vendor/src/github.com/daviddengcn/go-colortext/README.md
+new file mode 100644
+index 0000000..371d9b6
+--- /dev/null
++++ b/vendor/src/github.com/daviddengcn/go-colortext/README.md
+@@ -0,0 +1,17 @@
++go-colortext package [![GoSearch](http://go-search.org/badge?id=github.com%2Fdaviddengcn%2Fgo-colortext)](http://go-search.org/view?id=github.com%2Fdaviddengcn%2Fgo-colortext)
++====================
++
++This is a package to change the color of the text and background in the console, working both under Windows and other systems.
++
++Under Windows, the console APIs are used. Otherwise, ANSI texts are output.
++
++Docs: http://godoc.org/github.com/daviddengcn/go-colortext ([packages that import ct](http://go-search.org/view?id=github.com%2fdaviddengcn%2fgo-colortext))
++
++Usage:
++```go
++ChangeColor(Red, true, White, false)
++fmt.Println(...)
++ChangeColor(Green, false, None, false)
++fmt.Println(...)
++ResetColor()
++```
+diff --git a/vendor/src/github.com/daviddengcn/go-colortext/ct.go b/vendor/src/github.com/daviddengcn/go-colortext/ct.go
+new file mode 100644
+index 0000000..a3d7657
+--- /dev/null
++++ b/vendor/src/github.com/daviddengcn/go-colortext/ct.go
+@@ -0,0 +1,37 @@
++/*
++ct package provides functions to change the color of console text.
++
++Under windows platform, the Console api is used. Under other systems, ANSI text mode is used.
++*/
++package ct
++
++// Color is the type of color to be set.
++type Color int
++
++const (
++	// No change of color
++	None = Color(iota)
++	Black
++	Red
++	Green
++	Yellow
++	Blue
++	Magenta
++	Cyan
++	White
++)
++
++/*
++ResetColor resets the foreground and background to original colors
++*/
++func ResetColor() {
++	resetColor()
++}
++
++// ChangeColor sets the foreground and background colors. If the value of the color is None,
++// the corresponding color keeps unchanged.
++// If fgBright or bgBright is set true, corresponding color use bright color. bgBright may be
++// ignored in some OS environment.
++func ChangeColor(fg Color, fgBright bool, bg Color, bgBright bool) {
++	changeColor(fg, fgBright, bg, bgBright)
++}
+diff --git a/vendor/src/github.com/daviddengcn/go-colortext/ct_ansi.go b/vendor/src/github.com/daviddengcn/go-colortext/ct_ansi.go
+new file mode 100644
+index 0000000..6b0c5bc
+--- /dev/null
++++ b/vendor/src/github.com/daviddengcn/go-colortext/ct_ansi.go
+@@ -0,0 +1,35 @@
++// +build !windows
++
++package ct
++
++import (
++	"fmt"
++)
++
++func resetColor() {
++	fmt.Print("\x1b[0m")
++}
++
++func changeColor(fg Color, fgBright bool, bg Color, bgBright bool) {
++	if fg == None && bg == None {
++		return
++	} // if
++
++	s := ""
++	if fg != None {
++		s = fmt.Sprintf("%s%d", s, 30+(int)(fg-Black))
++		if fgBright {
++			s += ";1"
++		} // if
++	} // if
++
++	if bg != None {
++		if s != "" {
++			s += ";"
++		} // if
++		s = fmt.Sprintf("%s%d", s, 40+(int)(bg-Black))
++	} // if
++
++	s = "\x1b[0;" + s + "m"
++	fmt.Print(s)
++}
+diff --git a/vendor/src/github.com/daviddengcn/go-colortext/ct_test.go b/vendor/src/github.com/daviddengcn/go-colortext/ct_test.go
+new file mode 100644
+index 0000000..b2db738
+--- /dev/null
++++ b/vendor/src/github.com/daviddengcn/go-colortext/ct_test.go
+@@ -0,0 +1,26 @@
++package ct
++
++import (
++	"fmt"
++	"testing"
++)
++
++func TestChangeColor(t *testing.T) {
++	defer ResetColor()
++	fmt.Println("Normal text...")
++	text := "This is an demo of using ChangeColor to output colorful texts"
++	i := 1
++	for _, c := range text {
++		ChangeColor(Color(i/2%8)+Black, i%2 == 1, Color((i+2)/2%8)+Black, false)
++		fmt.Print(string(c))
++		i++
++	} // for c
++	fmt.Println()
++	ChangeColor(Red, true, White, false)
++	fmt.Println("Before reset.")
++	ChangeColor(Red, false, White, true)
++	fmt.Println("Before reset.")
++	ResetColor()
++	fmt.Println("After reset.")
++	fmt.Println("After reset.")
++}
+diff --git a/vendor/src/github.com/daviddengcn/go-colortext/ct_win.go b/vendor/src/github.com/daviddengcn/go-colortext/ct_win.go
+new file mode 100644
+index 0000000..6b41644
+--- /dev/null
++++ b/vendor/src/github.com/daviddengcn/go-colortext/ct_win.go
+@@ -0,0 +1,139 @@
++// +build windows
++
++package ct
++
++import (
++	"syscall"
++	"unsafe"
++)
++
++var fg_colors = []uint16{
++	0,
++	0,
++	foreground_red,
++	foreground_green,
++	foreground_red | foreground_green,
++	foreground_blue,
++	foreground_red | foreground_blue,
++	foreground_green | foreground_blue,
++	foreground_red | foreground_green | foreground_blue}
++
++var bg_colors = []uint16{
++	0,
++	0,
++	background_red,
++	background_green,
++	background_red | background_green,
++	background_blue,
++	background_red | background_blue,
++	background_green | background_blue,
++	background_red | background_green | background_blue}
++
++const (
++	foreground_blue      = uint16(0x0001)
++	foreground_green     = uint16(0x0002)
++	foreground_red       = uint16(0x0004)
++	foreground_intensity = uint16(0x0008)
++	background_blue      = uint16(0x0010)
++	background_green     = uint16(0x0020)
++	background_red       = uint16(0x0040)
++	background_intensity = uint16(0x0080)
++
++	foreground_mask = foreground_blue | foreground_green | foreground_red | foreground_intensity
++	background_mask = background_blue | background_green | background_red | background_intensity
++)
++
++var (
++	kernel32 = syscall.NewLazyDLL("kernel32.dll")
++
++	procGetStdHandle               = kernel32.NewProc("GetStdHandle")
++	procSetConsoleTextAttribute    = kernel32.NewProc("SetConsoleTextAttribute")
++	procGetConsoleScreenBufferInfo = kernel32.NewProc("GetConsoleScreenBufferInfo")
++
++	hStdout        uintptr
++	initScreenInfo *console_screen_buffer_info
++)
++
++func setConsoleTextAttribute(hConsoleOutput uintptr, wAttributes uint16) bool {
++	ret, _, _ := procSetConsoleTextAttribute.Call(
++		hConsoleOutput,
++		uintptr(wAttributes))
++	return ret != 0
++}
++
++type coord struct {
++	X, Y int16
++}
++
++type small_rect struct {
++	Left, Top, Right, Bottom int16
++}
++
++type console_screen_buffer_info struct {
++	DwSize              coord
++	DwCursorPosition    coord
++	WAttributes         uint16
++	SrWindow            small_rect
++	DwMaximumWindowSize coord
++}
++
++func getConsoleScreenBufferInfo(hConsoleOutput uintptr) *console_screen_buffer_info {
++	var csbi console_screen_buffer_info
++	ret, _, _ := procGetConsoleScreenBufferInfo.Call(
++		hConsoleOutput,
++		uintptr(unsafe.Pointer(&csbi)))
++	if ret == 0 {
++		return nil
++	}
++	return &csbi
++}
++
++const (
++	std_output_handle = uint32(-11 & 0xFFFFFFFF)
++)
++
++func init() {
++	kernel32 := syscall.NewLazyDLL("kernel32.dll")
++
++	procGetStdHandle = kernel32.NewProc("GetStdHandle")
++
++	hStdout, _, _ = procGetStdHandle.Call(uintptr(std_output_handle))
++
++	initScreenInfo = getConsoleScreenBufferInfo(hStdout)
++
++	syscall.LoadDLL("")
++}
++
++func resetColor() {
++	if initScreenInfo == nil { // No console info - Ex: stdout redirection
++		return
++	}
++	setConsoleTextAttribute(hStdout, initScreenInfo.WAttributes)
++}
++
++func changeColor(fg Color, fgBright bool, bg Color, bgBright bool) {
++	attr := uint16(0)
++	if fg == None || bg == None {
++		cbufinfo := getConsoleScreenBufferInfo(hStdout)
++		if cbufinfo == nil { // No console info - Ex: stdout redirection
++			return
++		}
++		attr = getConsoleScreenBufferInfo(hStdout).WAttributes
++	} // if
++
++	if fg != None {
++		attr = attr & ^foreground_mask | fg_colors[fg]
++		if fgBright {
++			attr |= foreground_intensity
++		} // if
++	} // if
++
++	if bg != None {
++		attr = attr & ^background_mask | bg_colors[bg]
++		if bgBright {
++			attr |= background_intensity
++		} // if
++	} // if
++
++	setConsoleTextAttribute(hStdout, attr)
++}
