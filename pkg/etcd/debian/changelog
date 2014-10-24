@@ -1,3 +1,10 @@
+etcd (0.4.6-ppa3) trusty; urgency=low
+
+  * Add Upstart recipe
+  * Install default configuration to /etc/etcd/etcd.conf
+
+ -- Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>  Fri, 24 Oct 2014 16:27:34 +0000
+
 etcd (0.4.6-ppa2) trusty; urgency=low
 
   * Initial package release.
