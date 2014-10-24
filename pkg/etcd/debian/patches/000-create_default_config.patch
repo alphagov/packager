@@ -14,8 +14,8 @@ Index: etcd-0.4.6/etcd.conf
 +cpu_profile_file = ""
 +data_dir = "/var/lib/etcd"
 +discovery = ""
-+http_read_timeout = 10
-+http_write_timeout = 10
++http_read_timeout = 10.0
++http_write_timeout = 10.0
 +key_file = ""
 +peers = []
 +peers_file = ""
