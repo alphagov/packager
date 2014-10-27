@@ -1,1 +1,2 @@
 build/etcd /usr/bin
+etcd.conf /etc/etcd
