@@ -1,4 +1,4 @@
-Source: rbenv-ruby-2.1.3
+Source: rbenv-ruby-2.1.4
 Maintainer: Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>
 Section: interpreters
 Priority: optional
@@ -6,7 +6,7 @@ Homepage: http://www.ruby-lang.org/
 Standards-Version: 3.9.5
 Build-Depends: debhelper (>=7), autotools-dev, libffi-dev, libssl-dev, libreadline6-dev, libyaml-dev, zlib1g-dev
 
-Package: rbenv-ruby-2.1.3
+Package: rbenv-ruby-2.1.4
 Architecture: any
 Depends: rbenv, ${shlibs:Depends}, ${perl:Depends}, ${misc:Depends}
 Suggests: ${shlibs:Suggests}
