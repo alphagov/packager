@@ -1,3 +1,9 @@
+rbenv-ruby-2.1.4 (1-ppa1~lucid1) lucid; urgency=medium
+
+  * Backport to lucid
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Wed, 05 Nov 2014 08:51:59 +0000
+
 rbenv-ruby-2.1.4 (1-ppa1~trusty1) trusty; urgency=medium
 
   * Initial build for trusty
