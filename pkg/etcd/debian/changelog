@@ -1,3 +1,9 @@
+etcd (0.4.6-ppa4) trusty; urgency=low
+
+  * Fix extraneous space in client 'addr' setting in etcd.conf
+
+ -- Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>  Mon, 15 Dec 2014 16:33:07 +0000
+
 etcd (0.4.6-ppa3) trusty; urgency=low
 
   * Add Upstart recipe
