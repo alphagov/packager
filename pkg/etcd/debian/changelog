@@ -1,3 +1,11 @@
+etcd (0.4.6-ppa5) trusty; urgency=low
+
+  * Remove default etcd.conf provided by package, which hindered cluster
+    bootstrapping if the service was started by dpkg before the configuration
+    had been changed from the defaults.
+
+ -- Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>  Tue, 16 Dec 2014 09:27:16 +0000
+
 etcd (0.4.6-ppa4) trusty; urgency=low
 
   * Fix extraneous space in client 'addr' setting in etcd.conf
