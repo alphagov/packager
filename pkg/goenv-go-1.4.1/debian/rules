@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-GO_VERSION = 1.4
+GO_VERSION = 1.4.1
 PACKAGE = goenv-go-$(GO_VERSION)
 GOENV_DIR = /usr/lib/goenv/versions/$(GO_VERSION)
 
