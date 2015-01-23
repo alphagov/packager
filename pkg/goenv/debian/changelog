@@ -1,3 +1,10 @@
+goenv (0.0.6-1~ppa1) trusty; urgency=medium
+
+  * New upstream version 0.0.6
+  * Switch to alext fork
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Fri, 23 Jan 2015 15:36:32 +0000
+
 goenv (0.0.5-1~ppa2) precise; urgency=low
 
   * Add fix for goenv install with newer versions (1.3.1+)
