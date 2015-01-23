@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>
 Build-Depends: debhelper (>= 7.0.50)
 Standards-Version: 3.9.3
-Homepage: https://github.com/wfarr/goenv
+Homepage: https://github.com/alext/goenv
 
 Package: goenv
 Architecture: all
