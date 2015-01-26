@@ -40,7 +40,7 @@ class Changelog(object):
     out = p.communicate()[0]
     # See https://www.debian.org/doc/debian-policy/ch-controlfields.html#s-f-Version for details
     # of the version field
-    matches = re.search(r"^Source: (.+)\nVersion: (?:\d+:)?([A-Za-s0-9.+:~-]*?)(?:-[^-\n]+)?\n", out)
+    matches = re.search(r"^Source: (.+)\nVersion: (?:\d+:)?([A-Za-z0-9.+:~-]*?)(?:-[^-\n]+)?\n", out)
 
     self.source = matches.group(1)
     self.version = matches.group(2)
