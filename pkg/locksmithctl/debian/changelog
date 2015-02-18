@@ -1,3 +1,10 @@
+locksmithctl (0.2.3-ppa1) trusty; urgency=low
+
+  * Upgrade to upstream version 0.2.3.
+  * From tag: https://github.com/coreos/locksmith/releases/tag/v0.2.3
+
+ -- Alex Muller (Government Digital Service GDS) <alex.muller@digital.cabinet-office.gov.uk>  Wed, 18 Feb 2015 08:10:30 +0000
+
 locksmithctl (0.2.2-ppa1) trusty; urgency=low
 
   * Upgrade to upstream version 0.2.2.
