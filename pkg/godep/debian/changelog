@@ -1,3 +1,9 @@
+godep (0-113-g58d90f2-1~ppa1) trusty; urgency=medium
+
+  * Update to latest master at revision 58d90f2
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Wed, 18 Mar 2015 14:59:50 +0000
+
 godep (0-105-g754ee6f-1~ppa1) trusty; urgency=medium
 
   * Initial package release of git master at revision 754ee6f.
