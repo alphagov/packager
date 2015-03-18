@@ -1,3 +1,9 @@
+goenv (0.0.6-alext-1~ppa2) trusty; urgency=medium
+
+  * Add /usr/lib/goenv/bin/goenv symlink to fix goenv-install
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Wed, 18 Mar 2015 08:58:59 +0000
+
 goenv (0.0.6-alext-1~ppa1) trusty; urgency=medium
 
   * New upstream version 0.0.6

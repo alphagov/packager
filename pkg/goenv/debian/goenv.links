@@ -1,1 +1,2 @@
 usr/lib/goenv/libexec/goenv usr/bin/goenv
+usr/lib/goenv/libexec/goenv usr/lib/goenv/bin/goenv
