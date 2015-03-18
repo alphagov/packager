@@ -1,13 +1,13 @@
-Description: Add vendored code.google.com/p/go.tools/go/vcs
-  go/vcs subtree of revision 01f8610e891f from go.tools repository
-Origin: https://code.google.com/p/go/source/browse/?repo=tools&r=01f8610e891f#hg%2Fgo%2Fvcs
+Description: Add vendored golang.org/x/tools/go/vcs
+  go/vcs subtree of revision 53f3b29c5de72b from go/tools repository
+Origin: https://go.googlesource.com/tools/+/53f3b29c5de72b73d7836e1e6112e45485e9f2fe/go/vcs/
 
-diff --git a/src/code.google.com/p/go.tools/go/vcs/discovery.go b/src/code.google.com/p/go.tools/go/vcs/discovery.go
+diff --git a/src/golang.org/x/tools/go/vcs/discovery.go b/src/golang.org/x/tools/go/vcs/discovery.go
 new file mode 100644
-index 0000000..d5c3fc6
+index 0000000..c4b0e3d
 --- /dev/null
-+++ b/src/code.google.com/p/go.tools/go/vcs/discovery.go
-@@ -0,0 +1,73 @@
++++ b/src/golang.org/x/tools/go/vcs/discovery.go
+@@ -0,0 +1,76 @@
 +// Copyright 2012 The Go Authors.  All rights reserved.
 +// Use of this source code is governed by a BSD-style
 +// license that can be found in the LICENSE file.
@@ -46,6 +46,9 @@ index 0000000..d5c3fc6
 +	for {
 +		t, err = d.Token()
 +		if err != nil {
++			if err == io.EOF {
++				err = nil
++			}
 +			return
 +		}
 +		if e, ok := t.(xml.StartElement); ok && strings.EqualFold(e.Name.Local, "body") {
@@ -81,11 +84,11 @@ index 0000000..d5c3fc6
 +	}
 +	return ""
 +}
-diff --git a/src/code.google.com/p/go.tools/go/vcs/env.go b/src/code.google.com/p/go.tools/go/vcs/env.go
+diff --git a/src/golang.org/x/tools/go/vcs/env.go b/src/golang.org/x/tools/go/vcs/env.go
 new file mode 100644
 index 0000000..e846f5b
 --- /dev/null
-+++ b/src/code.google.com/p/go.tools/go/vcs/env.go
++++ b/src/golang.org/x/tools/go/vcs/env.go
 @@ -0,0 +1,39 @@
 +// Copyright 2013 The Go Authors.  All rights reserved.
 +// Use of this source code is governed by a BSD-style
@@ -126,11 +129,11 @@ index 0000000..e846f5b
 +	}
 +	return out
 +}
-diff --git a/src/code.google.com/p/go.tools/go/vcs/http.go b/src/code.google.com/p/go.tools/go/vcs/http.go
+diff --git a/src/golang.org/x/tools/go/vcs/http.go b/src/golang.org/x/tools/go/vcs/http.go
 new file mode 100644
 index 0000000..9618818
 --- /dev/null
-+++ b/src/code.google.com/p/go.tools/go/vcs/http.go
++++ b/src/golang.org/x/tools/go/vcs/http.go
 @@ -0,0 +1,80 @@
 +// Copyright 2012 The Go Authors.  All rights reserved.
 +// Use of this source code is governed by a BSD-style
@@ -212,17 +215,17 @@ index 0000000..9618818
 +	}
 +	return urlStr, res.Body, nil
 +}
-diff --git a/src/code.google.com/p/go.tools/go/vcs/vcs.go b/src/code.google.com/p/go.tools/go/vcs/vcs.go
+diff --git a/src/golang.org/x/tools/go/vcs/vcs.go b/src/golang.org/x/tools/go/vcs/vcs.go
 new file mode 100644
-index 0000000..586e1b8
+index 0000000..2d9b7de
 --- /dev/null
-+++ b/src/code.google.com/p/go.tools/go/vcs/vcs.go
-@@ -0,0 +1,744 @@
++++ b/src/golang.org/x/tools/go/vcs/vcs.go
+@@ -0,0 +1,754 @@
 +// Copyright 2012 The Go Authors.  All rights reserved.
 +// Use of this source code is governed by a BSD-style
 +// license that can be found in the LICENSE file.
 +
-+package vcs
++package vcs // import "golang.org/x/tools/go/vcs"
 +
 +import (
 +	"bytes"
@@ -459,9 +462,10 @@ index 0000000..586e1b8
 +// The parent of dir must exist; dir must not.
 +// rev must be a valid revision in repo.
 +func (v *Cmd) CreateAtRev(dir, repo, rev string) error {
-+	// Append revision flag to CreateCmd
-+	createAtRevCmd := v.CreateCmd + " --rev=" + rev
-+	return v.run(".", createAtRevCmd, "dir", dir, "repo", repo)
++	if err := v.Create(dir, repo); err != nil {
++		return err
++	}
++	return v.run(dir, v.TagSyncCmd, "tag", rev)
 +}
 +
 +// Download downloads any new changes for the repo in dir.
@@ -809,6 +813,15 @@ index 0000000..586e1b8
 +
 +// vcsPaths lists the known vcs paths.
 +var vcsPaths = []*vcsPath{
++	// go.googlesource.com
++	{
++		prefix: "go.googlesource.com",
++		re:     `^(?P<root>go\.googlesource\.com/[A-Za-z0-9_.\-]+/?)$`,
++		vcs:    "git",
++		repo:   "https://{root}",
++		check:  noVCSSuffix,
++	},
++
 +	// Google Code - new syntax
 +	{
 +		prefix: "code.google.com/",
@@ -962,12 +975,12 @@ index 0000000..586e1b8
 +	}
 +	return nil
 +}
-diff --git a/src/code.google.com/p/go.tools/go/vcs/vcs_test.go b/src/code.google.com/p/go.tools/go/vcs/vcs_test.go
+diff --git a/src/golang.org/x/tools/go/vcs/vcs_test.go b/src/golang.org/x/tools/go/vcs/vcs_test.go
 new file mode 100644
-index 0000000..0b8dd8c
+index 0000000..226a3e4
 --- /dev/null
-+++ b/src/code.google.com/p/go.tools/go/vcs/vcs_test.go
-@@ -0,0 +1,86 @@
++++ b/src/golang.org/x/tools/go/vcs/vcs_test.go
+@@ -0,0 +1,130 @@
 +// Copyright 2013 The Go Authors.  All rights reserved.
 +// Use of this source code is governed by a BSD-style
 +// license that can be found in the LICENSE file.
@@ -978,6 +991,8 @@ index 0000000..0b8dd8c
 +	"io/ioutil"
 +	"os"
 +	"path/filepath"
++	"reflect"
++	"strings"
 +	"testing"
 +)
 +
@@ -1052,5 +1067,47 @@ index 0000000..0b8dd8c
 +			t.Errorf("FromDir(%q, %q) = %s, want %s", test.path, tempDir, got, test.want)
 +		}
 +		os.RemoveAll(test.path)
++	}
++}
++
++var parseMetaGoImportsTests = []struct {
++	in  string
++	out []metaImport
++}{
++	{
++		`<meta name="go-import" content="foo/bar git https://github.com/rsc/foo/bar">`,
++		[]metaImport{{"foo/bar", "git", "https://github.com/rsc/foo/bar"}},
++	},
++	{
++		`<meta name="go-import" content="foo/bar git https://github.com/rsc/foo/bar">
++		<meta name="go-import" content="baz/quux git http://github.com/rsc/baz/quux">`,
++		[]metaImport{
++			{"foo/bar", "git", "https://github.com/rsc/foo/bar"},
++			{"baz/quux", "git", "http://github.com/rsc/baz/quux"},
++		},
++	},
++	{
++		`<head>
++		<meta name="go-import" content="foo/bar git https://github.com/rsc/foo/bar">
++		</head>`,
++		[]metaImport{{"foo/bar", "git", "https://github.com/rsc/foo/bar"}},
++	},
++	{
++		`<meta name="go-import" content="foo/bar git https://github.com/rsc/foo/bar">
++		<body>`,
++		[]metaImport{{"foo/bar", "git", "https://github.com/rsc/foo/bar"}},
++	},
++}
++
++func TestParseMetaGoImports(t *testing.T) {
++	for i, tt := range parseMetaGoImportsTests {
++		out, err := parseMetaGoImports(strings.NewReader(tt.in))
++		if err != nil {
++			t.Errorf("test#%d: %v", i, err)
++			continue
++		}
++		if !reflect.DeepEqual(out, tt.out) {
++			t.Errorf("test#%d:\n\thave %q\n\twant %q", i, out, tt.out)
++		}
 +	}
 +}
