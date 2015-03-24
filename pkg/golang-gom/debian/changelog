@@ -1,3 +1,9 @@
+golang-gom (0-139-gdf50cf4-1~ppa1) trusty; urgency=medium
+
+  * Update to latest upstream release revision df50cf4.
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Tue, 24 Mar 2015 09:19:21 +0000
+
 golang-gom (0-122-gd8c87b3-1~ppa1) trusty; urgency=medium
 
   * Initial package release of git master at revision d8c87b3.
