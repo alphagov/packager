@@ -1,6 +1,0 @@
-#!/usr/bin/make -f
-%:
-	dh $@
-
-override_dh_auto_configure:
-	dh_auto_configure -- --prefix=/usr/lib/rbenv/versions/1.9.3-p392
