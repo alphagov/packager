@@ -1,5 +1,0 @@
-goenv-go-1.2.2 (1) precise; urgency=low
-
-  * Packaging of binary release as systemwide goenv version.
-
- -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Tue, 09 Sep 2014 08:38:09 +0000
