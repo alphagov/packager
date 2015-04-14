@@ -1,5 +1,0 @@
-goenv-go-1.4.2 (1) trusty; urgency=medium
-
-  * Packaging of binary release as systemwide goenv version.
-
- -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Wed, 18 Feb 2015 10:08:04 +0000
