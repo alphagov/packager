@@ -1,0 +1,11 @@
+rbenv-ruby-2.2.3 (1-ppa1~precise1) precise; urgency=medium
+
+  * Backport to precise
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Wed, 19 Aug 2015 08:37:22 +0000
+
+rbenv-ruby-2.2.3 (1-ppa1~trusty1) trusty; urgency=medium
+
+  * Initial build for trusty
+
+ -- Alex Tomlins <alex.tomlins@digital.cabinet-office.gov.uk>  Wed, 19 Aug 2015 08:37:04 +0000
