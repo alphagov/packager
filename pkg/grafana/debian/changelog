@@ -1,3 +1,15 @@
+grafana (1.9.1~ppa1~trusty) trusty; urgency=low
+
+  * Upgrade to version 1.9.1.
+
+ -- Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>  Thu, 3 Sep 2015 16:41:29 +0000
+
+grafana (1.9.1~ppa1~precise) precise; urgency=low
+
+  * Upgrade to version 1.9.1.
+
+ -- Matt Bostock <matt.bostock@digital.cabinet-office.gov.uk>  Thu, 3 Sep 2015 16:41:29 +0000
+
 grafana (1.5.2~ppa1~trusty) trusty; urgency=low
 
   * Initial build for trusty.
