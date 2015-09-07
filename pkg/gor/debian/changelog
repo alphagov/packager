@@ -1,3 +1,10 @@
+gor (0.10.1~ppa1) trusty; urgency=low
+
+  * Upgrade to version 0.10.1. See changelog:
+    https://github.com/buger/gor/releases
+
+ -- Josh Myers <josh.myers@digital.cabinet-office.gov.uk>  Fri, 4 Sep 2015 14:03:48 +0000
+
 gor (0.7.0-9026155~ppa1~precise) precise; urgency=low
 
   * Initial package release.

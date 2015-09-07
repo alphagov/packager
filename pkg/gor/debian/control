@@ -2,7 +2,7 @@ Source: gor
 Section: web
 Priority: extra
 Maintainer: Dan Carley <dan.carley@gmail.com>
-Build-Depends: debhelper (>= 8.0.0), golang-go (>= 2:1.1), git
+Build-Depends: debhelper (>= 8.0.0), golang-go (>= 2:1.2), git
 Standards-Version: 3.9.2
 Homepage: https://github.com/buger/gor
 
