@@ -1,6 +1,6 @@
-gor (0.10.1~ppa2) trusty; urgency=low
+gor (0.9.4~ppa1) trusty; urgency=low
 
-  * Upgrade to version 0.10.1. See changelog:
+  * Upgrade to version 0.9.4. See changelog:
     https://github.com/buger/gor/releases
 
  -- Josh Myers <josh.myers@digital.cabinet-office.gov.uk>  Fri, 4 Sep 2015 14:03:48 +0000
