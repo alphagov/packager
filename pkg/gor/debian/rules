@@ -2,6 +2,7 @@
 
 export GOPATH=$(CURDIR)
 export GOBIN=$(CURDIR)/debian/gor/usr/bin
+export VERSION="0.10.1"
 
 %:
 	dh $@
@@ -12,4 +13,4 @@ export GOBIN=$(CURDIR)/debian/gor/usr/bin
 override_dh_auto_build:
 	mkdir -p src/github.com/buger/
 	ln -s ../../../ src/github.com/buger/gor
-	go build -o gor
+	go build -o gor -ldflags "-X main.VERSION $(VERSION)"
