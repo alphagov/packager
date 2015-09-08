@@ -1,4 +1,4 @@
-gor (0.10.1~ppa1) trusty; urgency=low
+gor (0.10.1~ppa2) trusty; urgency=low
 
   * Upgrade to version 0.10.1. See changelog:
     https://github.com/buger/gor/releases
