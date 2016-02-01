@@ -1,0 +1,11 @@
+rbenv-ruby-2.3.0 (1-ppa1~precise1) precise; urgency=medium
+
+  * Backport to precise
+
+ -- Dean Wilson <dean.wilson@digital.cabinet-office.gov.uk>  Mon,  1 Feb 2016 14:07:42 +0000
+
+rbenv-ruby-2.3.0 (1-ppa1~trusty1) trusty; urgency=medium
+
+  * Initial build for trusty
+
+ -- Dean Wilson <dean.wilson@digital.cabinet-office.gov.uk>  Mon,  1 Feb 2016 13:09:42 +0000
