@@ -1,0 +1,45 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    CFPropertyList (2.2.8)
+    addressable (2.4.0)
+    arr-pm (0.0.10)
+      cabin (> 0)
+    backports (3.6.8)
+    cabin (0.8.1)
+    childprocess (0.5.9)
+      ffi (~> 1.0, >= 1.0.11)
+    clamp (0.6.5)
+    facter (2.4.6)
+      CFPropertyList (~> 2.2.6)
+    ffi (1.9.10)
+    fpm (1.4.0)
+      arr-pm (~> 0.0.10)
+      backports (>= 2.6.2)
+      cabin (>= 0.6.0)
+      childprocess
+      clamp (~> 0.6)
+      ffi
+      json (>= 1.7.7)
+    fpm-cookery (0.31.0)
+      addressable
+      facter
+      fpm (~> 1.1)
+      puppet (~> 3.4)
+      systemu
+    hiera (1.3.4)
+      json_pure
+    json (1.8.3)
+    json_pure (1.8.3)
+    puppet (3.8.6)
+      facter (> 1.6, < 3)
+      hiera (~> 1.0)
+      json_pure
+    systemu (2.6.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  fpm (= 1.4.0)
+  fpm-cookery (= 0.31.0)
