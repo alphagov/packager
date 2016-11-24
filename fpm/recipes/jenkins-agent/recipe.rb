@@ -17,7 +17,7 @@ class JenkinsAgent < FPM::Cookery::Recipe
     package_name = "swarm-client-#{version}-jar-with-dependencies.jar"
 
     safesystem "mkdir -p #{destdir}/usr/local/bin/"
-    safesystem "cp -f #{builddir}/#{package_name}/#{package_name} /usr/local/bin/jenkins-agent"
+    safesystem "cp -f #{builddir}/#{package_name}/#{package_name} #{destdir}/usr/local/bin/jenkins-agent"
   end
 
 end
