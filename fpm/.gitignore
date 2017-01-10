@@ -1,3 +1,5 @@
+/.vagrant
+/Vagrantfile.local
 cache/
 pkg/
 tmp-build/
