@@ -2,10 +2,10 @@ class Terraform < FPM::Cookery::Recipe
   name 'terraform'
   homepage 'https://www.terraform.io/'
 
-  version '0.8.1'
+  version '0.9.10'
 
   source "https://releases.hashicorp.com/terraform/#{version}/terraform_#{version}_linux_amd64.zip"
-  sha256 'da98894a79b7e97ddcb2a1fed7700d3f53c3660f294fb709e1d52c9baaee5c59'
+  sha256 '77f0d01182d665f7f3c63c326aa699b452fba043c2e2f9050c4bd114f98a1207'
 
   maintainer 'GOV.UK <govuk-dev@digital.cabinet-office.gov.uk>'
   license 'Mozilla Public License, version 2.0'
