@@ -5,7 +5,7 @@ class RbenvRuby240 < FPM::Cookery::Recipe
   version '1'
 
   source 'https://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.2.tar.gz'
-  sha256 '08e72d0cbe870ed1317493600fbbad5995ea3af2d0166585e7ecc85d04cc50dc'
+  sha256 '93b9e75e00b262bc4def6b26b7ae8717efc252c47154abb7392e54357e6c8c9c'
 
   maintainer 'GOV.UK <govuk-dev@digital.cabinet-office.gov.uk>'
   license 'Ruby'
