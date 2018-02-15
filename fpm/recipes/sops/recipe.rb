@@ -15,6 +15,7 @@ class Sops < FPM::Cookery::Recipe
 
   def install
     safesystem "mkdir -p #{destdir}/usr/local/bin/"
+    safesystem "chmod +x #{builddir}/sops-#{version}.linux/*"
     safesystem "cp -f #{builddir}/sops-#{version}.linux/* #{destdir}/usr/local/bin/sops"
   end
 end
