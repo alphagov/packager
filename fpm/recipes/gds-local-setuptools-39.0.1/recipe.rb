@@ -1,7 +1,7 @@
 class GdsLocalSetuptools3901 < FPM::Cookery::Recipe
 
   homepage 'https://pypi.org/project/setuptools/'
-  name 'gds-local_setuptools'
+  name 'gds-local-setuptools'
   version '39.0.1'
 
   description 'Setuptools for self-compiled Python installation to live in /usr/local, necessary due to TLS requirements not fulfilled in 2.7.6 (Trustys own)'
@@ -12,9 +12,9 @@ class GdsLocalSetuptools3901 < FPM::Cookery::Recipe
   maintainer 'GOV.UK <govuk-dev@digital.cabinet-office.gov.uk>'
   license 'MIT'
 
-  build_depends 'gds-local_python'
+  build_depends 'gds-local-python'
 
-  depends 'gds-local_python'
+  depends 'gds-local-python'
 
   def build
     sh "cd setuptools-39.0.1 && /usr/local/bin/python bootstrap.py"
