@@ -5,17 +5,23 @@ set -e
 supported_distros=(trusty xenial)
 
 usage() {
-  echo "help text"
+  echo "Usage: $0 -d DISTRO -r RECIPE [-x]"
+  echo
+  echo "  Option    Or env. variable   "
+  echo "      -d    DISTRO             One of (${supported_distros[*]})"
+  echo "      -r    RECIPE             Recipe to build"
+  echo "      -x                       Bash \`set -x\` (trace)"
   exit 0
 }
 
-while getopts "d:r:x:i" opt
+while getopts "d:r:x:ih" opt
 do
   case "$opt" in
     d) DISTRO="$OPTARG" ;;
     r) RECIPE="$OPTARG" ;;
     i) in_container=1 ;;
     x) set -x ;;
+    h) usage ;;
     *) usage ;;
   esac
 done
