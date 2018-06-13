@@ -1,20 +1,18 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    CFPropertyList (2.3.5)
     addressable (2.3.8)
     arr-pm (0.0.10)
       cabin (> 0)
-    backports (3.8.0)
+    backports (3.11.3)
     cabin (0.9.0)
-    childprocess (0.7.1)
+    childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     clamp (1.0.1)
-    dotenv (2.2.1)
-    facter (2.5.0)
-      CFPropertyList (~> 2.2)
-    ffi (1.9.18)
-    fpm (1.9.2)
+    dotenv (2.4.0)
+    facter (2.5.1)
+    ffi (1.9.25)
+    fpm (1.10.0)
       arr-pm (~> 0.0.10)
       backports (>= 2.6.2)
       cabin (>= 0.6.0)
@@ -23,20 +21,23 @@ GEM
       ffi
       json (>= 1.7.7, < 2.0)
       pleaserun (~> 0.0.29)
-      ruby-xz
+      ruby-xz (~> 0.2.3)
       stud
-    fpm-cookery (0.32.0)
+    fpm-cookery (0.33.0)
       addressable (~> 2.3.8)
       facter
       fpm (~> 1.1)
+      json (>= 1.7.7, < 2.0)
+      json_pure (>= 1.7.7, < 2.0)
       puppet (~> 3.4)
+      safe_yaml (~> 1.0.4)
       systemu
     hiera (1.3.4)
       json_pure
     insist (1.0.0)
     io-like (0.3.0)
     json (1.8.6)
-    json_pure (2.1.0)
+    json_pure (1.8.6)
     mustache (0.99.8)
     pleaserun (0.0.30)
       cabin (> 0)
@@ -52,6 +53,7 @@ GEM
     ruby-xz (0.2.3)
       ffi (~> 1.9)
       io-like (~> 0.3)
+    safe_yaml (1.0.4)
     stud (0.0.23)
     systemu (2.6.5)
 
@@ -59,5 +61,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  fpm (= 1.9.2)
-  fpm-cookery (= 0.32.0)
+  fpm
+  fpm-cookery
+
+BUNDLED WITH
+   1.16.1
