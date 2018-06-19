@@ -22,5 +22,6 @@ class AwsCli < FPM::Cookery::Recipe
     safesystem "python3", "./awscli-bundle/install", "-i", "#{destdir}/opt/awscli", "-b", "#{destdir}/usr/bin/aws"
     safesystem "rm", "#{destdir}/usr/bin/aws"
     safesystem "ln", "-s", "/opt/awscli/bin/aws", "#{destdir}/usr/bin/aws"
+    safesystem 'sed', '-i', '1c #!/opt/awscli/bin/python3', "#{destdir}/opt/awscli/bin/aws"
   end
 end
