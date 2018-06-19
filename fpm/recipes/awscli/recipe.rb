@@ -1,14 +1,14 @@
 class AwsCli < FPM::Cookery::Recipe
-  homepage 'https://docs.aws.amazon.com/cli/'
-  source   'https://s3.amazonaws.com/aws-cli/awscli-bundle.zip'
-  sha256   'd0130984b77e2c5839fe9aad8b5f464b752fcf1016e6bdcfff4452ce9f8f1655'
-
-  maintainer 'GOV.UK <govuk-dev@digital.cabinet-office.gov.uk>'
-
   name     'awscli'
-  version  '1.15.37'
+  version  '1.15.40'
   revision "1-govuk-#{ENV['DISTRO']}1"
   arch     'all'
+
+  homepage 'https://docs.aws.amazon.com/cli/'
+  source   "https://s3.amazonaws.com/aws-cli/awscli-bundle-#{version}.zip"
+  sha256   '234976c3b0004a6275a77cfd039baa3590139da37be2c9a6ae21b473fee93912'
+
+  maintainer 'GOV.UK <govuk-dev@digital.cabinet-office.gov.uk>'
 
   description 'AWS Command Line Interface'
 
