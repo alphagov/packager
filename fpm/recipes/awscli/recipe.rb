@@ -2,7 +2,6 @@ class AwsCli < FPM::Cookery::Recipe
   name     'awscli'
   version  '1.15.40'
   revision "1-govuk-#{ENV['DISTRO']}1"
-  arch     'all'
 
   homepage 'https://docs.aws.amazon.com/cli/'
   source   "https://s3.amazonaws.com/aws-cli/awscli-bundle-#{version}.zip"
