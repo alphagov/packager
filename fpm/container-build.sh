@@ -50,7 +50,7 @@ else
   docker_tty=""
   [[ -t 0 ]] && docker_tty="-it"
 
-  docker run "$docker_tty" \
+  docker run $docker_tty \
     --mount type=bind,source="$(pwd)/recipes",target=/build \
     --env RECIPE --env DISTRO \
     "alphagov-packager:${DISTRO}"
