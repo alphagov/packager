@@ -45,7 +45,12 @@ else
   docker build -f "$dockerfile" --tag "alphagov-packager:${DISTRO}" .
   export DISTRO
   export RECIPE
-  docker run -it \
+
+  # Is stdin a tty? Run Docker interactively if so
+  docker_tty=""
+  [[ -t 0 ]] && docker_tty="-it"
+
+  docker run "$docker_tty" \
     --mount type=bind,source="$(pwd)/recipes",target=/build \
     --env RECIPE --env DISTRO \
     "alphagov-packager:${DISTRO}"
