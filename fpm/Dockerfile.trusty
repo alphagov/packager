@@ -8,7 +8,7 @@ RUN apt-get update \
 COPY Gemfile /tmp
 COPY Gemfile.lock /tmp
 
-RUN gem install bundler \
+RUN gem install bundler -v "< 2" \
   && bundle install --gemfile=/tmp/Gemfile \
   && rm /tmp/Gemfile /tmp/Gemfile.lock
 
