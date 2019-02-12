@@ -1,11 +1,11 @@
 class Gor < FPM::Cookery::Recipe
-  name 'gor'
-  homepage 'https://gortool.com/'
+  name 'goreplay'
+  homepage 'https://goreplay.org/'
 
-  version '0.14.1'
+  version '0.16.1'
 
-  source "https://github.com/buger/gor/releases/download/v#{version}/#{name}_v#{version}_x64.tar.gz"
-  sha256 'b1d46fd9383b8309077dceaaa24b8165635763722585c8bfca73a40f47fca6e5'
+  source "https://github.com/buger/goreplay/releases/download/v#{version}/gor_#{version}_x64.tar.gz"
+  sha256 '25587cd4c88b0608ac4004a3c7c9722e10a9086cfcc77d1fb26d9f07bd48d245'
 
   maintainer 'GOV.UK <govuk-dev@digital.cabinet-office.gov.uk>'
   license 'LGPLv3'
