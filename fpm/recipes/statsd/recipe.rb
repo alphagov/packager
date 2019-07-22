@@ -2,11 +2,11 @@ class Statsd < FPM::Cookery::Recipe
   description 'Simple daemon for easy stats aggregation'
 
   name       'statsd'
-  version    '0.8.0'
+  version    '0.8.4'
   license    'MIT'
   maintainer 'GOV.UK <govuk-dev@digital.cabinet-office.gov.uk>'
-  homepage   'https://github.com/etsy/statsd'
-  source     'https://github.com/etsy/statsd.git', :with => :git, :tag => "v#{version}"
+  homepage   'https://github.com/statsd/statsd'
+  source     'https://github.com/statsd/statsd.git', :with => :git, :tag => "v#{version}"
 
   arch     'all'
 
