@@ -1,6 +1,6 @@
 [Unit]
 Description=Network daemon for aggregating statistics
-Documentation=https://github.com/etsy/statsd/
+Documentation=https://github.com/statsd/statsd/
 Wants=network.target
 
 [Service]
