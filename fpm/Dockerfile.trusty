@@ -3,7 +3,7 @@ FROM ubuntu:trusty
 RUN apt-get update \
   && apt-get -y upgrade \
   && apt-get -y install \
-    curl wget build-essential ruby ruby-dev unzip
+    curl wget build-essential ruby ruby-dev unzip git
 
 COPY Gemfile /tmp
 COPY Gemfile.lock /tmp
