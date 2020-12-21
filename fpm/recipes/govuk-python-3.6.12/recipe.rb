@@ -3,7 +3,7 @@ class GovukPython3612 < FPM::Cookery::Recipe
   name 'govuk-python'
   version '3.6.12'
   
-  source 'https://www.python.org/ftp/python/3.6.12/Python-3.6.12.tgz'
+  source "https://www.python.org/ftp/python/#{version}/Python-#{version}.tgz"
   sha256 '12dddbe52385a0f702fb8071e12dcc6b3cb2dde07cd8db3ed60e90d90ab78693'
 
   maintainer 'GOV.UK <govuk-dev@digital.cabinet-office.gov.uk>'
