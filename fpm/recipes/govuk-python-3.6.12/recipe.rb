@@ -10,10 +10,12 @@ class GovukPython3612 < FPM::Cookery::Recipe
   license 'Python 3.6 License'
 
   build_depends 'libgeos-dev', 'build-essential', 'libssl-dev',
-                'libffi-dev', 'libpq-dev', 'libbz2-dev'
+                'libffi-dev', 'libpq-dev', 'libbz2-dev', 'libsqlite3-dev'
+
+  depends 'libpq-dev', 'libbz2-dev', 'libsqlite3-dev'
 
   def build
-    configure :prefix => prefix 
+    configure '--enable-loadable-sqlite-extensions', '--enable-optimizations', :prefix => prefix 
     make
   end
 
