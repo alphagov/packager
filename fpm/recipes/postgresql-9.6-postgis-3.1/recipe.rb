@@ -11,12 +11,11 @@ class PostGIS < FPM::Cookery::Recipe
   chain_recipes ["../proj-4.9.3/recipe", "../geos-3.9.0/recipe", "../gdal-2.4.4/recipe"]
 
   def build
-    safesystem "chmod 0755 #{builddir}/../../geos-3.9.0/tmp-build/geos-3.9.0/tools/geos-config"
-    configure "--with-projdir=#{builddir}/../../proj-4.9.3/tmp-build/proj-4.9.3/src", "--with-gdalconfig=#{builddir}/../../gdal-2.4.4/tmp-build/gdal-2.4.4/apps/gdal-config", "--with-geosconfig=#{builddir}/../../geos-3.9.0/tmp-build/geos-3.9.0/tools/geos-config", "--without-protobuf", "--without-raster"
+    configure "--with-projdir=#{builddir}/../../proj-4.9.3/tmp-dest/usr/lib/", "--with-gdalconfig=#{builddir}/../../gdal-2.4.4/tmp-dest/usr/bin/gdal-config", "--with-geosconfig=#{builddir}/../../geos-3.9.0/tmp-dest/usr/bin/geos-config", "--without-protobuf", "--without-raster", :prefix => prefix
     make
   end
 
   def install
-    make install: destdir
+    make :install, 'DESTDIR' => destdir
   end
 end

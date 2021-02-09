@@ -8,11 +8,11 @@ class GEOS < FPM::Cookery::Recipe
   sha256 "bd8082cf12f45f27630193c78bdb5a3cba847b81e72b20268356c2a4fc065269"
 
   def build
-    configure
+    configure :prefix => prefix
     make
   end
 
   def install
-    make install: destdir
+    make :install, 'DESTDIR' => destdir
   end
 end
