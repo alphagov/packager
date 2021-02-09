@@ -8,11 +8,11 @@ class SQLite < FPM::Cookery::Recipe
   sha256 "2a3bca581117b3b88e5361d0ef3803ba6d8da604b1c1a47d902ef785c1b53e89"
 
   def build
-    configure
+    configure :prefix => prefix
     make
   end
 
   def install
-    make install: destdir
+    make :install, 'DESTDIR' => destdir
   end
 end

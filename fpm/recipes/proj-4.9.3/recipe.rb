@@ -14,11 +14,11 @@ class PROJ < FPM::Cookery::Recipe
     ENV["SQLITE3_CFLAGS"] = "#{builddir}/../../sqlite-3/tmp-build/sqlite-autoconf-3340100/"
     ENV["SQLITE3_LIBS"] = "#{builddir}/../../sqlite-3/tmp-build/sqlite-autoconf-3340100/.libs/"
     ENV["PATH"] = "#{builddir}/../../sqlite-3/tmp-build/sqlite-autoconf-3340100:#{ENV["PATH"]}"
-    configure "--disable-tiff"
+    configure "--disable-tiff", :prefix => prefix
     make
   end
 
   def install
-    make install: destdir
+    make :install, 'DESTDIR' => destdir
   end
 end
