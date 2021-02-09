@@ -10,11 +10,11 @@ class GDAL < FPM::Cookery::Recipe
   sha256 "e6a2456907610639d73fc6a82bb10aa6fa02e2d03b24edacde34a16b6aa91080"
 
   def build
-    configure
+    configure :prefix => prefix
     make
   end
 
   def install
-    make install: destdir
+    make :install, 'DESTDIR' => destdir
   end
 end
