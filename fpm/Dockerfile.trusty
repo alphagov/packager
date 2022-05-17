@@ -5,6 +5,9 @@ RUN apt-get update \
   && apt-get -y install \
     curl wget build-essential ruby ruby-dev unzip git
 
+RUN sed -i '/^mozilla\/DST_Root_CA_X3\.crt/ s/./\!&/' /etc/ca-certificates.conf
+RUN update-ca-certificates
+
 COPY Gemfile /tmp
 COPY Gemfile.lock /tmp
 
