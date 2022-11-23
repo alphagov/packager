@@ -35,6 +35,9 @@ class GovukPython3715 < FPM::Cookery::Recipe
   end
 
   def install
+    safesystem "mkdir -p #{destdir}/openssl/"
+    safesystem "cp -r #{builddir}/Python-3.7.15/openssl-1.1.1g/* #{destdir}/openssl/"
+
     make :altinstall, 'DESTDIR' => destdir
   end
 end
