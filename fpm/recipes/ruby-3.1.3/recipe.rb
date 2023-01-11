@@ -21,6 +21,7 @@ class RbenvRuby313 < FPM::Cookery::Recipe
 Specific version of Ruby for use with a system install of rbenv.'
 
   def build
+    ENV['CFLAGS'] = "-std=gnu99"
     configure prefix: '/usr/lib/rbenv/versions/3.1.3'
     make
   end
