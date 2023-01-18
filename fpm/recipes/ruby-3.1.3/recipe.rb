@@ -13,16 +13,28 @@ class RbenvRuby313 < FPM::Cookery::Recipe
                 'libyaml-dev', 'libreadline6-dev', 'zlib1g-dev',
                 'libncurses5-dev', 'libffi-dev', 'libgdbm3', 'libgdbm-dev'
 
-  depends 'rbenv', 'libssl1.0.0', 'libyaml-0-2', 'libreadline6', 'zlib1g',
+  depends 'rbenv', 'libyaml-0-2', 'libreadline6', 'zlib1g',
           'libncurses5', 'libffi6', 'libgdbm3', 'libtinfo5'
+
+  ENV['LD_LIBRARY_PATH'] = 'opt/openssl/lib/'
+  ENV['LDFLAGS'] = '-L opt/openssl/lib -Wl,-rpath,opt/openssl/lib'
 
   section 'interpreters'
   description 'Ruby version for use with rbenv.
 Specific version of Ruby for use with a system install of rbenv.'
 
   def build
+
+    safesystem """
+      wget --no-check-certificate https://www.openssl.org/source/openssl-1.1.1s.tar.gz && \
+      tar zxvf openssl-1.1.1s.tar.gz && \
+      cd openssl-1.1.1s && \
+      ./config --prefix=/opt/openssl --openssldir=/opt/openssl no-tests zlib && \
+      make && make install_sw
+      """
+
     ENV['CFLAGS'] = "-std=gnu99"
-    configure prefix: '/usr/lib/rbenv/versions/3.1.3'
+    configure '--with-openssl=/opt/openssl', '--prefix=/usr/lib/rbenv/versions/3.1.3'
     make
   end
 
